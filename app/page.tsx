@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/layout/site-header";
+import { AnimatedBackground } from "@/components/ui/animated-background";
 import {
   AboutSection,
   ContactSection,
@@ -10,6 +11,7 @@ import {
 export default function Home() {
   return (
     <>
+      <AnimatedBackground />
       <SiteHeader />
       <main>
         <HeroSection />

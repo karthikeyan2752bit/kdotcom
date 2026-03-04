@@ -1,0 +1,20 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" rx="32" fill="#020617"/>
+  <rect x="70" y="160" width="170" height="95" rx="16" fill="#0F172A" stroke="#10B981"/>
+  <text x="95" y="214" fill="#E2E8F0" font-size="18" font-family="Inter">Event Stream</text>
+  <rect x="350" y="90" width="190" height="95" rx="16" fill="#0F172A" stroke="#06B6D4"/>
+  <text x="385" y="145" fill="#E2E8F0" font-size="18" font-family="Inter">Queue Engine</text>
+  <rect x="350" y="235" width="190" height="95" rx="16" fill="#0F172A" stroke="#10B981"/>
+  <text x="380" y="289" fill="#E2E8F0" font-size="18" font-family="Inter">Policy Guard</text>
+  <rect x="670" y="160" width="190" height="95" rx="16" fill="#0F172A" stroke="#22D3EE"/>
+  <text x="706" y="214" fill="#E2E8F0" font-size="18" font-family="Inter">Workers</text>
+  <rect x="960" y="160" width="170" height="95" rx="16" fill="#0F172A" stroke="#10B981"/>
+  <text x="995" y="214" fill="#E2E8F0" font-size="18" font-family="Inter">Insights</text>
+  <path d="M240 208H350" stroke="#34D399" stroke-width="3"/>
+  <path d="M540 138L670 200" stroke="#22D3EE" stroke-width="3"/>
+  <path d="M540 283L670 215" stroke="#34D399" stroke-width="3"/>
+  <path d="M860 208H960" stroke="#22D3EE" stroke-width="3"/>
+  <circle cx="350" cy="208" r="8" fill="#34D399"/>
+  <circle cx="670" cy="208" r="8" fill="#22D3EE"/>
+  <circle cx="960" cy="208" r="8" fill="#34D399"/>
+</svg>

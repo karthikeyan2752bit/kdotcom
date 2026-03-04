@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  @apply bg-black text-zinc-100;
+}
+
+::selection {
+  @apply bg-zinc-700/80 text-zinc-50;
+}

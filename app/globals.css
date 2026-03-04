@@ -10,15 +10,15 @@
 }
 
 body {
-  @apply bg-slate-50 text-slate-900;
+  @apply min-h-screen bg-gradient-to-b from-slate-50 via-white to-cyan-50 text-slate-900 antialiased;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-slate-100;
   }
 }
 
 ::selection {
-  @apply bg-emerald-200 text-slate-900 dark:bg-emerald-700/70 dark:text-slate-50;
+  @apply bg-emerald-200 text-slate-900 dark:bg-emerald-600/80 dark:text-slate-50;
 }

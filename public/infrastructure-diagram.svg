@@ -1,0 +1,37 @@
+<svg width="720" height="380" viewBox="0 0 720 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="380" rx="24" fill="url(#bg)"/>
+  <g opacity="0.25" stroke="#334155">
+    <path d="M0 70H720"/>
+    <path d="M0 140H720"/>
+    <path d="M0 210H720"/>
+    <path d="M0 280H720"/>
+    <path d="M120 0V380"/>
+    <path d="M240 0V380"/>
+    <path d="M360 0V380"/>
+    <path d="M480 0V380"/>
+    <path d="M600 0V380"/>
+  </g>
+  <rect x="56" y="96" width="142" height="72" rx="14" fill="#0F172A" stroke="#10B981"/>
+  <text x="76" y="136" fill="#E2E8F0" font-size="14" font-family="monospace">API Gateway</text>
+  <rect x="286" y="72" width="148" height="72" rx="14" fill="#0F172A" stroke="#06B6D4"/>
+  <text x="314" y="113" fill="#E2E8F0" font-size="14" font-family="monospace">Service Mesh</text>
+  <rect x="286" y="188" width="148" height="72" rx="14" fill="#0F172A" stroke="#10B981"/>
+  <text x="315" y="229" fill="#E2E8F0" font-size="14" font-family="monospace">Queue Cluster</text>
+  <rect x="522" y="130" width="144" height="72" rx="14" fill="#0F172A" stroke="#22D3EE"/>
+  <text x="547" y="171" fill="#E2E8F0" font-size="14" font-family="monospace">Workers</text>
+  <path d="M198 132H286" stroke="#34D399" stroke-width="2"/>
+  <path d="M434 108L522 152" stroke="#22D3EE" stroke-width="2"/>
+  <path d="M434 224L522 176" stroke="#34D399" stroke-width="2"/>
+  <circle cx="198" cy="132" r="4" fill="#34D399"/>
+  <circle cx="286" cy="132" r="4" fill="#34D399"/>
+  <circle cx="434" cy="108" r="4" fill="#22D3EE"/>
+  <circle cx="434" cy="224" r="4" fill="#34D399"/>
+  <circle cx="522" cy="152" r="4" fill="#22D3EE"/>
+  <circle cx="522" cy="176" r="4" fill="#34D399"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="720" y2="380" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>

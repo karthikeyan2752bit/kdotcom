@@ -1,41 +1,41 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { SectionShell } from "@/components/ui/section-shell";
+import { Reveal } from "@/components/ui/reveal";
 
-const pillars = [
-  "Reliability-first architecture",
-  "Operational visibility and incident readiness",
-  "Simple, maintainable systems that scale",
+const phases = [
+  {
+    title: "Map system constraints",
+    detail: "Trace critical data paths, identify coupling hotspots, and baseline reliability gaps.",
+  },
+  {
+    title: "Design scalable core",
+    detail: "Create service boundaries and automation patterns that support growth and team velocity.",
+  },
+  {
+    title: "Operationalize excellence",
+    detail: "Instrument metrics, rollout guardrails, and runbooks for sustainable reliability.",
+  },
 ];
 
 export function AboutSection() {
   return (
     <SectionShell
-      id="about"
-      eyebrow="About"
-      title="Engineering partner for teams building serious products."
-      description="I specialize in backend and infrastructure decisions that help SaaS teams ship faster while reducing production risk."
+      id="architecture"
+      eyebrow="Architecture Approach"
+      title="A systems architecture method focused on clarity, resilience, and velocity."
+      description="I apply a practical architecture process that turns backend complexity into scalable, maintainable systems."
     >
-      <div className="grid gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 lg:grid-cols-[1.3fr_1fr] dark:border-slate-800 dark:bg-slate-900 dark:shadow-black/30">
-        <div>
-          <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300">
-            I work across API design, platform architecture, Linux operations, and workflow automation.
-            My approach emphasizes clear interfaces, observability, and predictable production behavior.
-          </p>
-        </div>
-        <motion.ul
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          className="space-y-3"
-        >
-          {pillars.map((pillar) => (
-            <li key={pillar} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200">
-              {pillar}
-            </li>
-          ))}
-        </motion.ul>
+      <div className="grid gap-4">
+        {phases.map((phase, index) => (
+          <Reveal key={phase.title} delay={index * 0.08} x={index % 2 === 0 ? -28 : 28} y={0}>
+            <article className="rounded-3xl border border-slate-200/70 bg-white/75 p-6 dark:border-slate-700 dark:bg-slate-900/70">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">Phase {index + 1}</p>
+              <h3 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">{phase.title}</h3>
+              <p className="mt-2 text-base text-slate-600 dark:text-slate-300">{phase.detail}</p>
+            </article>
+          </Reveal>
+        ))}
       </div>
     </SectionShell>
   );

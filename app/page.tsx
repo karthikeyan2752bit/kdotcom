@@ -1,7 +1,6 @@
 import { SiteHeader } from "@/components/layout/site-header";
 import {
   AboutSection,
-  CaseStudiesSection,
   ContactSection,
   HeroSection,
   ProjectsSection,
@@ -14,10 +13,9 @@ export default function Home() {
       <SiteHeader />
       <main>
         <HeroSection />
-        <AboutSection />
         <ServicesSection />
         <ProjectsSection />
-        <CaseStudiesSection />
+        <AboutSection />
         <ContactSection />
       </main>
     </>

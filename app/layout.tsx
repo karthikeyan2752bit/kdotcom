@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Karthikeyan M · Backend & Systems Engineer",
   description:
-    "Engineering reliable backend systems, infrastructure, and automation solutions for startups and organizations.",
+    "Enterprise-grade backend systems, platform architecture, and automation engineering.",
 };
 
 export default function RootLayout({
@@ -25,10 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-black via-zinc-950 to-black text-zinc-100`}
-      >
-        <div className="min-h-screen">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
           {children}
         </div>
       </body>

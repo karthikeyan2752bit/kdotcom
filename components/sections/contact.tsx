@@ -50,7 +50,7 @@ export function ContactSection() {
                 type="button"
                 className="inline-flex items-center justify-center rounded-full bg-zinc-100 px-5 py-2.5 text-xs font-medium text-black shadow-[0_18px_40px_rgba(24,24,27,0.9)] transition hover:-translate-y-0.5 hover:bg-zinc-200"
               >
-                Placeholder submit
+                Connect
               </button>
               <a
                 href="mailto:hello@karthikeyan.dev"

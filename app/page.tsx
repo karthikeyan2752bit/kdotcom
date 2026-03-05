@@ -2,8 +2,10 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import {
   AboutSection,
+  AutomationSection,
   ContactSection,
   HeroSection,
+  InfrastructureSection,
   ProjectsSection,
   ServicesSection,
 } from "@/components/sections";
@@ -13,10 +15,12 @@ export default function Home() {
     <>
       <AnimatedBackground />
       <SiteHeader />
-      <main>
+      <main className="overflow-x-clip">
         <HeroSection />
         <ServicesSection />
+        <InfrastructureSection />
         <ProjectsSection />
+        <AutomationSection />
         <AboutSection />
         <ContactSection />
       </main>

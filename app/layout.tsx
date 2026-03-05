@@ -13,9 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Karthikeyan M · Backend & Systems Engineer",
-  description:
-    "Enterprise-grade backend systems, platform architecture, and automation engineering.",
+  title: "Karthikeyan M · Backend Systems & Automation",
+  description: "Backend systems, SaaS infrastructure, and end-to-end automation engineering.",
 };
 
 export default function RootLayout({
@@ -24,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
+        <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
           {children}
         </div>
       </body>

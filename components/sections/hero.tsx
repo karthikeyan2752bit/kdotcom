@@ -8,7 +8,7 @@ const stats = [
   { label: "System uptime", value: "99.95%" },
 ];
 
-const spring = { type: "spring" as const, stiffness: 90, damping: 18 };
+const spring = { type: "spring", stiffness: 90, damping: 18 };
 
 export function HeroSection() {
   return (

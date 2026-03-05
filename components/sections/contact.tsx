@@ -45,13 +45,19 @@ export function ContactSection() {
           <div id="contact" className="rounded-3xl border border-slate-200/80 bg-white/85 p-7 dark:border-slate-700 dark:bg-slate-900/75">
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Start a conversation</h3>
             <p className="mt-2 text-base text-slate-600 dark:text-slate-300">Share your roadmap and I&apos;ll propose a high-leverage backend strategy.</p>
-            <form action="https://formspree.io/f/xlgwqkok" method="POST" className="mt-6 grid gap-4">
+            <form
+              action="https://formspree.io/f/xlgwqkok"
+              method="POST"
+              acceptCharset="UTF-8"
+              className="mt-6 grid gap-4"
+            >
+              <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="Name" name="name" />
-                <Field label="Company" name="company" />
+                <Field label="Name" name="name" autoComplete="name" required minLength={2} maxLength={80} />
+                <Field label="Company" name="company" autoComplete="organization" maxLength={120} />
               </div>
-              <Field label="Email" name="email" type="email" />
-              <Field label="Current challenge" name="message" as="textarea" />
+              <Field label="Email" name="email" type="email" autoComplete="email" required maxLength={120} />
+              <Field label="Current challenge" name="message" as="textarea" required minLength={20} maxLength={3000} />
               <button type="submit" className="mt-2 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5">
                 Send inquiry
               </button>
@@ -68,9 +74,22 @@ interface FieldProps {
   name: string;
   type?: string;
   as?: "input" | "textarea";
+  autoComplete?: string;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
 }
 
-function Field({ label, name, type = "text", as = "input" }: FieldProps) {
+function Field({
+  label,
+  name,
+  type = "text",
+  as = "input",
+  autoComplete,
+  required = false,
+  minLength,
+  maxLength,
+}: FieldProps) {
   const InputTag = as === "textarea" ? "textarea" : "input";
 
   return (
@@ -79,6 +98,10 @@ function Field({ label, name, type = "text", as = "input" }: FieldProps) {
       <InputTag
         name={name}
         type={as === "input" ? type : undefined}
+        autoComplete={autoComplete}
+        required={required}
+        minLength={minLength}
+        maxLength={maxLength}
         rows={as === "textarea" ? 4 : undefined}
         className="mt-1.5 w-full rounded-xl border border-slate-300/80 bg-white/85 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-cyan-700/40"
       />

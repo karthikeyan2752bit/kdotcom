@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Transition } from "framer-motion";
 
 const stats = [
   { label: "Backend platforms delivered", value: "40+" },
@@ -8,7 +8,7 @@ const stats = [
   { label: "System uptime", value: "99.95%" },
 ];
 
-const spring = { type: "spring", stiffness: 90, damping: 18 };
+const spring: Transition = { type: "spring", stiffness: 90, damping: 18 };
 
 export function HeroSection() {
   return (

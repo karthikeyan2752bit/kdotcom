@@ -15,7 +15,7 @@ export function HeroSection() {
     <section id="hero" className="relative mx-auto grid min-h-screen max-w-7xl snap-start scroll-mt-24 items-center gap-14 px-6 pb-20 pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-28">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
         <span className="inline-flex rounded-full border border-emerald-600/25 bg-emerald-600/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">
-          Pari Labs • SaaS Platforms • AI-Assisted Automation
+          SaaS Platforms • Backend Systems • Automation
         </span>
         <h1 className="mt-7 text-5xl font-bold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl dark:text-slate-50">
           AI-powered business software and automation platforms built for modern organizations.

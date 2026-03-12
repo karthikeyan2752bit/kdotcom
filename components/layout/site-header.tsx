@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-const navItems = [
+const navItems: Array<{ href: string; label: string; hasDropdown?: boolean }> = [
   { href: "#use-cases", label: "Industries" },
   { href: "#modules", label: "Modules" },
   { href: "#infrastructure", label: "Infra" },

@@ -48,34 +48,34 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/80 ${
-        isScrolled ? "shadow-[0_8px_24px_-14px_rgba(15,23,42,0.25)] dark:shadow-black/35" : ""
+      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/82 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/82 ${
+        isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.3)] dark:shadow-black/35" : ""
       }`}
     >
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 flex-1 items-center">
-          <Link href="/" className="inline-flex items-center gap-3 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
-            <Image src="/logo-mark.svg" alt="Kdotcom logo" width={36} height={36} priority className="h-9 w-9" />
-            <span className="text-base font-semibold tracking-[0.015em] text-slate-900 dark:text-slate-100">Kdotcom</span>
+          <Link href="/" className="inline-flex items-center gap-2.5 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
+            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9 shrink-0" />
+            <span className="text-base font-semibold leading-none tracking-[0.015em] text-slate-900 dark:text-slate-100">Pari Labs</span>
           </Link>
         </div>
 
-        <nav className="hidden items-center justify-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden flex-1 items-center justify-center gap-2 xl:flex" aria-label="Primary">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               aria-haspopup={item.hasDropdown ? "menu" : undefined}
-              className="group relative inline-flex h-11 items-center gap-1 rounded-md px-3 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-slate-700 transition-colors duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 dark:text-slate-300 dark:hover:text-emerald-300"
+              className="group relative inline-flex h-11 items-center gap-1 rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-slate-700 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 dark:text-slate-300 dark:hover:text-emerald-300"
             >
               <span>{item.label}</span>
-              {item.hasDropdown ? <ChevronDownIcon /> : null}
+              {item.hasDropdown ? <span className="mt-[1px] inline-flex items-center"><ChevronDownIcon /></span> : null}
               <span className="absolute inset-x-3 bottom-1 h-0.5 origin-left scale-x-0 rounded-full bg-current opacity-70 transition-transform duration-200 group-hover:scale-x-100" />
             </a>
           ))}
         </nav>
 
-        <div className="flex flex-1 items-center justify-end gap-1.5 sm:gap-2">
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
           <button
             type="button"
             aria-label="Search"
@@ -86,7 +86,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className="hidden h-10 items-center rounded-md px-2.5 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
+            className="hidden h-10 items-center gap-1 rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
           >
             EN
             <ChevronDownIcon />
@@ -96,14 +96,14 @@ export function SiteHeader() {
 
           <a
             href="#contact"
-            className="hidden h-10 items-center rounded-md px-3 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
+            className="hidden h-10 items-center rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
           >
             Sign In
           </a>
 
           <a
             href="#contact"
-            className="inline-flex h-10 items-center rounded-xl bg-emerald-600 px-4 text-sm font-semibold tracking-[0.01em] text-white shadow-lg shadow-emerald-700/20 transition-all duration-200 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 sm:px-5"
+            className="inline-flex h-10 items-center rounded-xl bg-emerald-600 px-4 text-sm font-semibold leading-none tracking-[0.01em] text-white shadow-lg shadow-emerald-700/20 transition-all duration-200 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 sm:px-5"
           >
             <span className="hidden sm:inline">Request Consultation</span>
             <span className="sm:hidden">Consultation</span>
@@ -128,7 +128,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-slate-200/80 bg-white/95 px-4 pb-4 pt-3 backdrop-blur-xl lg:hidden dark:border-slate-800 dark:bg-slate-950/95"
+            className="border-t border-slate-200/80 bg-white/95 px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden dark:border-slate-800 dark:bg-slate-950/95"
             aria-label="Mobile"
           >
             <div className="mx-auto grid max-w-7xl gap-1.5">

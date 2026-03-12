@@ -35,6 +35,7 @@ export function InfrastructureSection() {
       title="Reliable technical foundations for business-critical software."
       description="Pari Labs helps organizations run software on secure, observable, and scalable infrastructure with business continuity in mind."
       align="center"
+      entry="left"
     >
       <div className="grid gap-5 lg:grid-cols-2">
         {infrastructurePillars.map((item, index) => (

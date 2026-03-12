@@ -55,6 +55,7 @@ export function ProjectsSection() {
       title="Built around real business scenarios, not generic templates."
       description="We tailor each software platform to the way your team already operates, then improve speed, control, and visibility."
       align="center"
+      entry="right"
     >
       <div className="grid gap-5 lg:grid-cols-2">
         {useCases.map((useCase, index) => (

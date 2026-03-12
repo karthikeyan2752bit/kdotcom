@@ -6,19 +6,24 @@ import { Reveal } from "@/components/ui/reveal";
 
 const automationCards = [
   {
-    title: "Workflow automation",
-    description: "Automate repetitive tasks from customer intake to fulfillment with tracked status at every step.",
-    points: ["Task routing", "Rules engine", "Approval checkpoints"],
+    title: "Automated workflows",
+    description: "Set rules that automatically route requests, approvals, and updates between teams and systems.",
+    points: ["Trigger-based actions", "Approvals", "SLA reminders"],
   },
   {
-    title: "Document pipelines",
-    description: "Capture, validate, transform, and deliver business documents with consistent quality controls.",
-    points: ["OCR + extraction", "Validation", "System delivery"],
+    title: "Intelligent data processing",
+    description: "Use AI-assisted extraction and classification to process forms, invoices, and business records faster.",
+    points: ["Form extraction", "Data validation", "Error flags"],
   },
   {
-    title: "System integrations",
-    description: "Connect CRM, ERP, internal APIs, and support tooling to remove data silos and manual sync work.",
-    points: ["Bidirectional sync", "Audit logs", "Error recovery"],
+    title: "Repetitive task automation",
+    description: "Reduce manual copy-paste and repetitive back-office activities with reliable automation pipelines.",
+    points: ["System sync", "Batch updates", "Task completion logs"],
+  },
+  {
+    title: "AI-assisted analytics",
+    description: "Summarize key trends and operational signals so managers can make decisions quickly.",
+    points: ["Trend summaries", "Exception alerts", "Performance insights"],
   },
 ];
 
@@ -26,11 +31,12 @@ export function AutomationSection() {
   return (
     <SectionShell
       id="automation"
-      eyebrow="End-to-End Business Automation SaaS"
-      title="Automation services built around real business workflows."
-      description="From inbound requests to completed transactions, each pipeline is designed to be reliable, observable, and easy for teams to adopt."
+      eyebrow="AI-Powered Automation"
+      title="Practical AI features that improve daily operations."
+      description="We focus on dependable automation and measurable outcomes, not hype. Every AI feature is tied to a clear business workflow."
+      entry="right"
     >
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2">
         {automationCards.map((card, index) => (
           <Reveal key={card.title} delay={index * 0.1}>
             <motion.article
@@ -43,7 +49,7 @@ export function AutomationSection() {
               <ul className="mt-5 space-y-2 text-sm text-slate-600 dark:text-slate-300">
                 {card.points.map((point) => (
                   <li key={point} className="flex items-center gap-2">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-violet-500" />
                     {point}
                   </li>
                 ))}

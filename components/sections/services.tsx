@@ -4,47 +4,50 @@ import { motion } from "framer-motion";
 import { SectionShell } from "@/components/ui/section-shell";
 import { Reveal } from "@/components/ui/reveal";
 
-const capabilities = [
+const solutions = [
   {
-    title: "Distributed API platforms",
-    description: "Service boundaries, event contracts, and resilient APIs for high-concurrency SaaS traffic.",
-    metric: "7x throughput",
+    title: "Business Automation Platforms",
+    description: "We design platforms that automate repetitive operational tasks, approvals, and handoffs so your team can focus on high-value work.",
+    icon: "⚙️",
   },
   {
-    title: "Cloud reliability engineering",
-    description: "Observability, SLOs, and incident-ready infrastructure to keep customer-facing systems stable.",
-    metric: "62% incident reduction",
+    title: "Custom SaaS Applications",
+    description: "We build secure web applications tailored to your business model, with clean dashboards for teams, managers, and customers.",
+    icon: "🧩",
   },
   {
-    title: "Automation systems",
-    description: "Queue-driven workers and orchestration for browser and document workflows with auditability.",
-    metric: "250k jobs/day",
+    title: "Infrastructure & Server Setup",
+    description: "We set up cloud infrastructure, secure deployments, and monitoring so your software remains stable and dependable.",
+    icon: "☁️",
   },
   {
-    title: "Platform modernization",
-    description: "Containerization, CI/CD hardening, and migration plans that reduce deployment risk.",
-    metric: "4x faster releases",
+    title: "AI-Assisted Workflow Systems",
+    description: "We apply AI to data-heavy and repetitive workflows such as form handling, document review, and reporting support.",
+    icon: "🤖",
   },
 ];
 
 export function ServicesSection() {
   return (
     <SectionShell
-      id="capabilities"
-      eyebrow="Capabilities"
-      title="Engineering capabilities for resilient SaaS products."
-      description="Engagements focus on clear architecture decisions, reliable operations, and measurable business outcomes."
+      id="solutions"
+      eyebrow="Solutions"
+      title="Software and automation systems designed for business operations."
+      description="Pari Labs helps organizations modernize workflows with practical software that is easy for teams to adopt and scale."
+      entry="left"
     >
       <div className="grid gap-5 md:grid-cols-2">
-        {capabilities.map((item, index) => (
+        {solutions.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08} y={20}>
             <motion.article
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 120, damping: 18 }}
               className="h-full rounded-3xl border border-slate-200/80 bg-white/80 p-7 shadow-lg shadow-slate-300/20 backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/70"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">{item.metric}</p>
-              <h3 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 text-xl">
+                {item.icon}
+              </div>
+              <h3 className="mt-4 text-2xl font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
               <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">{item.description}</p>
             </motion.article>
           </Reveal>

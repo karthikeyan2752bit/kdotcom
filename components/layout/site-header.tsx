@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems = [
   { href: "#solutions", label: "Solutions", hasDropdown: true },
@@ -54,8 +55,8 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 flex-1 items-center">
           <Link href="/" className="inline-flex items-center gap-3 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
-            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9" />
-            <span className="text-base font-semibold tracking-[0.015em] text-slate-900 dark:text-slate-100">Pari Labs</span>
+            <Image src="/logo-mark.svg" alt="Kdotcom logo" width={36} height={36} priority className="h-9 w-9" />
+            <span className="text-base font-semibold tracking-[0.015em] text-slate-900 dark:text-slate-100">Kdotcom</span>
           </Link>
         </div>
 
@@ -90,6 +91,8 @@ export function SiteHeader() {
             EN
             <ChevronDownIcon />
           </button>
+
+          <ThemeToggle />
 
           <a
             href="#contact"

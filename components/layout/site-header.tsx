@@ -7,10 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems = [
-  { href: "#solutions", label: "Solutions", hasDropdown: true },
-  { href: "#use-cases", label: "Industry Use Cases", hasDropdown: true },
-  { href: "#modules", label: "Software Modules" },
-  { href: "#infrastructure", label: "Infrastructure" },
+  { href: "#use-cases", label: "Industries" },
+  { href: "#modules", label: "Modules" },
+  { href: "#infrastructure", label: "Infra" },
   { href: "#automation", label: "AI Automation" },
   { href: "#process", label: "Process" },
   { href: "#contact", label: "Contact" },
@@ -52,21 +51,14 @@ export function SiteHeader() {
         isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.3)] dark:shadow-black/35" : ""
       }`}
     >
-      <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex min-w-0 flex-1 items-center">
-          <Link href="/" className="inline-flex items-center gap-2.5 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
-            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9 shrink-0" />
-            <span className="text-base font-semibold leading-none tracking-[0.015em] text-slate-900 dark:text-slate-100">Pari Labs</span>
-          </Link>
-        </div>
-
-        <nav className="hidden flex-1 items-center justify-center gap-2 xl:flex" aria-label="Primary">
+      <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
+        <nav className="hidden min-w-0 flex-1 items-center justify-start gap-1.5 xl:flex" aria-label="Primary">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               aria-haspopup={item.hasDropdown ? "menu" : undefined}
-              className="group relative inline-flex h-11 items-center gap-1 rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-slate-700 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 dark:text-slate-300 dark:hover:text-emerald-300"
+              className="group relative inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-slate-700 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 dark:text-slate-300 dark:hover:text-emerald-300"
             >
               <span>{item.label}</span>
               {item.hasDropdown ? <span className="mt-[1px] inline-flex items-center"><ChevronDownIcon /></span> : null}
@@ -118,6 +110,11 @@ export function SiteHeader() {
           >
             {isOpen ? "✕" : "☰"}
           </button>
+
+          <Link href="/" className="inline-flex items-center gap-2 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
+            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9 shrink-0" />
+            <span className="hidden whitespace-nowrap text-base font-semibold leading-none tracking-[0.015em] text-slate-900 sm:inline dark:text-slate-100">Pari Labs</span>
+          </Link>
         </div>
       </div>
 

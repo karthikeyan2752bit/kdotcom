@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { FloatingActions } from "@/components/ui/floating-actions";
@@ -27,6 +28,7 @@ export default function Home() {
         <AboutSection />
         <ContactSection />
       </main>
+      <SiteFooter />
       <FloatingActions />
     </>
   );

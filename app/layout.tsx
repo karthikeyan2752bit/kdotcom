@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Karthikeyan M · Backend Systems & Automation",
-  description: "Backend systems, SaaS infrastructure, and end-to-end automation engineering.",
+  title: "Pari Labs · AI Software & Business Automation",
+  description: "Pari Labs builds reliable software platforms, automation systems, and SaaS solutions for modern organizations.",
 };
 
 export default function RootLayout({

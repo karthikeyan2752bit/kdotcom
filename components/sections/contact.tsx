@@ -17,7 +17,6 @@ export function ContactSection() {
       eyebrow="Contact"
       title="Tell us about your operations and we’ll help design the right software solution."
       description="Share your workflow challenges, growth goals, and current tools. The Pari Labs team will recommend a practical implementation plan."
-      entry="up"
     >
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal>

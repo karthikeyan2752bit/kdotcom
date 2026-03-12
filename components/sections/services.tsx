@@ -34,7 +34,6 @@ export function ServicesSection() {
       eyebrow="Solutions"
       title="Software and automation systems designed for business operations."
       description="Pari Labs helps organizations modernize workflows with practical software that is easy for teams to adopt and scale."
-      entry="left"
     >
       <div className="grid gap-5 md:grid-cols-2">
         {solutions.map((item, index) => (

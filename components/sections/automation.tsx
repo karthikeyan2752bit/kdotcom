@@ -34,7 +34,6 @@ export function AutomationSection() {
       eyebrow="AI-Powered Automation"
       title="Practical AI features that improve daily operations."
       description="We focus on dependable automation and measurable outcomes, not hype. Every AI feature is tied to a clear business workflow."
-      entry="right"
     >
       <div className="grid gap-5 md:grid-cols-2">
         {automationCards.map((card, index) => (

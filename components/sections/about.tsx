@@ -29,7 +29,6 @@ export function AboutSection() {
       eyebrow="Our Process"
       title="A clear step-by-step delivery model for business software projects."
       description="From discovery to long-term support, Pari Labs works as a technical partner focused on operational outcomes."
-      entry="down"
     >
       <div className="grid gap-4">
         {phases.map((phase, index) => (

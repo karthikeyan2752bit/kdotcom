@@ -33,22 +33,6 @@ body {
     radial-gradient(circle at 56% 92%, rgba(139, 92, 246, 0.08), transparent 34%);
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-    scroll-snap-type: none;
-  }
-}
-
 ::selection {
   @apply bg-emerald-200 text-slate-900 dark:bg-emerald-600/80 dark:text-slate-50;
 }

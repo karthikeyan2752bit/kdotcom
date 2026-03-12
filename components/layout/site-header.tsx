@@ -20,11 +20,11 @@ export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/80">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-        <Link href="/" className="flex min-w-0 items-center gap-3">
-          <Image src="/logo-mark.svg" alt="Pari Labs logo" width={38} height={38} priority className="shrink-0" />
-          <div className="leading-tight">
+    <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/75">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-6 py-4 lg:px-10">
+        <Link href="/" className="flex items-center gap-3">
+          <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority />
+          <div>
             <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Pari Labs</p>
             <p className="text-xs text-slate-600 dark:text-slate-400">AI Software & Business Automation</p>
           </div>
@@ -40,7 +40,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
-          <a href="#contact" className="hidden rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500 sm:inline-flex">
+          <a href="#contact" className="rounded-full bg-emerald-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500">
             Request Consultation
           </a>
           <button

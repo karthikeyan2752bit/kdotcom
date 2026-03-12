@@ -6,6 +6,7 @@ import {
   ContactSection,
   HeroSection,
   InfrastructureSection,
+  ModulesSection,
   ProjectsSection,
   ServicesSection,
 } from "@/components/sections";
@@ -18,8 +19,9 @@ export default function Home() {
       <main className="overflow-x-clip">
         <HeroSection />
         <ServicesSection />
-        <InfrastructureSection />
         <ProjectsSection />
+        <ModulesSection />
+        <InfrastructureSection />
         <AutomationSection />
         <AboutSection />
         <ContactSection />

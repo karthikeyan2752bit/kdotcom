@@ -52,7 +52,14 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
-        <nav className="hidden min-w-0 flex-1 items-center justify-start gap-1.5 xl:flex" aria-label="Primary">
+        <div className="flex min-w-0 flex-1 items-center xl:basis-1/4 xl:flex-none">
+          <Link href="/" className="inline-flex items-center gap-2 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
+            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9 shrink-0" />
+            <span className="hidden whitespace-nowrap text-base font-semibold leading-none tracking-[0.015em] text-slate-900 sm:inline dark:text-slate-100">Pari Labs</span>
+          </Link>
+        </div>
+
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1.5 xl:flex" aria-label="Primary">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -67,7 +74,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
+        <div className="ml-auto flex flex-1 items-center justify-end gap-2 sm:gap-3 xl:basis-1/4 xl:flex-none">
           <button
             type="button"
             aria-label="Search"
@@ -111,10 +118,6 @@ export function SiteHeader() {
             {isOpen ? "✕" : "☰"}
           </button>
 
-          <Link href="/" className="inline-flex items-center gap-2 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
-            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9 shrink-0" />
-            <span className="hidden whitespace-nowrap text-base font-semibold leading-none tracking-[0.015em] text-slate-900 sm:inline dark:text-slate-100">Pari Labs</span>
-          </Link>
         </div>
       </div>
 

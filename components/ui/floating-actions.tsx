@@ -48,7 +48,7 @@ export function FloatingActions() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.97 }}
             transition={{ duration: 0.18 }}
-            className="w-[18rem] rounded-2xl border border-slate-200/80 bg-white/95 p-4 shadow-xl shadow-slate-900/10 backdrop-blur dark:border-slate-700 dark:bg-slate-900/95"
+            className="w-[18rem] rounded-2xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-4 shadow-xl shadow-slate-900/10 backdrop-blur dark:border-slate-700"
           >
             <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Pari Labs Assistant</p>
             <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
@@ -66,7 +66,7 @@ export function FloatingActions() {
         onClick={goToNext}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.96 }}
-        className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-300/80 bg-white/90 text-lg text-slate-700 shadow-lg shadow-slate-900/10 backdrop-blur transition hover:text-emerald-600 dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-200 dark:hover:text-emerald-300"
+        className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-300/80 bg-white/95 dark:bg-slate-900 text-lg text-slate-700 shadow-lg shadow-slate-900/10 backdrop-blur transition hover:text-emerald-600 dark:border-slate-700 dark:text-slate-200 dark:hover:text-emerald-300"
         aria-label="Go to next section"
         title="Next section"
       >

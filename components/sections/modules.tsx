@@ -25,7 +25,7 @@ export function ModulesSection() {
         {modules.map((module, index) => (
           <Reveal key={module.title} delay={index * 0.06}>
             <motion.article
-              className="h-full rounded-3xl border border-slate-200/80 bg-white/80 p-6 dark:border-slate-700 dark:bg-slate-900/75"
+              className="h-full rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-6 dark:border-slate-700 "
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 130, damping: 22 }}
             >

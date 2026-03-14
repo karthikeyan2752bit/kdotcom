@@ -20,7 +20,7 @@ export function ContactSection() {
     >
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal>
-          <div className="rounded-3xl border border-slate-200/80 bg-white/80 p-7 dark:border-slate-700 dark:bg-slate-900/70">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 ">
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">What we can discuss</h3>
             <ul className="mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-300">
               {discussionTopics.map((item) => (
@@ -34,7 +34,7 @@ export function ContactSection() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="rounded-3xl border border-slate-200/80 bg-white/85 p-7 dark:border-slate-700 dark:bg-slate-900/75">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 ">
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Request consultation</h3>
             <p className="mt-2 text-base text-slate-600 dark:text-slate-300">Tell us about your organization and goals. We&apos;ll respond with next steps and a proposed approach.</p>
             <form
@@ -95,7 +95,7 @@ function Field({
         minLength={minLength}
         maxLength={maxLength}
         rows={as === "textarea" ? 4 : undefined}
-        className="mt-1.5 w-full rounded-xl border border-slate-300/80 bg-white/85 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-emerald-700/40"
+        className="mt-1.5 w-full rounded-xl border border-slate-300/80 bg-white/95 dark:bg-slate-900 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-emerald-700/40"
       />
     </label>
   );

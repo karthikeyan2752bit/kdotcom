@@ -30,7 +30,7 @@ export function AnimatedBackground() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden" aria-hidden="true">
+    <div className="pointer-events-none fixed top-0 left-0 z-[-30] h-full w-full overflow-hidden" aria-hidden="true">
       {!videoFailed ? (
         <video
           ref={videoRef}
@@ -55,7 +55,7 @@ export function AnimatedBackground() {
         />
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/72 via-slate-900/62 to-slate-950/78" />
+      <div className="absolute inset-0 z-10 bg-[rgba(5,10,20,0.82)] md:bg-[rgba(5,10,20,0.75)]" />
     </div>
   );
 }

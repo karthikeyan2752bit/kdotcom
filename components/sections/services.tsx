@@ -41,7 +41,7 @@ export function ServicesSection() {
             <motion.article
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 120, damping: 18 }}
-              className="h-full rounded-3xl border border-slate-200/80 bg-white/80 p-7 shadow-lg shadow-slate-300/20 backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/70"
+              className="h-full rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-7 shadow-lg shadow-slate-300/20 backdrop-blur dark:border-slate-700/70 "
             >
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 text-xl">
                 {item.icon}

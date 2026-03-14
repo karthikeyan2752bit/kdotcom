@@ -55,9 +55,9 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label="Pari Labs homepage"
-            className="relative inline-flex items-center rounded-md pl-2 pr-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 sm:pl-3 sm:pr-7"
+            className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
           >
-            <span className="relative flex h-12 w-[176px] items-center overflow-hidden rounded-xl bg-slate-900/5 dark:bg-white/5 sm:h-[3.1rem] sm:w-[186px]">
+            <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-slate-900/5 dark:bg-white/5">
               <video
                 autoPlay
                 muted
@@ -65,7 +65,7 @@ export function SiteHeader() {
                 playsInline
                 preload="auto"
                 aria-label="Pari Labs animated logo"
-                className="h-full w-full object-contain object-center"
+                className="h-full w-full scale-[1.35] object-cover object-center"
               >
                 <source src="/media/Pari_Labs_Logo_Animation_Request.mp4" type="video/mp4" />
               </video>

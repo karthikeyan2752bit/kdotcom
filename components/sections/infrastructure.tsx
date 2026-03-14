@@ -41,7 +41,7 @@ export function InfrastructureSection() {
         {infrastructurePillars.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08}>
             <motion.article
-              className="rounded-3xl border border-slate-200/80 bg-white/80 p-6 dark:border-slate-700 dark:bg-slate-900/70"
+              className="rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-6 dark:border-slate-700 "
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 110, damping: 18 }}
             >

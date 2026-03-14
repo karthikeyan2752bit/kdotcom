@@ -44,9 +44,9 @@ export function SectionShell({
       >
         {(eyebrow || title || description) && (
           <div className={centered ? "mx-auto max-w-4xl text-center" : "max-w-4xl"}>
-            {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700 dark:text-emerald-300">{eyebrow}</p>}
-            {title && <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-50">{title}</h2>}
-            {description && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">{description}</p>}
+            {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">{eyebrow}</p>}
+            {title && <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl lg:text-6xl">{title}</h2>}
+            {description && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">{description}</p>}
           </div>
         )}
         <div className="mt-12">{children}</div>

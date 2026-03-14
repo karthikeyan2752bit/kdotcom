@@ -63,7 +63,7 @@ export function ProjectsSection() {
             <motion.article
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 120, damping: 19 }}
-              className="h-full rounded-3xl border border-slate-200/70 bg-white/80 p-7 dark:border-slate-700 dark:bg-slate-900/75"
+              className="h-full rounded-3xl border border-slate-200/70 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 "
             >
               <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{useCase.industry}</h3>
               <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">

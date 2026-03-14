@@ -48,7 +48,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/78 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/78 ${
+      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/95 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/95 ${
         isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.45)] dark:shadow-black/45" : ""
       }`}
     >
@@ -135,7 +135,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-slate-200/80 bg-white/95 px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden dark:border-slate-800 dark:bg-slate-950/95"
+            className="border-t border-slate-200/80 bg-white px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden dark:border-slate-800 dark:bg-slate-950"
             aria-label="Mobile"
           >
             <div className="mx-auto grid max-w-7xl gap-1.5">

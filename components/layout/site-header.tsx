@@ -55,7 +55,7 @@ export function SiteHeader() {
         <div className="flex min-w-0 flex-1 items-center xl:basis-1/4 xl:flex-none">
           <Link href="/" className="inline-flex items-center gap-3 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
             <Image
-              src="/resources/logo.jpg"
+              src="/media/logo.jpg"
               alt="Pari Labs"
               priority
               className="h-8 w-auto shrink-0 sm:h-9 md:h-10"

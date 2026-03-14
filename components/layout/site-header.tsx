@@ -2,10 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { AnimatedLogoOrbit } from "@/components/ui/animated-logo-orbit";
 
 const navItems: Array<{ href: string; label: string; hasDropdown?: boolean }> = [
   { href: "#use-cases", label: "Industries" },
@@ -54,16 +52,25 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 flex-1 items-center xl:basis-1/4 xl:flex-none">
-          <Link href="/" className="relative inline-flex items-center gap-3 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
-            <AnimatedLogoOrbit />
-            <Image
-              src="/media/logo.jpg"
-              alt="Pari Labs"
-              priority
-              width={180}
-              height={56}
-              className="relative z-10 h-8 w-auto shrink-0 sm:h-9 md:h-10"
-            />
+          <Link
+            href="/"
+            aria-label="Pari Labs homepage"
+            className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
+          >
+            <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-slate-900/5 dark:bg-white/5">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                aria-label="Pari Labs animated logo"
+                className="h-full w-full scale-[1.35] object-cover object-center"
+              >
+                <source src="/media/Pari_Labs_Logo_Animation_Request.mp4" type="video/mp4" />
+              </video>
+              <span className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]" />
+            </span>
           </Link>
         </div>
 

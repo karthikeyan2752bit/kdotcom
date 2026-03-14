@@ -47,15 +47,19 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/82 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/82 ${
-        isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.3)] dark:shadow-black/35" : ""
+      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/78 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/78 ${
+        isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.45)] dark:shadow-black/45" : ""
       }`}
     >
       <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 flex-1 items-center xl:basis-1/4 xl:flex-none">
-          <Link href="/" className="inline-flex items-center gap-2 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
-            <Image src="/logo-mark.svg" alt="Pari Labs logo" width={36} height={36} priority className="h-9 w-9 shrink-0" />
-            <span className="hidden whitespace-nowrap text-base font-semibold leading-none tracking-[0.015em] text-slate-900 sm:inline dark:text-slate-100">Pari Labs</span>
+          <Link href="/" className="inline-flex items-center gap-3 rounded-md px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50">
+            <Image
+              src="/resources/logo.jpg"
+              alt="Pari Labs"
+              priority
+              className="h-8 w-auto shrink-0 sm:h-9 md:h-10"
+            />
           </Link>
         </div>
 
@@ -117,7 +121,6 @@ export function SiteHeader() {
           >
             {isOpen ? "✕" : "☰"}
           </button>
-
         </div>
       </div>
 

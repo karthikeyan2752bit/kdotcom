@@ -33,10 +33,10 @@ export function AboutSection() {
       <div className="grid gap-4">
         {phases.map((phase, index) => (
           <Reveal key={phase.title} delay={index * 0.08} x={index % 2 === 0 ? -28 : 28} y={0}>
-            <article className="rounded-3xl border border-slate-200/70 bg-white/75 p-6 dark:border-slate-700 ">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">Step {index + 1}</p>
-              <h3 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">{phase.title}</h3>
-              <p className="mt-2 text-base text-slate-600 dark:text-slate-300">{phase.detail}</p>
+            <article className="rounded-3xl border border-white/25 bg-slate-950/45 p-6 backdrop-blur-sm">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Step {index + 1}</p>
+              <h3 className="mt-2 text-2xl font-semibold text-slate-50">{phase.title}</h3>
+              <p className="mt-2 text-base text-slate-300">{phase.detail}</p>
             </article>
           </Reveal>
         ))}

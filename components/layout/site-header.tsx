@@ -58,17 +58,10 @@ export function SiteHeader() {
             className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
           >
             <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-[var(--color-secondary)]/8">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label="Pari Labs animated logo"
-                className="h-full w-full scale-[1.35] object-cover object-center"
-              >
-                <source src="/media/Pari_Labs_Logo_Animation_Request.mp4" type="video/mp4" />
-              </video>
+              <picture>
+                <source srcSet="/media/logo.png" type="image/png" />
+                <img src="/media/logo.jpg" alt="Pari Labs logo" loading="eager" className="h-full w-full object-contain p-1" />
+              </picture>
               <span className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]" />
             </span>
           </Link>

@@ -46,8 +46,8 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/95 backdrop-blur-xl transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-950/95 ${
-        isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.45)] dark:shadow-black/45" : ""
+      className={`sticky top-0 z-50 border-b border-slate-200/80 bg-[var(--color-surface)]/95 backdrop-blur-xl transition-all duration-300 ${
+        isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.25)]" : ""
       }`}
     >
       <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
@@ -55,9 +55,9 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label="Pari Labs homepage"
-            className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
+            className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
           >
-            <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-slate-900/5 dark:bg-white/5">
+            <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-[var(--color-secondary)]/8">
               <video
                 autoPlay
                 muted
@@ -80,7 +80,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               aria-haspopup={item.hasDropdown ? "menu" : undefined}
-              className="group relative inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-slate-700 transition-all duration-200 hover:text-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 dark:text-slate-300 dark:hover:text-emerald-300"
+              className="group relative inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-all duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
             >
               <span>{item.label}</span>
               {item.hasDropdown ? <span className="mt-[1px] inline-flex items-center"><ChevronDownIcon /></span> : null}
@@ -93,14 +93,14 @@ export function SiteHeader() {
           <button
             type="button"
             aria-label="Search"
-            className="hidden h-10 w-10 items-center justify-center rounded-md text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
+            className="hidden h-10 w-10 items-center justify-center rounded-md text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
           >
             <SearchIcon />
           </button>
 
           <button
             type="button"
-            className="hidden h-10 items-center gap-1 rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
+            className="hidden h-10 items-center gap-1 rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
           >
             EN
             <ChevronDownIcon />
@@ -110,14 +110,14 @@ export function SiteHeader() {
 
           <a
             href="#contact"
-            className="hidden h-10 items-center rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
+            className="hidden h-10 items-center rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
           >
             Call Us
           </a>
 
           <a
             href="#contact"
-            className="inline-flex h-10 items-center rounded-xl bg-emerald-600 px-4 text-sm font-semibold leading-none tracking-[0.01em] text-white shadow-lg shadow-emerald-700/20 transition-all duration-200 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 sm:px-5"
+            className="inline-flex h-10 items-center rounded-xl bg-[var(--color-accent)] px-4 text-sm font-semibold leading-none tracking-[0.01em] text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/60 sm:px-5"
           >
             <span className="hidden sm:inline">Discuss Your Needs</span>
             <span className="sm:hidden">Contact Us</span>
@@ -126,7 +126,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setIsOpen((open) => !open)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300/80 text-lg text-slate-700 transition-colors hover:bg-slate-100 lg:hidden dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-900"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300/80 text-lg text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] lg:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
@@ -142,7 +142,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-slate-200/80 bg-white px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden dark:border-slate-800 dark:bg-slate-950"
+            className="border-t border-slate-200/80 bg-[var(--color-surface)] px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden"
             aria-label="Mobile"
           >
             <div className="mx-auto grid max-w-7xl gap-1.5">
@@ -151,22 +151,22 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="flex min-h-11 items-center justify-between rounded-md px-3 py-2 text-sm font-medium tracking-[0.01em] text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-700 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-emerald-300"
+                  className="flex min-h-11 items-center justify-between rounded-md px-3 py-2 text-sm font-medium tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)]"
                 >
                   <span>{item.label}</span>
                   {item.hasDropdown ? <ChevronDownIcon /> : null}
                 </a>
               ))}
-              <div className="mt-1 grid grid-cols-2 gap-2 border-t border-slate-200/80 pt-3 dark:border-slate-800">
+              <div className="mt-1 grid grid-cols-2 gap-2 border-t border-slate-200/80 pt-3">
                 <button
                   type="button"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)]"
                 >
                   Search
                 </button>
                 <button
                   type="button"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)]"
                 >
                   EN
                 </button>

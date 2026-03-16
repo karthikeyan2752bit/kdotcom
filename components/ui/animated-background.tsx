@@ -55,7 +55,7 @@ export function AnimatedBackground() {
         />
       )}
 
-      <div className="absolute inset-0 z-10 bg-[rgba(5,10,20,0.82)] md:bg-[rgba(5,10,20,0.75)]" />
+      <div className="absolute inset-0 z-10 bg-[rgba(248,250,252,0.92)] md:bg-[rgba(248,250,252,0.86)]" />
     </div>
   );
 }

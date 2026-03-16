@@ -42,17 +42,17 @@ export function ServicesSection() {
             <motion.article
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 120, damping: 18 }}
-              className="h-full rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-7 shadow-lg shadow-slate-300/20 backdrop-blur dark:border-slate-700/70 "
+              className="h-full rounded-3xl border border-slate-200/80 bg-[var(--color-surface)] p-7 shadow-lg shadow-slate-300/20 backdrop-blur "
             >
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 text-xl">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-xl">
                 {item.icon}
               </div>
-              <h3 className="mt-4 text-2xl font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
-              <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">{item.description}</p>
-              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              <h3 className="mt-4 text-2xl font-semibold text-[var(--color-text-primary)]">{item.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-[var(--color-text-secondary)]">{item.description}</p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                 {item.points.map((point) => (
                   <li key={point} className="flex gap-2">
-                    <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                     <span>{point}</span>
                   </li>
                 ))}

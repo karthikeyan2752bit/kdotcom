@@ -39,16 +39,16 @@ export function AutomationSection() {
         {automationCards.map((card, index) => (
           <Reveal key={card.title} delay={index * 0.1}>
             <motion.article
-              className="h-full rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-6 dark:border-slate-700 "
+              className="h-full rounded-3xl border border-slate-200/80 bg-[var(--color-surface)] p-6 "
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 130, damping: 22 }}
             >
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{card.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{card.description}</p>
-              <ul className="mt-5 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">{card.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">{card.description}</p>
+              <ul className="mt-5 space-y-2 text-sm text-[var(--color-text-secondary)]">
                 {card.points.map((point) => (
                   <li key={point} className="flex items-center gap-2">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-violet-500" />
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                     {point}
                   </li>
                 ))}

@@ -53,31 +53,31 @@ export function CaseStudiesSection() {
         {caseStudies.map((cs) => (
           <article
             key={cs.title}
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 shadow-sm shadow-black/60 transition-transform duration-200 hover:-translate-y-1 hover:border-zinc-500/70 hover:shadow-[0_20px_60px_rgba(0,0,0,0.9)]"
+            className="group rounded-2xl border border-slate-200 bg-[var(--color-surface)] p-5 shadow-sm shadow-slate-300/20 transition-transform duration-200 hover:-translate-y-1 hover:border-[var(--color-primary)]/40 hover:shadow-[0_20px_60px_rgba(15,23,42,0.12)]"
           >
-            <h3 className="text-sm font-medium text-zinc-100">{cs.title}</h3>
-            <div className="mt-3 grid gap-3 text-xs text-zinc-300 sm:grid-cols-3">
+            <h3 className="text-sm font-medium text-[var(--color-text-primary)]">{cs.title}</h3>
+            <div className="mt-3 grid gap-3 text-xs text-[var(--color-text-secondary)] sm:grid-cols-3">
               <div>
-                <p className="text-[11px] uppercase tracking-wide text-zinc-500">
+                <p className="text-[11px] uppercase tracking-wide text-[var(--color-secondary)]">
                   Context
                 </p>
-                <p className="mt-1 text-zinc-300">{cs.context}</p>
+                <p className="mt-1 text-[var(--color-text-secondary)]">{cs.context}</p>
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-wide text-zinc-500">
+                <p className="text-[11px] uppercase tracking-wide text-[var(--color-secondary)]">
                   Challenge
                 </p>
-                <p className="mt-1 text-zinc-300">{cs.challenge}</p>
+                <p className="mt-1 text-[var(--color-text-secondary)]">{cs.challenge}</p>
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-wide text-zinc-500">
+                <p className="text-[11px] uppercase tracking-wide text-[var(--color-secondary)]">
                   Approach
                 </p>
-                <p className="mt-1 text-zinc-300">{cs.approach}</p>
+                <p className="mt-1 text-[var(--color-text-secondary)]">{cs.approach}</p>
               </div>
             </div>
-            <div className="mt-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3 text-xs text-emerald-200">
-              <p className="text-[11px] uppercase tracking-wide text-emerald-300/80">
+            <div className="mt-3 rounded-xl border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/10 p-3 text-xs text-[var(--color-secondary)]">
+              <p className="text-[11px] uppercase tracking-wide text-[var(--color-accent)]">
                 Outcome
               </p>
               <p className="mt-1">{cs.outcome}</p>

@@ -34,7 +34,7 @@ export function SectionShell({
 
   return (
     <section id={id} className="relative flex min-h-screen snap-start scroll-mt-24 items-center py-18 sm:py-24 lg:py-28">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent dark:via-cyan-900" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--color-primary)]/35 to-transparent" />
       <motion.div
         className="mx-auto max-w-7xl px-6 lg:px-10"
         initial={{ opacity: 0, ...entryVariants[entry] }}
@@ -44,9 +44,9 @@ export function SectionShell({
       >
         {(eyebrow || title || description) && (
           <div className={centered ? "mx-auto max-w-4xl text-center" : "max-w-4xl"}>
-            {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">{eyebrow}</p>}
-            {title && <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl lg:text-6xl">{title}</h2>}
-            {description && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">{description}</p>}
+            {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-primary)]">{eyebrow}</p>}
+            {title && <h2 className="mt-4 text-4xl font-bold tracking-tight text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl">{title}</h2>}
+            {description && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--color-text-secondary)]">{description}</p>}
           </div>
         )}
         <div className="mt-12">{children}</div>

@@ -41,15 +41,15 @@ export function InfrastructureSection() {
         {infrastructurePillars.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08}>
             <motion.article
-              className="rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-6 dark:border-slate-700 "
+              className="rounded-3xl border border-slate-200/80 bg-[var(--color-surface)] p-6 "
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 110, damping: 18 }}
             >
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.text}</p>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">{item.text}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {item.chips.map((chip) => (
-                  <span key={chip} className="rounded-full border border-slate-300/80 bg-gradient-to-r from-cyan-50 to-emerald-50 px-3 py-1 text-xs font-medium text-slate-700 dark:border-slate-600 dark:from-cyan-950/40 dark:to-emerald-950/40 dark:text-slate-200">
+                  <span key={chip} className="rounded-full border border-slate-200 bg-[var(--color-bg)] px-3 py-1 text-xs font-medium text-[var(--color-secondary)]">
                     {chip}
                   </span>
                 ))}

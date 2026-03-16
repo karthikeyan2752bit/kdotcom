@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased font-sans">
-        <div className="relative z-0 min-h-screen bg-transparent text-slate-100 transition-colors duration-300">
+        <div className="relative z-0 min-h-screen bg-transparent text-[var(--color-text-primary)] transition-colors duration-300">
           {children}
         </div>
       </body>

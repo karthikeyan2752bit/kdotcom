@@ -37,10 +37,10 @@ export function AboutSection() {
       <div className="grid gap-4">
         {reasons.map((reason, index) => (
           <Reveal key={reason.title} delay={index * 0.08} x={index % 2 === 0 ? -28 : 28} y={0}>
-            <article className="rounded-3xl border border-white/25 bg-slate-950/45 p-6 backdrop-blur-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Reason {index + 1}</p>
-              <h3 className="mt-2 text-2xl font-semibold text-slate-50">{reason.title}</h3>
-              <p className="mt-2 text-base text-slate-300">{reason.detail}</p>
+            <article className="rounded-3xl border border-slate-200 bg-[var(--color-surface)] p-6 backdrop-blur-sm">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">Reason {index + 1}</p>
+              <h3 className="mt-2 text-2xl font-semibold text-[var(--color-text-primary)]">{reason.title}</h3>
+              <p className="mt-2 text-base text-[var(--color-text-secondary)]">{reason.detail}</p>
             </article>
           </Reveal>
         ))}

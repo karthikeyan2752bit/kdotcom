@@ -25,15 +25,15 @@ export function ModulesSection() {
         {modules.map((module, index) => (
           <Reveal key={module.title} delay={index * 0.06}>
             <motion.article
-              className="h-full rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-6 dark:border-slate-700 "
+              className="h-full rounded-3xl border border-slate-200/80 bg-[var(--color-surface)] p-6 "
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 130, damping: 22 }}
             >
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/20 to-violet-500/20 text-lg">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-primary)]/10 text-lg">
                 {module.icon}
               </div>
-              <h3 className="mt-3 text-xl font-semibold text-slate-900 dark:text-slate-100">{module.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{module.detail}</p>
+              <h3 className="mt-3 text-xl font-semibold text-[var(--color-text-primary)]">{module.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">{module.detail}</p>
             </motion.article>
           </Reveal>
         ))}

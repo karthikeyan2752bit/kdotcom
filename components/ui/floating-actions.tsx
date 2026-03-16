@@ -48,13 +48,13 @@ export function FloatingActions() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.97 }}
             transition={{ duration: 0.18 }}
-            className="w-[18rem] rounded-2xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-4 shadow-xl shadow-slate-900/10 backdrop-blur dark:border-slate-700"
+            className="w-[18rem] rounded-2xl border border-slate-200/80 bg-[var(--color-surface)] p-4 shadow-xl shadow-slate-900/10 backdrop-blur"
           >
-            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Pari Labs Assistant</p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]">Pari Labs Assistant</p>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
               Hello, this is the Pari Labs assistant. Ask how we can automate your business operations and set up reliable systems.
             </p>
-            <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-2 text-xs text-slate-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-400">
+            <div className="mt-3 rounded-xl border border-slate-200 bg-[var(--color-bg)] p-2 text-xs text-[var(--color-text-secondary)]">
               Chat backend integration coming soon.
             </div>
           </motion.div>
@@ -66,7 +66,7 @@ export function FloatingActions() {
         onClick={goToNext}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.96 }}
-        className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-300/80 bg-white/95 dark:bg-slate-900 text-lg text-slate-700 shadow-lg shadow-slate-900/10 backdrop-blur transition hover:text-emerald-600 dark:border-slate-700 dark:text-slate-200 dark:hover:text-emerald-300"
+        className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-300/80 bg-[var(--color-surface)] text-lg text-[var(--color-secondary)] shadow-lg shadow-slate-900/10 backdrop-blur transition hover:text-[var(--color-accent)]"
         aria-label="Go to next section"
         title="Next section"
       >
@@ -78,7 +78,7 @@ export function FloatingActions() {
         onClick={() => setChatOpen((open) => !open)}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.96 }}
-        className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-lg text-white shadow-lg shadow-emerald-700/20"
+        className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-accent)] text-lg text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 hover:bg-emerald-700"
         aria-label="Toggle chatbot placeholder"
         title="AI assistant"
       >

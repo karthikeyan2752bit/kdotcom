@@ -9,6 +9,14 @@
 
 :root {
   color-scheme: light;
+  --color-primary: #1e3a8a;
+  --color-secondary: #334155;
+  --color-accent: #10b981;
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-button-text: #ffffff;
 }
 
 :root.dark {
@@ -26,9 +34,28 @@ html {
 }
 
 body {
-  @apply min-h-screen overflow-x-clip bg-transparent text-slate-100 antialiased;
+  @apply min-h-screen overflow-x-clip antialiased;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
 }
 
 ::selection {
-  @apply bg-emerald-200 text-slate-900 dark:bg-emerald-600/80 dark:text-slate-50;
+  background: color-mix(in srgb, var(--color-accent) 28%, white);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+main > section:nth-child(odd) {
+  background: var(--color-surface);
+}
+
+main > section:nth-child(even) {
+  background: var(--color-bg);
 }

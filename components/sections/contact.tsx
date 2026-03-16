@@ -20,12 +20,12 @@ export function ContactSection() {
     >
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal>
-          <div className="rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 ">
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">What we can discuss</h3>
-            <ul className="mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-300">
+          <div className="rounded-3xl border border-slate-200/80 bg-[var(--color-surface)] p-7 ">
+            <h3 className="text-2xl font-semibold text-[var(--color-text-primary)]">What we can discuss</h3>
+            <ul className="mt-5 space-y-3 text-sm text-[var(--color-text-secondary)]">
               {discussionTopics.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -34,9 +34,9 @@ export function ContactSection() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="rounded-3xl border border-slate-200/80 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 ">
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Discuss your business needs</h3>
-            <p className="mt-2 text-base text-slate-600 dark:text-slate-300">Share your details and goals. We&apos;ll get back to you with next steps and a clear plan.</p>
+          <div className="rounded-3xl border border-slate-200/80 bg-[var(--color-surface)] p-7 ">
+            <h3 className="text-2xl font-semibold text-[var(--color-text-primary)]">Discuss your business needs</h3>
+            <p className="mt-2 text-base text-[var(--color-text-secondary)]">Share your details and goals. We&apos;ll get back to you with next steps and a clear plan.</p>
             <form
               action="https://formspree.io/f/xlgwqkok"
               method="POST"
@@ -50,7 +50,7 @@ export function ContactSection() {
               </div>
               <Field label="Email" name="email" type="email" autoComplete="email" required maxLength={120} />
               <Field label="What would you like to improve?" name="message" as="textarea" required minLength={20} maxLength={3000} />
-              <button type="submit" className="mt-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-emerald-500">
+              <button type="submit" className="mt-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-button-text)] transition hover:-translate-y-0.5 hover:bg-emerald-700">
                 Discuss Your Business Needs
               </button>
             </form>
@@ -85,7 +85,7 @@ function Field({
   const InputTag = as === "textarea" ? "textarea" : "input";
 
   return (
-    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+    <label className="text-sm font-medium text-[var(--color-secondary)]">
       {label}
       <InputTag
         name={name}
@@ -95,7 +95,7 @@ function Field({
         minLength={minLength}
         maxLength={maxLength}
         rows={as === "textarea" ? 4 : undefined}
-        className="mt-1.5 w-full rounded-xl border border-slate-300/80 bg-white/95 dark:bg-slate-900 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-emerald-700/40"
+        className="mt-1.5 w-full rounded-xl border border-slate-300/80 bg-[var(--color-surface)] px-3.5 py-2.5 text-sm text-[var(--color-text-primary)] outline-none transition focus:border-[var(--color-accent)] focus:ring-2 focus:ring-emerald-200/70"
       />
     </label>
   );

@@ -48,14 +48,14 @@ export function ProjectsSection() {
             <motion.article
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 120, damping: 19 }}
-              className="h-full rounded-3xl border border-slate-200/70 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 "
+              className="h-full rounded-3xl border border-slate-200/70 bg-[var(--color-surface)] p-7 "
             >
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{useCase.industry}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{useCase.description}</p>
-              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">{useCase.industry}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">{useCase.description}</p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                 {useCase.items.map((item) => (
                   <li key={item} className="flex gap-2">
-                    <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-cyan-500" />
+                    <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                     <span>{item}</span>
                   </li>
                 ))}

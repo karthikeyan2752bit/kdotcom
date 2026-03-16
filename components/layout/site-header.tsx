@@ -59,7 +59,7 @@ export function SiteHeader() {
           >
             <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-[var(--color-secondary)]/8">
               <picture>
-                <source srcSet="/media/logo.png" type="image/png" />
+                <source srcSet="/media/logonew.png" type="image/png" />
                 <img src="/media/logo.jpg" alt="Pari Labs logo" loading="eager" className="h-full w-full object-contain p-1" />
               </picture>
               <span className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]" />

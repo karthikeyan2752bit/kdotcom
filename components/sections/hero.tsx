@@ -38,7 +38,7 @@ export function HeroSection() {
 
         <div className="flex items-center justify-center">
           <div className="hero-logo max-w-[420px]">
-            <img src="/media/logo.png" alt="Pari Labs Logo" loading="eager" className="h-auto w-full" />
+            <img src="/media/logonew.png" alt="Pari Labs Logo" loading="eager" className="h-auto w-full" />
           </div>
         </div>
       </div>

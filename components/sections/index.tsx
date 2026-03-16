@@ -1,9 +1,6 @@
 export { HeroSection } from "./hero";
-export { ServicesSection } from "./services";
-export { ProjectsSection } from "./projects";
-export { ModulesSection } from "./modules";
-export { InfrastructureSection } from "./infrastructure";
-export { AutomationSection } from "./automation";
-export { AboutSection } from "./about";
-export { ContactSection } from "./contact";
-export { CaseStudiesSection } from "./case-studies";
+export { SolutionsSection } from "./solutions";
+export { IndustriesSection } from "./industries";
+export { HowWeWorkSection } from "./how-we-work";
+export { WhyChooseUsSection } from "./why-choose-us";
+export { FinalCtaSection } from "./final-cta";

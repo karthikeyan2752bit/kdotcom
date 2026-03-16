@@ -67,16 +67,32 @@ main > section:nth-child(even) {
   will-change: transform, opacity;
 }
 
-.hero-logo-shimmer::after {
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 1rem;
-  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.48) 50%, transparent 65%);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transform: translateX(-140%);
-  animation: hero-logo-shimmer 10s ease-in-out infinite;
+  background: rgba(248, 250, 252, 0.65);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-grid {
@@ -111,22 +127,6 @@ main > section:nth-child(even) {
   }
 }
 
-@keyframes hero-logo-shimmer {
-  0%,
-  70%,
-  100% {
-    opacity: 0;
-    transform: translateX(-140%);
-  }
-  76% {
-    opacity: 0.25;
-  }
-  84% {
-    opacity: 0.18;
-    transform: translateX(140%);
-  }
-}
-
 @keyframes hero-glow-drift {
   0%,
   100% {
@@ -139,7 +139,6 @@ main > section:nth-child(even) {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-logo,
-  .hero-logo-shimmer::after,
   .hero-glow {
     animation: none !important;
     transform: none !important;

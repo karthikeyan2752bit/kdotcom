@@ -6,10 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems: Array<{ href: string; label: string; hasDropdown?: boolean }> = [
+  { href: "#solutions", label: "Solutions", hasDropdown: true },
   { href: "#use-cases", label: "Industries" },
-  { href: "#modules", label: "Expertise" },
-  { href: "#infrastructure", label: "IT Setup" },
-  { href: "#automation", label: "Automation" },
+  { href: "#infrastructure", label: "How It Works" },
   { href: "#process", label: "Why Us" },
   { href: "#contact", label: "Contact" },
 ];
@@ -57,12 +56,11 @@ export function SiteHeader() {
             aria-label="Pari Labs homepage"
             className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
           >
-            <span className="relative block h-10 w-[132px] overflow-hidden rounded-xl bg-[var(--color-secondary)]/8">
+            <span className="navbar-logo relative block h-11 w-[164px] overflow-hidden">
               <picture>
-                <source srcSet="/media/logonew.png" type="image/png" />
-                <img src="/media/logo.jpg" alt="Pari Labs logo" loading="eager" className="h-full w-full object-contain p-1" />
+                <source srcSet="/media/logo.png" type="image/png" />
+                <img src="/media/logonew.png" alt="Pari Labs logo" loading="eager" className="h-full w-full object-contain" />
               </picture>
-              <span className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]" />
             </span>
           </Link>
         </div>

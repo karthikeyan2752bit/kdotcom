@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pari Labs · AI Software & Business Automation",
-  description: "Pari Labs builds reliable software platforms, automation systems, and SaaS solutions for modern organizations.",
+  title: "Pari Labs · Business Software & IT Solutions",
+  description: "Pari Labs builds business software and IT systems that automate operations, improve efficiency, and support growth.",
 };
 
 export default function RootLayout({

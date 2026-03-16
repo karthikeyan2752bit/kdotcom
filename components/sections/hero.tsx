@@ -3,9 +3,9 @@
 import { motion, type Transition } from "framer-motion";
 
 const stats = [
-  { label: "Automation hours saved", value: "18k+/month" },
-  { label: "Business systems delivered", value: "60+" },
-  { label: "Platform uptime target", value: "99.95%" },
+  { label: "Businesses supported", value: "60+" },
+  { label: "Hours of manual work reduced", value: "18k+/month" },
+  { label: "Support response time", value: "< 24 hours" },
 ];
 
 const spring: Transition = { type: "spring", stiffness: 90, damping: 18 };
@@ -15,23 +15,23 @@ export function HeroSection() {
     <section id="hero" className="relative mx-auto grid min-h-screen max-w-7xl snap-start scroll-mt-24 items-center gap-14 px-6 pb-20 pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-28">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
         <span className="inline-flex rounded-full border border-emerald-600/25 bg-emerald-600/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">
-          SaaS Platforms • Backend Systems • Automation
+          Business Software • Automation • Office IT Setup
         </span>
         <h1 className="mt-7 text-5xl font-bold tracking-tight text-slate-100 sm:text-6xl lg:text-7xl">
-          AI-powered business software and automation platforms built for modern organizations.
+          Software and IT systems that run your business better.
         </h1>
         <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-          Pari Labs builds reliable software platforms, automation systems, and SaaS solutions that help organizations run and scale operations efficiently.
+          We build software that automates your daily operations, from billing and inventory to appointments, customer follow-ups, and team workflows.
         </p>
         <p className="mt-4 max-w-2xl text-base text-slate-300">
-          Our engineering team works with business owners and operations leaders to design practical systems that reduce manual work, improve visibility, and support growth.
+          Custom solutions for clinics, stores, showrooms, and growing offices that need reliable systems without technical complexity.
         </p>
         <div className="mt-9 flex flex-wrap gap-4">
           <a href="#contact" className="rounded-full bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-emerald-500/20 transition hover:-translate-y-0.5">
-            Request Consultation
+            Talk to us about your business
           </a>
           <a href="#solutions" className="rounded-full border border-slate-600/80 bg-white/95 dark:bg-slate-900 px-7 py-3.5 text-sm font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-200">
-            Explore Solutions
+            See what we can build for you
           </a>
         </div>
       </motion.div>
@@ -44,9 +44,9 @@ export function HeroSection() {
       >
         <div className="grid gap-3 rounded-2xl border border-cyan-500/25 bg-slate-950/95 p-5 text-slate-100">
           {[
-            "Understand your operations and bottlenecks",
-            "Design software workflows with clear approvals",
-            "Deploy secure systems with monitoring and support",
+            "We understand how your current operations work",
+            "We build software around your exact business process",
+            "We launch, train your team, and provide ongoing support",
           ].map((step, index) => (
             <motion.div
               key={step}

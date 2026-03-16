@@ -6,44 +6,29 @@ import { Reveal } from "@/components/ui/reveal";
 
 const useCases = [
   {
-    industry: "Healthcare & Hospitals",
-    items: [
-      "Patient record workflows with role-based access",
-      "Appointment booking from website or WhatsApp",
-      "Automated reminders for visits and follow-ups",
-      "Digital billing, claims, and report generation",
-      "Doctor and staff scheduling visibility",
-    ],
+    industry: "Clinics and Hospitals",
+    description: "Reduce front-desk pressure and improve patient service with organized appointment, billing, and record systems.",
+    items: ["Appointment booking and reminders", "Faster billing and payment tracking", "Patient records and visit history in one place"],
   },
   {
-    industry: "Small Businesses",
-    items: [
-      "Simple sales and billing management",
-      "Automated stock and reorder notifications",
-      "Owner-friendly reports for daily decisions",
-      "Integrated customer follow-up messages",
-      "Task tracking across small teams",
-    ],
+    industry: "Laundry Businesses",
+    description: "Track every order from pickup to delivery, reduce missed items, and keep customers informed automatically.",
+    items: ["Order tracking by stage", "Auto billing and invoice generation", "Customer updates and repeat order history"],
   },
   {
-    industry: "Retail Shops",
-    items: [
-      "Point-of-sale and inventory sync",
-      "Centralized product and pricing controls",
-      "Automated purchase and supplier workflows",
-      "Promotions and customer loyalty tracking",
-      "Multi-branch reporting dashboards",
-    ],
+    industry: "Retail Shops and Supermarkets",
+    description: "Keep stock accurate, speed up billing, and get a daily view of what is selling and what needs restocking.",
+    items: ["Billing connected to inventory", "Low-stock alerts and purchase planning", "Simple sales and profit reports"],
   },
   {
-    industry: "Service Businesses & Professional Offices",
-    items: [
-      "Lead capture and client onboarding automation",
-      "Appointment and service delivery scheduling",
-      "Invoice automation and payment tracking",
-      "Client document collection and approvals",
-      "Operational dashboards for managers",
-    ],
+    industry: "Car and Bike Showrooms",
+    description: "Manage leads, bookings, test drives, deliveries, and follow-ups without losing customer details.",
+    items: ["Lead tracking and follow-up reminders", "Booking and delivery workflow", "Sales team performance dashboards"],
+  },
+  {
+    industry: "Growing Offices (20–100 Employees)",
+    description: "Create smoother internal operations with better process visibility, approvals, and reporting.",
+    items: ["Employee request and approval systems", "Task and workflow tracking", "Management dashboards for operations"],
   },
 ];
 
@@ -51,9 +36,9 @@ export function ProjectsSection() {
   return (
     <SectionShell
       id="use-cases"
-      eyebrow="Industry Use Cases"
-      title="Built around real business scenarios, not generic templates."
-      description="We tailor each software platform to the way your team already operates, then improve speed, control, and visibility."
+      eyebrow="Industries We Help"
+      title="Built for real businesses, not just tech teams."
+      description="We design each solution around your daily business operations so your team can work faster with fewer errors."
       align="center"
       entry="right"
     >
@@ -66,6 +51,7 @@ export function ProjectsSection() {
               className="h-full rounded-3xl border border-slate-200/70 bg-white/95 dark:bg-slate-900 p-7 dark:border-slate-700 "
             >
               <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{useCase.industry}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{useCase.description}</p>
               <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 {useCase.items.map((item) => (
                   <li key={item} className="flex gap-2">

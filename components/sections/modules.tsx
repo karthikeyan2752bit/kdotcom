@@ -5,21 +5,21 @@ import { SectionShell } from "@/components/ui/section-shell";
 import { Reveal } from "@/components/ui/reveal";
 
 const modules = [
-  { title: "Billing & Inventory Management", icon: "💳", detail: "Track sales, stock movement, and invoicing from one connected system." },
-  { title: "HR Management Automation", icon: "👥", detail: "Manage attendance, leave, onboarding, and payroll workflows with fewer manual steps." },
-  { title: "Internal Workflow Software", icon: "🗂️", detail: "Route internal tasks with approvals, ownership, and status tracking across departments." },
-  { title: "Customer Management Systems", icon: "🤝", detail: "Capture leads, manage customer interactions, and follow up consistently from one place." },
-  { title: "Reporting Dashboards", icon: "📊", detail: "Give managers clear dashboards for operations, finance, and performance trends." },
-  { title: "Document Automation", icon: "📄", detail: "Generate, validate, and process business documents with templates and approval logic." },
+  { title: "Business automation systems", icon: "⚙️", detail: "Automate routine tasks, approvals, and status updates so your operations run smoothly every day." },
+  { title: "Custom software development", icon: "🧩", detail: "Build software around your exact business model instead of forcing your team into generic tools." },
+  { title: "Secure office systems", icon: "🔐", detail: "Set up dependable access, data protection, and internal systems for your staff and managers." },
+  { title: "Customer and sales management", icon: "🤝", detail: "Track customer interactions, leads, follow-ups, and service quality in one organized system." },
+  { title: "Data dashboards and reporting", icon: "📊", detail: "Give owners and managers a clear view of sales, operations, and performance without manual reports." },
+  { title: "Reliable infrastructure", icon: "🛠️", detail: "Keep business software stable with proper server setup, backups, and ongoing technical support." },
 ];
 
 export function ModulesSection() {
   return (
     <SectionShell
       id="modules"
-      eyebrow="Business Software Modules"
-      title="Common modules we build to modernize operations."
-      description="These modules can be delivered individually or combined into a full business platform based on your priorities."
+      eyebrow="Our Expertise"
+      title="What we can build and manage for your business."
+      description="Our expertise combines software, automation, and dependable IT systems to support business growth."
     >
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {modules.map((module, index) => (

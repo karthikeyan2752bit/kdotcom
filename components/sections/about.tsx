@@ -3,22 +3,26 @@
 import { SectionShell } from "@/components/ui/section-shell";
 import { Reveal } from "@/components/ui/reveal";
 
-const phases = [
+const reasons = [
   {
-    title: "Understand the business workflow",
-    detail: "We map your current process, identify delays, and define what should be automated or improved first.",
+    title: "Custom solutions for your business",
+    detail: "We design every system around your workflow, team size, and growth goals rather than using one-size-fits-all software.",
   },
   {
-    title: "Design the system architecture",
-    detail: "Our team designs a secure, scalable solution with clear modules, user roles, and integration points.",
+    title: "Direct support from the build team",
+    detail: "You work with the same people who plan and build your system, so communication is faster and clearer.",
   },
   {
-    title: "Develop and deploy the software",
-    detail: "We build, test, and launch the platform with phased rollouts to keep operations stable.",
+    title: "Affordable for small and growing companies",
+    detail: "Our solutions are cost-effective compared to large software vendors while still delivering strong reliability.",
   },
   {
-    title: "Maintain and improve the platform",
-    detail: "We provide ongoing monitoring, updates, and iterative improvements as your business grows.",
+    title: "Fast and practical delivery",
+    detail: "We focus on launching useful features quickly so your team sees value early and keeps improving over time.",
+  },
+  {
+    title: "Reliable technology with long-term support",
+    detail: "Your business gets stable software, secure systems, and ongoing updates as your operations grow.",
   },
 ];
 
@@ -26,17 +30,17 @@ export function AboutSection() {
   return (
     <SectionShell
       id="process"
-      eyebrow="Our Process"
-      title="A clear step-by-step delivery model for business software projects."
-      description="From discovery to long-term support, Pari Labs works as a technical partner focused on operational outcomes."
+      eyebrow="Why Businesses Choose Us"
+      title="A trusted software partner for business owners."
+      description="We help you automate operations with clear communication, practical solutions, and dependable support."
     >
       <div className="grid gap-4">
-        {phases.map((phase, index) => (
-          <Reveal key={phase.title} delay={index * 0.08} x={index % 2 === 0 ? -28 : 28} y={0}>
+        {reasons.map((reason, index) => (
+          <Reveal key={reason.title} delay={index * 0.08} x={index % 2 === 0 ? -28 : 28} y={0}>
             <article className="rounded-3xl border border-white/25 bg-slate-950/45 p-6 backdrop-blur-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Step {index + 1}</p>
-              <h3 className="mt-2 text-2xl font-semibold text-slate-50">{phase.title}</h3>
-              <p className="mt-2 text-base text-slate-300">{phase.detail}</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Reason {index + 1}</p>
+              <h3 className="mt-2 text-2xl font-semibold text-slate-50">{reason.title}</h3>
+              <p className="mt-2 text-base text-slate-300">{reason.detail}</p>
             </article>
           </Reveal>
         ))}

@@ -6,24 +6,25 @@ import { Reveal } from "@/components/ui/reveal";
 
 const solutions = [
   {
-    title: "Business Automation Platforms",
-    description: "We design platforms that automate repetitive operational tasks, approvals, and handoffs so your team can focus on high-value work.",
+    title: "Business Software",
+    description:
+      "We build day-to-day software that helps owners and staff manage sales, stock, customers, and reporting in one place. Your team gets a clear system instead of scattered spreadsheets and manual updates.",
+    points: ["Inventory management systems", "Billing software connected with stock", "CRM and business dashboards"],
+    icon: "💼",
+  },
+  {
+    title: "Business Automation",
+    description:
+      "We automate repetitive work so your team can serve customers faster and make fewer mistakes. Every workflow is designed around how your business already operates.",
+    points: ["Clinic appointment and follow-up automation", "Laundry pickup-to-delivery workflow tracking", "Retail and showroom process automation"],
     icon: "⚙️",
   },
   {
-    title: "Custom SaaS Applications",
-    description: "We build secure web applications tailored to your business model, with clean dashboards for teams, managers, and customers.",
-    icon: "🧩",
-  },
-  {
-    title: "Infrastructure & Server Setup",
-    description: "We set up cloud infrastructure, secure deployments, and monitoring so your software remains stable and dependable.",
-    icon: "☁️",
-  },
-  {
-    title: "AI-Assisted Workflow Systems",
-    description: "We apply AI to data-heavy and repetitive workflows such as form handling, document review, and reporting support.",
-    icon: "🤖",
+    title: "Infrastructure & IT Setup",
+    description:
+      "We set up reliable office systems so your software runs smoothly every day. You get secure access, dependable backups, and practical support for your team.",
+    points: ["Office server setup and configuration", "Secure systems for business data", "Internal employee tools and access setup"],
+    icon: "🛡️",
   },
 ];
 
@@ -31,11 +32,11 @@ export function ServicesSection() {
   return (
     <SectionShell
       id="solutions"
-      eyebrow="Solutions"
-      title="Software and automation systems designed for business operations."
-      description="Pari Labs helps organizations modernize workflows with practical software that is easy for teams to adopt and scale."
+      eyebrow="What We Do"
+      title="Software solutions that solve real business problems."
+      description="From inventory and billing to appointments and reporting, we build systems that make daily operations simpler, faster, and easier to manage."
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-3">
         {solutions.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08} y={20}>
             <motion.article
@@ -48,6 +49,14 @@ export function ServicesSection() {
               </div>
               <h3 className="mt-4 text-2xl font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
               <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">{item.description}</p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                {item.points.map((point) => (
+                  <li key={point} className="flex gap-2">
+                    <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.article>
           </Reveal>
         ))}

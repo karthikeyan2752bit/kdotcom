@@ -6,24 +6,24 @@ import { Reveal } from "@/components/ui/reveal";
 
 const automationCards = [
   {
-    title: "Automated workflows",
-    description: "Set rules that automatically route requests, approvals, and updates between teams and systems.",
-    points: ["Trigger-based actions", "Approvals", "SLA reminders"],
+    title: "Daily workflow automation",
+    description: "Automate routine steps like approvals, updates, and notifications so work moves faster between teams.",
+    points: ["Automatic task routing", "Approval reminders", "Status updates"],
   },
   {
-    title: "Intelligent data processing",
-    description: "Use AI-assisted extraction and classification to process forms, invoices, and business records faster.",
-    points: ["Form extraction", "Data validation", "Error flags"],
+    title: "Faster data handling",
+    description: "Reduce manual data entry and keep records more accurate with smart processing for forms and business documents.",
+    points: ["Form data capture", "Data checks", "Error reduction"],
   },
   {
-    title: "Repetitive task automation",
-    description: "Reduce manual copy-paste and repetitive back-office activities with reliable automation pipelines.",
-    points: ["System sync", "Batch updates", "Task completion logs"],
+    title: "Back-office efficiency",
+    description: "Cut repetitive office work and help staff focus on customers, sales, and service quality.",
+    points: ["System-to-system updates", "Batch processing", "Activity logs"],
   },
   {
-    title: "AI-assisted analytics",
-    description: "Summarize key trends and operational signals so managers can make decisions quickly.",
-    points: ["Trend summaries", "Exception alerts", "Performance insights"],
+    title: "Business insights for owners",
+    description: "Get clear summaries and alerts so you can make decisions quickly without waiting for manual reports.",
+    points: ["Trend summaries", "Issue alerts", "Performance insights"],
   },
 ];
 
@@ -31,9 +31,9 @@ export function AutomationSection() {
   return (
     <SectionShell
       id="automation"
-      eyebrow="AI-Powered Automation"
-      title="Practical AI features that improve daily operations."
-      description="We focus on dependable automation and measurable outcomes, not hype. Every AI feature is tied to a clear business workflow."
+      eyebrow="Business Automation"
+      title="Automation that saves time and reduces mistakes."
+      description="We focus on practical automation that improves day-to-day operations and delivers measurable business results."
     >
       <div className="grid gap-5 md:grid-cols-2">
         {automationCards.map((card, index) => (

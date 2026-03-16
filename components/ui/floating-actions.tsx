@@ -52,7 +52,7 @@ export function FloatingActions() {
           >
             <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Pari Labs Assistant</p>
             <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Hello, this is the Pari Labs assistant. Ask about automation, software solutions, or infrastructure.
+              Hello, this is the Pari Labs assistant. Ask how we can automate your business operations and set up reliable systems.
             </p>
             <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-2 text-xs text-slate-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-400">
               Chat backend integration coming soon.

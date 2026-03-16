@@ -7,10 +7,10 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems: Array<{ href: string; label: string; hasDropdown?: boolean }> = [
   { href: "#use-cases", label: "Industries" },
-  { href: "#modules", label: "Modules" },
-  { href: "#infrastructure", label: "Infra" },
-  { href: "#automation", label: "AI Automation" },
-  { href: "#process", label: "Process" },
+  { href: "#modules", label: "Expertise" },
+  { href: "#infrastructure", label: "IT Setup" },
+  { href: "#automation", label: "Automation" },
+  { href: "#process", label: "Why Us" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -112,15 +112,15 @@ export function SiteHeader() {
             href="#contact"
             className="hidden h-10 items-center rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
           >
-            Sign In
+            Call Us
           </a>
 
           <a
             href="#contact"
             className="inline-flex h-10 items-center rounded-xl bg-emerald-600 px-4 text-sm font-semibold leading-none tracking-[0.01em] text-white shadow-lg shadow-emerald-700/20 transition-all duration-200 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 sm:px-5"
           >
-            <span className="hidden sm:inline">Request Consultation</span>
-            <span className="sm:hidden">Consultation</span>
+            <span className="hidden sm:inline">Discuss Your Needs</span>
+            <span className="sm:hidden">Contact Us</span>
           </a>
 
           <button

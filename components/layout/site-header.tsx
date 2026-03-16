@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems: Array<{ href: string; label: string; hasDropdown?: boolean }> = [
   { href: "#solutions", label: "Solutions", hasDropdown: true },
-  { href: "#use-cases", label: "Industries" },
-  { href: "#infrastructure", label: "How It Works" },
-  { href: "#process", label: "Why Us" },
+  { href: "#industries", label: "Industries" },
+  { href: "#how-we-work", label: "How We Work" },
+  { href: "#why-choose-us", label: "Why Choose Us" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -57,10 +58,7 @@ export function SiteHeader() {
             className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
           >
             <span className="navbar-logo relative block h-11 w-[164px] overflow-hidden">
-              <picture>
-                <source srcSet="/media/logo.png" type="image/png" />
-                <img src="/media/logonew.png" alt="Pari Labs logo" loading="eager" className="h-full w-full object-contain" />
-              </picture>
+              <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="h-full w-full object-contain" />
             </span>
           </Link>
         </div>

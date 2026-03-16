@@ -1,35 +1,27 @@
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { AnimatedBackground } from "@/components/ui/animated-background";
-import { FloatingActions } from "@/components/ui/floating-actions";
 import {
-  AboutSection,
-  AutomationSection,
-  ContactSection,
+  FinalCtaSection,
   HeroSection,
-  InfrastructureSection,
-  ModulesSection,
-  ProjectsSection,
-  ServicesSection,
+  HowWeWorkSection,
+  IndustriesSection,
+  SolutionsSection,
+  WhyChooseUsSection,
 } from "@/components/sections";
 
 export default function Home() {
   return (
     <>
-      <AnimatedBackground />
       <SiteHeader />
       <main className="overflow-x-clip">
         <HeroSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <ModulesSection />
-        <InfrastructureSection />
-        <AutomationSection />
-        <AboutSection />
-        <ContactSection />
+        <SolutionsSection />
+        <IndustriesSection />
+        <HowWeWorkSection />
+        <WhyChooseUsSection />
+        <FinalCtaSection />
       </main>
       <SiteFooter />
-      <FloatingActions />
     </>
   );
 }

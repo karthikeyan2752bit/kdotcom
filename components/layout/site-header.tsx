@@ -6,11 +6,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-const navItems: Array<{ href: string; label: string; hasDropdown?: boolean }> = [
-  { href: "#solutions", label: "Solutions", hasDropdown: true },
+const navItems: Array<{ href: string; label: string }> = [
+  { href: "#solutions", label: "Solutions" },
   { href: "#industries", label: "Industries" },
-  { href: "#how-we-work", label: "How We Work" },
-  { href: "#why-choose-us", label: "Why Choose Us" },
+  { href: "#how-we-work", label: "How It Works" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -50,15 +49,15 @@ export function SiteHeader() {
         isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.25)]" : ""
       }`}
     >
-      <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 flex-1 items-center xl:basis-1/4 xl:flex-none">
           <Link
             href="/"
             aria-label="Pari Labs homepage"
             className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
           >
-            <span className="navbar-logo relative block h-11 w-[164px] overflow-hidden">
-              <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="h-full w-full object-contain" />
+            <span className="navbar-logo relative block h-9 w-[168px] overflow-hidden">
+              <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="logo-image" />
             </span>
           </Link>
         </div>
@@ -68,11 +67,9 @@ export function SiteHeader() {
             <a
               key={item.href}
               href={item.href}
-              aria-haspopup={item.hasDropdown ? "menu" : undefined}
-              className="group relative inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-all duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
+              className="group relative inline-flex h-11 items-center whitespace-nowrap rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-all duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
             >
               <span>{item.label}</span>
-              {item.hasDropdown ? <span className="mt-[1px] inline-flex items-center"><ChevronDownIcon /></span> : null}
               <span className="absolute inset-x-3 bottom-1 h-0.5 origin-left scale-x-0 rounded-full bg-current opacity-70 transition-transform duration-200 group-hover:scale-x-100" />
             </a>
           ))}
@@ -99,17 +96,10 @@ export function SiteHeader() {
 
           <a
             href="#contact"
-            className="hidden h-10 items-center rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
+            className="inline-flex h-10 items-center rounded-xl bg-[var(--color-accent)] px-4 text-sm font-semibold leading-none tracking-[0.01em] text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/60 sm:px-5"
           >
-            Call Us
-          </a>
-
-          <a
-            href="#contact"
-            className="inline-flex h-10 items-center rounded-xl bg-[var(--color-accent)] px-4 text-sm font-semibold leading-none tracking-[0.01em] text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/60 sm:px-5"
-          >
-            <span className="hidden sm:inline">Discuss Your Needs</span>
-            <span className="sm:hidden">Contact Us</span>
+            <span className="hidden sm:inline">Book a Demo</span>
+            <span className="sm:hidden">Demo</span>
           </a>
 
           <button
@@ -143,7 +133,6 @@ export function SiteHeader() {
                   className="flex min-h-11 items-center justify-between rounded-md px-3 py-2 text-sm font-medium tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)]"
                 >
                   <span>{item.label}</span>
-                  {item.hasDropdown ? <ChevronDownIcon /> : null}
                 </a>
               ))}
               <div className="mt-1 grid grid-cols-2 gap-2 border-t border-slate-200/80 pt-3">

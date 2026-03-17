@@ -42,12 +42,24 @@ a {
   color: inherit;
 }
 
-.navbar-logo img {
-  height: 36px;
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 100%;
+  height: 32px;
+  object-fit: contain;
+  object-position: left center;
+  transform: scale(1.12);
+  transform-origin: left center;
 }
 
 .hero-section {
-  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  background:
+    radial-gradient(circle at 70% 24%, rgba(30, 58, 138, 0.18), rgba(30, 58, 138, 0) 45%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
 }
 
 .hero-content {
@@ -56,47 +68,40 @@ a {
 }
 
 .hero-preview {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  max-width: 560px;
+  margin: auto;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: #fff;
+  transform: perspective(1200px) rotateY(-8deg) rotateX(2deg);
+  transform-origin: left center;
+  box-shadow: 0 40px 70px -32px rgba(15, 23, 42, 0.38);
   overflow: hidden;
-  max-width: 420px;
-  margin: auto;
-  width: 100%;
 }
 
-.slider {
-  position: relative;
-  min-height: 280px;
-  aspect-ratio: 4 / 3;
-}
-
-.slide {
-  opacity: 0;
-  position: absolute;
-  inset: 0;
-  transition: opacity 0.8s ease;
+.hero-preview-bar {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+  gap: 6px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  padding: 10px 14px;
 }
 
-.slide.active {
-  opacity: 1;
-  pointer-events: auto;
+.hero-preview-bar span {
+  height: 9px;
+  width: 9px;
+  border-radius: 999px;
+  background: #cbd5e1;
 }
 
-.slide img {
-  max-width: 220px;
-  margin: auto;
-  display: block;
-  padding: 60px;
-  width: 100%;
-  height: auto;
+.product-screen {
+  position: relative;
+  min-height: 320px;
+  aspect-ratio: 16 / 10;
 }
 
-.slide video {
+.product-screen video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -108,6 +113,7 @@ a {
   }
 
   .hero-preview {
-    max-width: 480px;
+    max-width: 520px;
+    transform: none;
   }
 }

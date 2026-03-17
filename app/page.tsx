@@ -5,7 +5,9 @@ import {
   HeroSection,
   HowWeWorkSection,
   IndustriesSection,
+  ProductVisualizationSection,
   SolutionsSection,
+  TrustedBySection,
   WhyChooseUsSection,
 } from "@/components/sections";
 
@@ -15,7 +17,9 @@ export default function Home() {
       <SiteHeader />
       <main className="overflow-x-clip">
         <HeroSection />
+        <TrustedBySection />
         <SolutionsSection />
+        <ProductVisualizationSection />
         <IndustriesSection />
         <HowWeWorkSection />
         <WhyChooseUsSection />

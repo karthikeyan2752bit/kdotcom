@@ -1,52 +1,38 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const SLIDE_INTERVAL_MS = 5500;
-
 export function HeroSection() {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % 2);
-    }, SLIDE_INTERVAL_MS);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section id="hero" className="hero-section relative isolate overflow-hidden">
-      <div className="hero-content mx-auto grid w-full max-w-7xl items-center gap-12 px-6 py-24 lg:grid-cols-2 lg:px-10 lg:py-30">
+      <div className="hero-content mx-auto grid min-h-[92vh] w-full max-w-7xl items-center gap-14 px-6 py-16 lg:grid-cols-2 lg:px-10 lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-7"
+          className="space-y-8"
         >
           <span className="inline-flex rounded-full border border-indigo-200 bg-indigo-50/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-indigo-700 backdrop-blur-sm">
-            SaaS Automation Partner
+            SaaS Infrastructure Partner
           </span>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-            Software and IT systems that run your business better.
+          <h1 className="text-5xl font-bold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
+            Build the Software Your Business Actually Needs
           </h1>
-          <p className="max-w-xl text-lg leading-relaxed text-slate-700">
-            Automate billing, inventory, appointments, and daily operations with custom platforms designed for business owners.
+          <p className="max-w-xl text-lg leading-relaxed text-slate-700 sm:text-xl">
+            From billing and inventory to dashboards and workflow automation, Pari Labs builds custom SaaS systems that help teams move faster with less operational friction.
           </p>
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:-translate-y-0.5 hover:bg-emerald-700"
+              className="rounded-xl bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-emerald-600/20 transition hover:-translate-y-0.5 hover:bg-emerald-700"
             >
-              Discuss Your Business Needs
+              Book a Demo
             </a>
             <a
               href="#solutions"
-              className="rounded-xl border border-slate-300 bg-white/90 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:text-indigo-700"
+              className="rounded-xl border border-slate-300 bg-white/90 px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:text-indigo-700"
             >
-              See What We Can Build
+              Explore Solutions
             </a>
           </div>
         </motion.div>
@@ -58,16 +44,15 @@ export function HeroSection() {
           className="hero-visual"
         >
           <div className="hero-preview">
-            <div className="slider" aria-live="polite">
-              <div className={`slide ${activeSlide === 0 ? "active" : ""}`}>
-                <Image src="/media/logonew.png" alt="Pari Labs" width={640} height={320} priority />
-              </div>
-
-              <div className={`slide ${activeSlide === 1 ? "active" : ""}`}>
-                <video autoPlay muted loop playsInline preload="metadata" aria-label="Pari Labs product preview">
-                  <source src="/media/SaaS_Automation_Background_Video_Generation.mp4" type="video/mp4" />
-                </video>
-              </div>
+            <div className="hero-preview-bar">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="product-screen" aria-live="polite">
+              <video autoPlay muted loop playsInline preload="metadata" aria-label="Pari Labs product dashboard preview">
+                <source src="/media/SaaS_Automation_Background_Video_Generation.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AutomationGlobe } from "@/components/ui/automation-globe";
 
 export function HeroSection() {
   return (
@@ -12,50 +13,32 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="space-y-8"
         >
-          <span className="inline-flex rounded-full border border-indigo-200 bg-indigo-50/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-indigo-700 backdrop-blur-sm">
+          <span className="inline-flex rounded-full border border-emerald-300/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100 backdrop-blur-sm">
             SaaS Infrastructure Partner
           </span>
-          <h1 className="text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl lg:text-[64px] lg:leading-[1.04]">
+          <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-[64px] lg:leading-[1.04]">
             Build the Software Your Business Actually Needs
           </h1>
-          <p className="max-w-xl text-lg leading-relaxed text-slate-700 sm:text-xl">
+          <p className="max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
             From billing and inventory to dashboards and workflow automation, Pari Labs builds custom SaaS systems that help teams move faster with less operational friction.
           </p>
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="rounded-xl bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-emerald-600/20 transition duration-300 hover:scale-[1.02] hover:bg-emerald-700"
+              className="rounded-xl bg-emerald-500 px-7 py-3.5 text-sm font-semibold text-slate-950 shadow-xl shadow-emerald-900/30 transition duration-300 hover:scale-[1.02] hover:bg-emerald-400"
             >
               Book a Demo
             </a>
             <a
               href="#solutions"
-              className="rounded-xl border border-slate-300 bg-white/70 px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:scale-[1.02] hover:border-indigo-300 hover:text-indigo-700"
+              className="rounded-xl border border-cyan-400/30 bg-slate-900/65 px-7 py-3.5 text-sm font-semibold text-cyan-100 shadow-sm transition duration-300 hover:scale-[1.02] hover:border-cyan-300 hover:text-white"
             >
               Explore Solutions
             </a>
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.1 }}
-          className="hero-visual"
-        >
-          <div className="hero-preview">
-            <div className="hero-preview-bar">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="product-screen" aria-live="polite">
-              <video autoPlay muted loop playsInline preload="metadata" aria-label="Pari Labs product dashboard preview">
-                <source src="/media/SaaS_Automation_Background_Video_Generation.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </motion.div>
+        <AutomationGlobe />
       </div>
     </section>
   );

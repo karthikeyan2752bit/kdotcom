@@ -29,7 +29,10 @@ html {
 
 body {
   @apply min-h-screen overflow-x-clip antialiased;
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at 15% -10%, rgba(16, 185, 129, 0.1), transparent 32%),
+    radial-gradient(circle at 100% 0%, rgba(30, 58, 138, 0.1), transparent 34%),
+    var(--color-bg);
   color: var(--color-text-primary);
 }
 
@@ -40,6 +43,23 @@ body {
 
 a {
   color: inherit;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .navbar-logo {
@@ -74,10 +94,15 @@ a {
   border-radius: 20px;
   border: 1px solid rgba(148, 163, 184, 0.4);
   background: #fff;
-  transform: perspective(1200px) rotateY(-8deg) rotateX(2deg);
+  transform: perspective(1200px) rotateY(-6deg) rotateX(2deg);
   transform-origin: left center;
-  box-shadow: 0 40px 70px -32px rgba(15, 23, 42, 0.38);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 40px 70px -32px rgba(15, 23, 42, 0.32);
   overflow: hidden;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.hero-preview:hover {
+  transform: perspective(1200px) rotateY(-4deg) rotateX(1.5deg) translateY(-4px);
 }
 
 .hero-preview-bar {
@@ -115,5 +140,9 @@ a {
   .hero-preview {
     max-width: 520px;
     transform: none;
+  }
+
+  .hero-preview:hover {
+    transform: translateY(-3px);
   }
 }

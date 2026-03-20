@@ -1,6 +1,6 @@
 export function FinalCtaSection() {
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-24">
       <div className="mx-auto w-full max-w-5xl px-6 lg:px-10">
         <div className="rounded-3xl bg-indigo-600 px-8 py-14 text-center shadow-[0_28px_80px_-34px_rgba(79,70,229,0.6)] sm:px-12">
           <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Ready to automate your business operations?</h2>
@@ -45,7 +45,7 @@ export function FinalCtaSection() {
             />
             <button
               type="submit"
-              className="mt-2 inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-indigo-700"
+              className="mt-2 inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/20 transition duration-300 hover:scale-[1.02] hover:bg-indigo-700"
             >
               Discuss Your Business Needs
             </button>

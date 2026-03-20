@@ -23,7 +23,7 @@ const solutions = [
 
 export function SolutionsSection() {
   return (
-    <section id="solutions" className="py-20">
+    <section id="solutions" className="py-24">
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-indigo-600">Solutions</p>
@@ -31,7 +31,7 @@ export function SolutionsSection() {
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {solutions.map((solution) => (
-            <article key={solution.title} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <article key={solution.title} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)]">
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-lg">{solution.icon}</div>
               <h3 className="mt-4 text-lg font-semibold text-slate-900">{solution.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">{solution.description}</p>

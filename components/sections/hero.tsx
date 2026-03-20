@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AutomationGlobe } from "@/components/ui/automation-globe";
+import { AutomationGlobe3D } from "@/components/ui/automation-globe-3d";
 
 export function HeroSection() {
   return (
@@ -38,7 +38,7 @@ export function HeroSection() {
           </div>
         </motion.div>
 
-        <AutomationGlobe />
+        <AutomationGlobe3D />
       </div>
     </section>
   );

@@ -185,6 +185,9 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
 
         {arcs.map((link, index) => {
           const points = link.curve.getPoints(64);
+          const positions = new Float32Array(
+            points.flatMap((point) => [point.x, point.y, point.z]),
+          );
           const arcColor = index % 2 === 0 ? CYAN : EMERALD;
           return (
             <group key={`${link.from.id}-${link.to.id}`}>
@@ -192,9 +195,7 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
                 <bufferGeometry>
                   <bufferAttribute
                     attach="attributes-position"
-                    count={points.length}
-                    array={new Float32Array(points.flatMap((point) => [point.x, point.y, point.z]))}
-                    itemSize={3}
+                    args={[positions, 3]}
                   />
                 </bufferGeometry>
                 <lineBasicMaterial color={arcColor} transparent opacity={0.35} />

@@ -17,11 +17,11 @@ export default function Home() {
       <SiteHeader />
       <main className="overflow-x-clip">
         <HeroSection />
+        <HowWeWorkSection />
         <TrustedBySection />
         <SolutionsSection />
         <ProductVisualizationSection />
         <IndustriesSection />
-        <HowWeWorkSection />
         <WhyChooseUsSection />
         <FinalCtaSection />
       </main>

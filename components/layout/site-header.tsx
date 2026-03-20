@@ -45,12 +45,14 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-slate-200/80 bg-[var(--color-surface)]/95 backdrop-blur-xl transition-all duration-300 ${
-        isScrolled ? "shadow-[0_12px_30px_-16px_rgba(15,23,42,0.25)]" : ""
+      className={`sticky top-0 z-50 border-b border-slate-200/65 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/70 shadow-[0_14px_32px_-18px_rgba(15,23,42,0.35)] backdrop-blur-[10px]"
+          : "bg-white/90 backdrop-blur-sm"
       }`}
     >
-      <div className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
-        <div className="flex min-w-0 flex-1 items-center xl:basis-1/4 xl:flex-none">
+      <div className="nav-container mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex min-w-0 items-center">
           <Link
             href="/"
             aria-label="Pari Labs homepage"
@@ -62,12 +64,12 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1.5 xl:flex" aria-label="Primary">
+        <nav className="nav-links hidden items-center xl:flex" aria-label="Primary">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="group relative inline-flex h-11 items-center whitespace-nowrap rounded-md px-3.5 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-all duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
+              className="group relative inline-flex h-11 items-center whitespace-nowrap rounded-md px-3 text-[0.95rem] font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-all duration-200 hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
             >
               <span>{item.label}</span>
               <span className="absolute inset-x-3 bottom-1 h-0.5 origin-left scale-x-0 rounded-full bg-current opacity-70 transition-transform duration-200 group-hover:scale-x-100" />
@@ -75,18 +77,18 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="ml-auto flex flex-1 items-center justify-end gap-2 sm:gap-3 xl:basis-1/4 xl:flex-none">
+        <div className="nav-right ml-auto flex items-center justify-end">
           <button
             type="button"
             aria-label="Search"
-            className="hidden h-10 w-10 items-center justify-center rounded-md text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-md text-[var(--color-secondary)] transition-all duration-200 hover:bg-white hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
           >
             <SearchIcon />
           </button>
 
           <button
             type="button"
-            className="hidden h-10 items-center gap-1 rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
+            className="hidden h-10 items-center gap-1 rounded-md px-3 text-sm font-medium leading-none tracking-[0.01em] text-[var(--color-secondary)] transition-all duration-200 hover:bg-white hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 lg:inline-flex"
           >
             EN
             <ChevronDownIcon />
@@ -96,7 +98,7 @@ export function SiteHeader() {
 
           <a
             href="#contact"
-            className="inline-flex h-10 items-center rounded-xl bg-[var(--color-accent)] px-4 text-sm font-semibold leading-none tracking-[0.01em] text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/60 sm:px-5"
+            className="inline-flex h-10 items-center rounded-xl bg-[var(--color-accent)] px-4 text-sm font-semibold leading-none tracking-[0.01em] text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:scale-[1.02] hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/60 sm:px-5"
           >
             <span className="hidden sm:inline">Book a Demo</span>
             <span className="sm:hidden">Demo</span>
@@ -105,7 +107,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setIsOpen((open) => !open)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300/80 text-lg text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300/80 text-lg text-[var(--color-secondary)] transition-colors hover:bg-white lg:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
@@ -121,7 +123,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-slate-200/80 bg-[var(--color-surface)] px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden"
+            className="border-t border-slate-200/80 bg-white/90 px-4 pb-4 pt-3 backdrop-blur-xl xl:hidden"
             aria-label="Mobile"
           >
             <div className="mx-auto grid max-w-7xl gap-1.5">
@@ -130,21 +132,22 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="flex min-h-11 items-center justify-between rounded-md px-3 py-2 text-sm font-medium tracking-[0.01em] text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)] hover:text-[var(--color-primary)]"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-white hover:text-[var(--color-primary)]"
                 >
-                  <span>{item.label}</span>
+                  {item.label}
                 </a>
               ))}
-              <div className="mt-1 grid grid-cols-2 gap-2 border-t border-slate-200/80 pt-3">
+
+              <div className="mt-2 grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)]"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-white"
                 >
                   Search
                 </button>
                 <button
                   type="button"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-bg)]"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-white"
                 >
                   EN
                 </button>

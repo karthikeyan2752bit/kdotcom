@@ -35,7 +35,7 @@ const industries = [
 
 export function IndustriesSection() {
   return (
-    <section id="industries" className="bg-slate-50 py-20">
+    <section id="industries" className="bg-slate-50 py-24">
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-indigo-600">Industries</p>

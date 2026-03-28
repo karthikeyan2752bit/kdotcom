@@ -2,18 +2,18 @@ import type { ReactNode } from "react";
 
 export function HowWeWorkSection() {
   return (
-    <section id="how-we-work" className="py-24">
-      <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
+    <section id="how-we-work" className="section-tight py-16 sm:py-20 lg:py-24">
+      <div className="mobile-shell mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-600">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-600 sm:text-sm">
             How It Works
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-[1.65rem] font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl">
             A clean path from planning to production.
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-3 md:gap-5">
           <WorkCard
             title="Discover & Plan"
             text="Audit workflows and define the shortest reliable route to production."
@@ -85,12 +85,12 @@ function WorkCard({
   icon: ReactNode;
 }) {
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(15,23,42,0.12)]">
+    <article className="mobile-card rounded-3xl border border-slate-200 bg-white/70 p-6 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(15,23,42,0.12)]">
       <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
         {icon}
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-slate-900">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
+      <h3 className="mt-4 text-xl font-semibold text-slate-900">{title}</h3>
+      <p className="mt-2 text-base leading-relaxed text-slate-600">{text}</p>
     </article>
   );
 }

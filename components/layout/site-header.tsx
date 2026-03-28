@@ -81,7 +81,7 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label="Pari Labs homepage"
-            className="relative inline-flex items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
+            className="relative hidden items-center rounded-md p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40 md:inline-flex"
           >
             <span className="navbar-logo relative block h-9 w-[168px] overflow-hidden">
               <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="logo-image" />
@@ -130,7 +130,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 md:hidden">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 md:hidden">
         <Link
           href="/"
           aria-label="Pari Labs homepage"
@@ -169,12 +169,7 @@ export function SiteHeader() {
               className="flex h-full flex-col overflow-y-auto px-6 pb-8 pt-5"
               aria-label="Mobile"
             >
-              <div className="mb-8 flex items-center justify-between">
-                <Link href="/" onClick={() => setIsOpen(false)} aria-label="Pari Labs homepage" className="relative inline-flex items-center rounded-md p-1">
-                  <span className="navbar-logo relative block h-8 w-[142px] overflow-hidden">
-                    <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="logo-image logo-image-mobile" />
-                  </span>
-                </Link>
+              <div className="mb-8 flex items-center justify-end">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}

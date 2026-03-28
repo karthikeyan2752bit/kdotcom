@@ -58,24 +58,19 @@ a {
 }
 
 .nav-container {
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-links {
-  display: flex;
   gap: 24px;
 }
 
 .nav-right {
-  display: flex;
-  align-items: center;
   gap: 16px;
 }
 
 .navbar-logo {
-  display: flex;
   align-items: center;
 }
 
@@ -188,8 +183,8 @@ a {
   }
 
   .hero-content {
-    padding-top: 2.75rem;
-    padding-bottom: 2.75rem;
+    padding-top: 1.25rem;
+    padding-bottom: 2.25rem;
   }
 
   .section-tight {

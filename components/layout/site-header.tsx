@@ -6,10 +6,20 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-const navItems: Array<{ href: string; label: string }> = [
+const desktopNavItems: Array<{ href: string; label: string }> = [
   { href: "#solutions", label: "Solutions" },
   { href: "#industries", label: "Industries" },
   { href: "#how-we-work", label: "How It Works" },
+  { href: "#contact", label: "Contact" },
+];
+
+const mobileNavItems: Array<{ href: string; label: string }> = [
+  { href: "#solutions", label: "Solutions" },
+  { href: "#industries", label: "Industry Use Cases" },
+  { href: "#modules", label: "Software Modules" },
+  { href: "#infrastructure", label: "Infrastructure" },
+  { href: "#automation", label: "AI Automation" },
+  { href: "#how-we-work", label: "Process" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -43,6 +53,16 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const onChange = () => {
+      if (media.matches) setIsOpen(false);
+    };
+    onChange();
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
   return (
     <header
       className={`sticky top-0 z-50 border-b border-slate-200/65 transition-all duration-300 ${
@@ -51,7 +71,7 @@ export function SiteHeader() {
           : "bg-white/90 backdrop-blur-sm"
       }`}
     >
-      <div className="nav-container mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="nav-container mx-auto hidden h-[4.5rem] w-full max-w-7xl items-center justify-between px-4 sm:px-6 md:flex lg:px-8">
         <div className="flex min-w-0 items-center">
           <Link
             href="/"
@@ -65,7 +85,7 @@ export function SiteHeader() {
         </div>
 
         <nav className="nav-links hidden items-center xl:flex" aria-label="Primary">
-          {navItems.map((item) => (
+          {desktopNavItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -104,16 +124,29 @@ export function SiteHeader() {
             <span className="md:hidden">Consult</span>
           </a>
 
-          <button
-            type="button"
-            onClick={() => setIsOpen((open) => !open)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300/80 text-lg text-[var(--color-secondary)] transition-colors hover:bg-white lg:hidden"
-            aria-label="Toggle navigation menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? "✕" : "☰"}
-          </button>
         </div>
+      </div>
+
+      <div className="mx-auto flex h-[4.25rem] w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 md:hidden">
+        <Link
+          href="/"
+          aria-label="Pari Labs homepage"
+          className="relative inline-flex min-w-0 flex-1 items-center rounded-md py-1 pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/40"
+        >
+          <span className="navbar-logo relative block h-8 w-[142px] max-w-full overflow-hidden">
+            <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="logo-image logo-image-mobile" />
+          </span>
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((open) => !open)}
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-300/80 text-lg text-[var(--color-secondary)] transition-colors hover:bg-white"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
+        >
+          {isOpen ? "✕" : "☰"}
+        </button>
       </div>
 
       <AnimatePresence>
@@ -123,16 +156,16 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-slate-200/80 bg-white/95 px-4 pb-5 pt-3 backdrop-blur-xl xl:hidden"
+            className="border-t border-slate-200/80 bg-white/95 px-4 pb-5 pt-3 backdrop-blur-xl md:hidden"
             aria-label="Mobile"
           >
-            <div className="mx-auto grid max-w-7xl gap-2">
-              {navItems.map((item) => (
+            <div className="mx-auto grid w-full max-w-7xl gap-2">
+              {mobileNavItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="rounded-xl px-4 py-3 text-base font-medium text-[var(--color-secondary)] transition-colors hover:bg-white hover:text-[var(--color-primary)]"
+                  className="w-full rounded-xl px-4 py-3 text-base font-medium text-[var(--color-secondary)] transition-colors hover:bg-white hover:text-[var(--color-primary)]"
                 >
                   {item.label}
                 </a>
@@ -141,25 +174,10 @@ export function SiteHeader() {
               <a
                 href="#contact"
                 onClick={() => setIsOpen(false)}
-                className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-[var(--color-accent)] px-4 text-base font-semibold text-white"
+                className="mt-2 inline-flex h-12 w-full items-center justify-center rounded-xl bg-[var(--color-accent)] px-4 text-base font-semibold text-white"
               >
                 Request Consultation
               </a>
-
-              <div className="mt-1 grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  className="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-white"
-                >
-                  Search
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300/80 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-white"
-                >
-                  EN
-                </button>
-              </div>
             </div>
           </motion.nav>
         )}

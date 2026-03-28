@@ -12,6 +12,7 @@ const SOFT_BLUE = "#60a5fa";
 type ModuleLabel = {
   name: string;
   tooltip: string;
+  color: string;
 };
 
 type NetworkNode = {
@@ -31,18 +32,11 @@ type ArcDefinition = {
 };
 
 const MODULES: ModuleLabel[] = [
-  { name: "CRM", tooltip: "Customer operations" },
-  { name: "Billing", tooltip: "Billing automation" },
-  { name: "Inventory", tooltip: "Inventory sync" },
-  { name: "HRMS", tooltip: "Employee workflows" },
-  { name: "ERP", tooltip: "Unified enterprise data" },
-  { name: "Hospital", tooltip: "Hospital appointment system" },
-  { name: "Appointment", tooltip: "Booking orchestration" },
-  { name: "WhatsApp", tooltip: "Message automation" },
-  { name: "Automation", tooltip: "Workflow automation" },
-  { name: "Analytics", tooltip: "Business analytics" },
-  { name: "Server", tooltip: "Cloud server setup" },
-  { name: "Cloud", tooltip: "Cloud infrastructure" },
+  { name: "CRM", tooltip: "Customer operations", color: CYAN },
+  { name: "Billing", tooltip: "Billing automation", color: EMERALD },
+  { name: "ERP", tooltip: "Unified enterprise data", color: SOFT_BLUE },
+  { name: "Hospital", tooltip: "Hospital appointment system", color: CYAN },
+  { name: "Automation", tooltip: "Workflow automation", color: EMERALD },
 ];
 
 const NODES: NetworkNode[] = [
@@ -97,27 +91,38 @@ function createGlobeTexture() {
   if (!ctx) return null;
 
   const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  bg.addColorStop(0, "#020814");
-  bg.addColorStop(0.5, "#061325");
-  bg.addColorStop(1, "#04101f");
+  bg.addColorStop(0, "#0b1f3d");
+  bg.addColorStop(0.45, "#112f54");
+  bg.addColorStop(1, "#0a223f");
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = "rgba(96,165,250,0.1)";
+  ctx.strokeStyle = "rgba(103,232,249,0.14)";
   ctx.lineWidth = 1;
-  for (let y = 32; y < canvas.height; y += 24) {
+  for (let y = 24; y < canvas.height; y += 20) {
     ctx.beginPath();
     ctx.moveTo(0, y + Math.sin(y * 0.04) * 4);
     ctx.lineTo(canvas.width, y + Math.cos(y * 0.03) * 4);
     ctx.stroke();
   }
 
-  ctx.fillStyle = "rgba(52,211,153,0.09)";
-  for (let i = 0; i < 24; i += 1) {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
+  ctx.strokeStyle = "rgba(125,211,252,0.11)";
+  for (let x = 36; x < canvas.width; x += 44) {
     ctx.beginPath();
-    ctx.ellipse(x, y, 40 + Math.random() * 120, 18 + Math.random() * 50, Math.random() * Math.PI, 0, Math.PI * 2);
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x + Math.sin(x * 0.02) * 10, canvas.height);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "rgba(110,231,183,0.11)";
+  for (let i = 0; i < 18; i += 1) {
+    const x = ((i * 137) % canvas.width) + 16;
+    const y = ((i * 89) % canvas.height) + 10;
+    const width = 42 + ((i * 19) % 80);
+    const height = 16 + ((i * 11) % 36);
+    const rotation = ((i * 0.42) % 1) * Math.PI;
+    ctx.beginPath();
+    ctx.ellipse(x, y, width, height, rotation, 0, Math.PI * 2);
     ctx.fill();
   }
 
@@ -165,7 +170,7 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
           curve,
           line: new THREE.Line(
             new THREE.BufferGeometry().setFromPoints(curve.getPoints(70)),
-            new THREE.LineBasicMaterial({ color: route.color, transparent: true, opacity: 0.55 }),
+            new THREE.LineBasicMaterial({ color: route.color, transparent: true, opacity: 0.82 }),
           ),
           particleOffsets: Array.from({ length: route.particles }, (_, i) => (routeIndex * 0.13 + i * 0.31) % 1),
         };
@@ -177,10 +182,10 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
     () =>
       MODULES.map((module, i) => ({
         ...module,
-        radius: radius + 0.34 + (i % 3) * 0.09,
-        inclination: -0.7 + ((i * 0.41) % 1.4),
-        speed: 0.09 + (i % 4) * 0.018,
-        phase: i * 0.57,
+        radius: radius + 0.16,
+        inclination: -0.24 + ((i % 2) * 0.44 - 0.22),
+        speed: 0.14,
+        phase: (Math.PI * 2 * i) / MODULES.length,
       })),
     [radius],
   );
@@ -205,9 +210,11 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
       holder.position.set(x, y, z);
       holder.lookAt(0, 0, 0);
 
-      const visibilityWave = 0.5 + 0.5 * Math.sin(t * 0.7 + label.phase);
-      const front = z > -0.15;
-      const target = front ? THREE.MathUtils.lerp(0.12, 0.95, visibilityWave) : 0;
+      const visibilityWave = 0.5 + 0.5 * Math.sin(t * 0.9 + label.phase);
+      const projected = holder.position.clone().project(state.camera);
+      const insideFrame = Math.abs(projected.x) < 0.85 && Math.abs(projected.y) < 0.72;
+      const front = z > -0.08;
+      const target = front && insideFrame ? THREE.MathUtils.lerp(0.2, 0.96, visibilityWave) : 0;
       const scale = hovered === label.name ? 1.1 : 1;
 
       holder.scale.setScalar(scale);
@@ -238,31 +245,31 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
 
   return (
     <>
-      <ambientLight intensity={0.42} color="#7dd3fc" />
-      <directionalLight position={[2.8, 2.2, 2.2]} intensity={1.1} color="#d1fae5" />
-      <pointLight position={[-2.3, -0.3, 2.3]} intensity={1.5} color={CYAN} />
+      <ambientLight intensity={0.56} color="#bfdbfe" />
+      <directionalLight position={[2.8, 2.2, 2.2]} intensity={1.24} color="#ccfbf1" />
+      <pointLight position={[-2.3, -0.3, 2.3]} intensity={1.65} color={CYAN} />
 
       <group ref={globeGroupRef}>
         <mesh>
           <sphereGeometry args={[radius, mobile ? 48 : 64, mobile ? 48 : 64]} />
           <meshStandardMaterial
             map={globeTexture ?? undefined}
-            color="#061425"
-            roughness={0.78}
-            metalness={0.28}
-            emissive="#09213a"
-            emissiveIntensity={0.35}
+            color="#102f57"
+            roughness={0.56}
+            metalness={0.34}
+            emissive="#11385c"
+            emissiveIntensity={0.5}
           />
         </mesh>
 
         <mesh>
           <sphereGeometry args={[radius * 1.02, 64, 64]} />
-          <meshBasicMaterial color={SOFT_BLUE} transparent opacity={0.07} blending={THREE.AdditiveBlending} />
+          <meshBasicMaterial color="#67e8f9" transparent opacity={0.12} blending={THREE.AdditiveBlending} />
         </mesh>
 
         <mesh>
           <sphereGeometry args={[radius * 1.08, 48, 48]} />
-          <meshBasicMaterial color={EMERALD} transparent opacity={0.05} blending={THREE.AdditiveBlending} />
+          <meshBasicMaterial color={EMERALD} transparent opacity={0.085} blending={THREE.AdditiveBlending} />
         </mesh>
 
         {[0.88, 1.0, 1.12].map((mul) => (
@@ -282,8 +289,8 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
         {arcs.map((arc) => (
           <group key={arc.key}>
             <mesh>
-              <tubeGeometry args={[arc.curve, 80, arc.thickness, 10, false]} />
-              <meshBasicMaterial color={arc.color} transparent opacity={0.2} />
+              <tubeGeometry args={[arc.curve, 90, arc.thickness * 1.22, 10, false]} />
+              <meshBasicMaterial color={arc.color} transparent opacity={0.38} />
             </mesh>
             <primitive object={arc.line} />
           </group>
@@ -296,8 +303,8 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
               particleRefs.current[index] = el;
             }}
           >
-            <sphereGeometry args={[0.016, 10, 10]} />
-            <meshBasicMaterial color={index % 2 === 0 ? CYAN : EMERALD} transparent opacity={0.95} />
+            <sphereGeometry args={[0.02, 10, 10]} />
+            <meshBasicMaterial color={index % 2 === 0 ? "#67e8f9" : "#6ee7b7"} transparent opacity={1} />
           </mesh>
         ))}
       </group>
@@ -309,18 +316,34 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
             labelMeshesRef.current[index] = el;
           }}
         >
-          <Html center transform distanceFactor={8.5}>
+          <Html center distanceFactor={8}>
             <div
               ref={(el) => {
                 labelDomRefs.current[index] = el;
               }}
-              className="group cursor-default rounded-full border border-cyan-200/30 bg-slate-950/75 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-cyan-100 shadow-[0_0_20px_rgba(34,211,238,0.18)] backdrop-blur-sm transition-all duration-300"
+              className="group pointer-events-auto cursor-default transition-opacity duration-500"
               onPointerEnter={() => setHovered(label.name)}
               onPointerLeave={() => setHovered((current) => (current === label.name ? null : current))}
-              style={{ opacity: 0.95 }}
+              style={{
+                opacity: 0.95,
+                fontSize: "12px",
+                whiteSpace: "nowrap",
+                transform: "translate(-50%, -50%)",
+                maxWidth: "96px",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                padding: "4px 8px",
+                borderRadius: "999px",
+                background: "rgba(248,250,252,0.88)",
+                border: `1px solid ${label.color}66`,
+                color: "#0f172a",
+                boxShadow: "0 0 0 1px rgba(16,185,129,0.18), 0 8px 20px rgba(2,6,23,0.22)",
+                fontWeight: 700,
+                letterSpacing: "0.04em",
+              }}
             >
               {label.name}
-              <span className="pointer-events-none absolute left-1/2 top-[120%] hidden -translate-x-1/2 whitespace-nowrap rounded-md border border-emerald-200/30 bg-slate-900/90 px-2 py-1 text-[9px] normal-case tracking-normal text-emerald-100 shadow-lg group-hover:block">
+              <span className="pointer-events-none absolute left-1/2 top-[122%] hidden -translate-x-1/2 rounded-md border border-emerald-200/60 bg-slate-50/95 px-2 py-1 text-[10px] normal-case tracking-normal text-slate-700 shadow-lg group-hover:block">
                 {label.tooltip}
               </span>
             </div>
@@ -359,7 +382,7 @@ export default function AutomationGlobe3D() {
       <Canvas
         camera={{ position: [0, 0, 4.4], fov: 37 }}
         gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
-        dpr={[1, 1.8]}
+        dpr={[1, 2]}
       >
         <fog attach="fog" args={["#020617", 4.8, 8.5]} />
         <Suspense fallback={null}>

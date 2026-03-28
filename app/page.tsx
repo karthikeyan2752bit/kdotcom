@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="overflow-x-clip">
+      <main>
         <HeroSection />
         <HowWeWorkSection />
         <TrustedBySection />

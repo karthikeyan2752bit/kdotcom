@@ -93,6 +93,11 @@ a {
   transform-origin: left center;
 }
 
+.logo-image-mobile {
+  height: 28px;
+  transform: scale(1);
+}
+
 .hero-section {
   position: relative;
   background:
@@ -178,12 +183,21 @@ a {
 @media (max-width: 767px) {
   html,
   body {
-    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .nav-container,
   .mobile-shell {
     padding-inline: 1rem;
+  }
+
+  main,
+  section,
+  .mobile-shell {
+    width: 100%;
+    max-width: 100%;
   }
 
   section {
@@ -207,21 +221,12 @@ a {
 
   .mobile-snap {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    grid-template-columns: 1fr;
+    overflow-x: hidden;
   }
 
   .mobile-snap > * {
-    scroll-snap-align: start;
-  }
-
-  .mobile-snap::-webkit-scrollbar {
-    display: none;
+    min-width: 0;
   }
 
   .hide-mobile-motion,

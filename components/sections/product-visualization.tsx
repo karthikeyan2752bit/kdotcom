@@ -21,21 +21,21 @@ const productHighlights = [
 
 export function ProductVisualizationSection() {
   return (
-    <section className="py-24">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
+    <section className="section-tight py-16 sm:py-20 lg:py-24">
+      <div className="mobile-shell mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10 lg:px-10">
         <div className="space-y-5">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-indigo-600">Product Visualization</p>
-          <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">See your operations on one intelligent control layer.</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600 sm:text-sm">Product Visualization</p>
+          <h2 className="text-[1.65rem] font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl">See your operations on one intelligent control layer.</h2>
           <p className="max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
             Every platform we build ships with analytics, workflow automation, and business management modules so owners and operators always know what to act on next.
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="mobile-snap mt-6 gap-4 sm:mt-8 sm:grid sm:grid-cols-3">
             {productHighlights.map((item) => (
-              <article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
+              <article key={item.title} className="mobile-card rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                <p className="text-base font-semibold text-slate-900">{item.title}</p>
+                <p className="mt-2 text-base leading-relaxed text-slate-600">{item.description}</p>
                 <p className="mt-5 text-2xl font-semibold text-indigo-700">{item.metric}</p>
-                <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500">{item.label}</p>
+                <p className="text-sm font-medium uppercase tracking-[0.12em] text-slate-500">{item.label}</p>
               </article>
             ))}
           </div>

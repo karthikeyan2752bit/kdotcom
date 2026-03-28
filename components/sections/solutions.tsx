@@ -27,12 +27,12 @@ const solutions = [
 
 export function SolutionsSection() {
   return (
-    <section id="solutions" className="py-24">
-      <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.82fr)]">
+    <section id="solutions" className="section-tight py-16 sm:py-20 lg:py-24">
+      <div className="mobile-shell mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.82fr)] lg:gap-10">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-indigo-600">Solutions</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600 sm:text-sm">Solutions</p>
+            <h2 className="mt-3 text-[1.65rem] font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               Systems built around your business operations.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -60,15 +60,15 @@ export function SolutionsSection() {
           </motion.article>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-4 md:mt-12 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
           {solutions.map((solution) => (
             <article
               key={solution.title}
-              className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)]"
+              className="mobile-card group rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(15,23,42,0.14)]"
             >
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-lg">{solution.icon}</div>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">{solution.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{solution.description}</p>
+              <h3 className="mt-4 text-xl font-semibold text-slate-900">{solution.title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-slate-600">{solution.description}</p>
             </article>
           ))}
         </div>

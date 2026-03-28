@@ -27,6 +27,12 @@ html {
   scroll-behavior: smooth;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   @apply min-h-screen overflow-x-clip antialiased;
   background:
@@ -34,6 +40,17 @@ body {
     radial-gradient(circle at 100% 0%, rgba(30, 58, 138, 0.1), transparent 34%),
     var(--color-bg);
   color: var(--color-text-primary);
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ::selection {
@@ -155,5 +172,61 @@ a {
 
   .solution-video-card {
     max-width: 520px;
+  }
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  .nav-container,
+  .mobile-shell {
+    padding-inline: 1rem;
+  }
+
+  section {
+    scroll-margin-top: 5rem;
+  }
+
+  .hero-content {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .section-tight {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .mobile-card {
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .mobile-snap {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mobile-snap > * {
+    scroll-snap-align: start;
+  }
+
+  .mobile-snap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-mobile-motion,
+  .hide-mobile-motion * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.16s !important;
   }
 }

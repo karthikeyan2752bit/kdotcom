@@ -6,7 +6,7 @@ import AutomationGlobe3D from "@/components/AutomationGlobe3D";
 export function HeroSection() {
   return (
     <section id="hero" className="hero-section relative isolate overflow-hidden">
-      <div className="hero-content mobile-shell mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-10 lg:py-24">
+      <div className="hero-content mobile-shell mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-14 lg:px-10 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 18 }}

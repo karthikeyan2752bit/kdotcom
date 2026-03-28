@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const desktopNavItems: Array<{ href: string; label: string }> = [
   { href: "#solutions", label: "Solutions" },
@@ -21,6 +20,7 @@ const mobileNavItems: Array<{ href: string; label: string }> = [
   { href: "#automation", label: "AI Automation" },
   { href: "#how-we-work", label: "Process" },
   { href: "#contact", label: "Contact" },
+  { href: "#contact", label: "Request Consultation" },
 ];
 
 function SearchIcon() {
@@ -62,6 +62,11 @@ export function SiteHeader() {
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("overflow-hidden", isOpen);
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [isOpen]);
 
   return (
     <header
@@ -114,8 +119,6 @@ export function SiteHeader() {
             <ChevronDownIcon />
           </button>
 
-          <ThemeToggle />
-
           <a
             href="#contact"
             className="inline-flex h-11 items-center rounded-xl bg-[var(--color-accent)] px-4 text-sm font-semibold leading-none tracking-[0.01em] text-[var(--color-button-text)] shadow-lg shadow-emerald-600/20 transition-all duration-200 hover:scale-[1.02] hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/60 sm:px-5"
@@ -151,35 +154,51 @@ export function SiteHeader() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-slate-200/80 bg-white/95 px-4 pb-5 pt-3 backdrop-blur-xl md:hidden"
-            aria-label="Mobile"
+            className="fixed inset-0 z-[60] bg-white md:hidden"
           >
-            <div className="mx-auto grid w-full max-w-7xl gap-2">
+            <motion.nav
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.26, ease: "easeOut" }}
+              className="flex h-full flex-col overflow-y-auto px-6 pb-8 pt-5"
+              aria-label="Mobile"
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <Link href="/" onClick={() => setIsOpen(false)} aria-label="Pari Labs homepage" className="relative inline-flex items-center rounded-md p-1">
+                  <span className="navbar-logo relative block h-8 w-[142px] overflow-hidden">
+                    <Image src="/media/logonew.png" alt="Pari Labs logo" width={328} height={72} priority className="logo-image logo-image-mobile" />
+                  </span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-300/80 text-lg text-[var(--color-secondary)] transition-colors hover:bg-slate-50"
+                  aria-label="Close navigation menu"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="grid w-full gap-2">
               {mobileNavItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="w-full rounded-xl px-4 py-3 text-base font-medium text-[var(--color-secondary)] transition-colors hover:bg-white hover:text-[var(--color-primary)]"
+                  className="w-full rounded-xl px-4 py-4 text-xl font-semibold text-[var(--color-text-primary)] transition-colors hover:bg-slate-50 hover:text-[var(--color-accent)]"
                 >
                   {item.label}
                 </a>
               ))}
-
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="mt-2 inline-flex h-12 w-full items-center justify-center rounded-xl bg-[var(--color-accent)] px-4 text-base font-semibold text-white"
-              >
-                Request Consultation
-              </a>
-            </div>
-          </motion.nav>
+              </div>
+            </motion.nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

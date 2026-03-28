@@ -12,9 +12,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className="antialiased font-sans">
-        <div className="relative z-0 min-h-screen bg-transparent text-[var(--color-text-primary)] transition-colors duration-300">
+        <div className="relative z-0 min-h-screen bg-transparent text-[var(--color-text-primary)]">
           {children}
         </div>
       </body>

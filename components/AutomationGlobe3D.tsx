@@ -116,7 +116,7 @@ function GlobeScene() {
 
       {/* LABEL */}
       <Html position={[1.6, 0.3, 0]} center>
-        <div className="rounded-full bg-black/60 px-3 py-1 text-xs text-white backdrop-blur">
+        <div className="rounded-full border border-emerald-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
           CRM
         </div>
       </Html>

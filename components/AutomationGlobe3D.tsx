@@ -13,6 +13,7 @@ type ModuleLabel = {
   name: string;
   tooltip: string;
   color: string;
+  anchor: string;
 };
 
 type NetworkNode = {
@@ -22,55 +23,68 @@ type NetworkNode = {
   kind: "key" | "standard";
 };
 
-type ArcDefinition = {
-  route: [string, string];
+type RouteDefinition = {
+  id: string;
+  from: string;
+  to: string;
   thickness: number;
   lift: number;
   speed: number;
-  particles: number;
+  pulseCount: number;
   color: string;
+  mode: "persistent" | "cycle";
+};
+
+type RouteRuntime = RouteDefinition & {
+  curve: THREE.CubicBezierCurve3;
+  points: THREE.Vector3[];
+  offset: number;
+  pulseOffsets: number[];
+  pulseSpeeds: number[];
 };
 
 const MODULES: ModuleLabel[] = [
-  { name: "CRM", tooltip: "Customer operations", color: CYAN },
-  { name: "Billing", tooltip: "Billing automation", color: EMERALD },
-  { name: "ERP", tooltip: "Unified enterprise data", color: SOFT_BLUE },
-  { name: "Hospital", tooltip: "Hospital appointment system", color: CYAN },
-  { name: "Automation", tooltip: "Workflow automation", color: EMERALD },
+  { name: "CRM", tooltip: "Customer operations", color: CYAN, anchor: "europe" },
+  { name: "Billing", tooltip: "Billing automation", color: EMERALD, anchor: "north-america" },
+  { name: "ERP", tooltip: "Unified enterprise data", color: SOFT_BLUE, anchor: "india" },
+  { name: "Hospital", tooltip: "Clinical systems", color: EMERALD, anchor: "india" },
+  { name: "WhatsApp", tooltip: "Instant notifications", color: CYAN, anchor: "japan" },
 ];
 
 const NODES: NetworkNode[] = [
-  { id: "crm", lat: 20, lon: -35, kind: "key" },
-  { id: "billing", lat: -5, lon: -80, kind: "key" },
-  { id: "inventory", lat: 8, lon: 60, kind: "standard" },
-  { id: "hrms", lat: 50, lon: 95, kind: "standard" },
-  { id: "erp", lat: 34, lon: 22, kind: "key" },
-  { id: "hospital", lat: 5, lon: 95, kind: "key" },
-  { id: "appointment", lat: 13, lon: 118, kind: "standard" },
-  { id: "whatsapp", lat: -10, lon: 130, kind: "standard" },
-  { id: "automation", lat: -20, lon: 15, kind: "key" },
-  { id: "analytics", lat: 42, lon: -120, kind: "standard" },
-  { id: "server", lat: -38, lon: -30, kind: "key" },
-  { id: "cloud", lat: 56, lon: -10, kind: "key" },
-  { id: "ops-east", lat: -45, lon: 88, kind: "standard" },
-  { id: "ops-west", lat: -30, lon: -128, kind: "standard" },
-  { id: "ops-eu", lat: 62, lon: 42, kind: "standard" },
-  { id: "ops-apac", lat: 30, lon: 145, kind: "standard" },
+  { id: "north-america", lat: 37, lon: -100, kind: "key" },
+  { id: "us-west", lat: 35, lon: -122, kind: "standard" },
+  { id: "brazil", lat: -10, lon: -56, kind: "standard" },
+  { id: "uk", lat: 54, lon: -2, kind: "standard" },
+  { id: "europe", lat: 49, lon: 10, kind: "key" },
+  { id: "africa", lat: 8, lon: 21, kind: "standard" },
+  { id: "middle-east", lat: 26, lon: 46, kind: "standard" },
+  { id: "india", lat: 21, lon: 78, kind: "key" },
+  { id: "singapore", lat: 1, lon: 104, kind: "standard" },
+  { id: "japan", lat: 36, lon: 138, kind: "standard" },
+  { id: "australia", lat: -26, lon: 134, kind: "key" },
+  { id: "cloud", lat: 54, lon: -18, kind: "key" },
+  { id: "crm", lat: 41, lon: -74, kind: "standard" },
+  { id: "erp", lat: 30, lon: 76, kind: "standard" },
+  { id: "hospital", lat: 13, lon: 77, kind: "standard" },
+  { id: "whatsapp", lat: 35, lon: 139, kind: "standard" },
 ];
 
-const ARC_ROUTES: ArcDefinition[] = [
-  { route: ["hospital", "appointment"], thickness: 0.008, lift: 1.9, speed: 0.16, particles: 2, color: EMERALD },
-  { route: ["appointment", "whatsapp"], thickness: 0.006, lift: 1.82, speed: 0.2, particles: 2, color: CYAN },
-  { route: ["billing", "inventory"], thickness: 0.009, lift: 1.92, speed: 0.14, particles: 3, color: SOFT_BLUE },
-  { route: ["inventory", "analytics"], thickness: 0.007, lift: 1.85, speed: 0.11, particles: 2, color: CYAN },
-  { route: ["erp", "hrms"], thickness: 0.008, lift: 1.9, speed: 0.12, particles: 2, color: EMERALD },
-  { route: ["hrms", "cloud"], thickness: 0.007, lift: 1.88, speed: 0.15, particles: 2, color: SOFT_BLUE },
-  { route: ["crm", "server"], thickness: 0.01, lift: 2.02, speed: 0.1, particles: 3, color: CYAN },
-  { route: ["server", "automation"], thickness: 0.008, lift: 1.9, speed: 0.14, particles: 2, color: EMERALD },
-  { route: ["cloud", "analytics"], thickness: 0.006, lift: 1.86, speed: 0.1, particles: 1, color: SOFT_BLUE },
-  { route: ["erp", "server"], thickness: 0.007, lift: 1.95, speed: 0.12, particles: 1, color: CYAN },
-  { route: ["ops-eu", "ops-apac"], thickness: 0.005, lift: 2.0, speed: 0.09, particles: 1, color: SOFT_BLUE },
-  { route: ["ops-west", "ops-east"], thickness: 0.005, lift: 1.98, speed: 0.08, particles: 1, color: EMERALD },
+const ROUTES: RouteDefinition[] = [
+  { id: "india-europe", from: "india", to: "europe", thickness: 0.007, lift: 1.28, speed: 0.085, pulseCount: 2, color: CYAN, mode: "cycle" },
+  { id: "us-asia", from: "north-america", to: "japan", thickness: 0.009, lift: 1.36, speed: 0.06, pulseCount: 3, color: SOFT_BLUE, mode: "cycle" },
+  { id: "billing-crm", from: "north-america", to: "crm", thickness: 0.006, lift: 1.2, speed: 0.12, pulseCount: 1, color: CYAN, mode: "persistent" },
+  { id: "hospital-whatsapp", from: "hospital", to: "whatsapp", thickness: 0.006, lift: 1.22, speed: 0.1, pulseCount: 2, color: EMERALD, mode: "cycle" },
+  { id: "erp-cloud", from: "erp", to: "cloud", thickness: 0.007, lift: 1.26, speed: 0.082, pulseCount: 2, color: EMERALD, mode: "persistent" },
+  { id: "africa-europe", from: "africa", to: "europe", thickness: 0.005, lift: 1.17, speed: 0.14, pulseCount: 1, color: CYAN, mode: "persistent" },
+  { id: "us-europe", from: "us-west", to: "uk", thickness: 0.006, lift: 1.23, speed: 0.108, pulseCount: 2, color: SOFT_BLUE, mode: "cycle" },
+  { id: "india-singapore", from: "india", to: "singapore", thickness: 0.005, lift: 1.18, speed: 0.17, pulseCount: 1, color: CYAN, mode: "persistent" },
+  { id: "singapore-australia", from: "singapore", to: "australia", thickness: 0.006, lift: 1.2, speed: 0.13, pulseCount: 1, color: EMERALD, mode: "cycle" },
+  { id: "brazil-africa", from: "brazil", to: "africa", thickness: 0.006, lift: 1.28, speed: 0.094, pulseCount: 2, color: SOFT_BLUE, mode: "cycle" },
+  { id: "middle-east-india", from: "middle-east", to: "india", thickness: 0.0045, lift: 1.16, speed: 0.16, pulseCount: 1, color: EMERALD, mode: "persistent" },
+  { id: "cloud-japan", from: "cloud", to: "japan", thickness: 0.007, lift: 1.34, speed: 0.068, pulseCount: 2, color: CYAN, mode: "cycle" },
+  { id: "north-america-brazil", from: "north-america", to: "brazil", thickness: 0.005, lift: 1.22, speed: 0.115, pulseCount: 1, color: EMERALD, mode: "persistent" },
+  { id: "uk-india", from: "uk", to: "india", thickness: 0.006, lift: 1.24, speed: 0.097, pulseCount: 2, color: SOFT_BLUE, mode: "cycle" },
 ];
 
 function latLonToPosition(lat: number, lon: number, radius: number) {
@@ -83,269 +97,384 @@ function latLonToPosition(lat: number, lon: number, radius: number) {
   );
 }
 
+function lonLatToCanvas(lon: number, lat: number, width: number, height: number) {
+  return {
+    x: ((lon + 180) / 360) * width,
+    y: ((90 - lat) / 180) * height,
+  };
+}
+
+function drawLandPath(
+  ctx: CanvasRenderingContext2D,
+  points: Array<[number, number]>,
+  width: number,
+  height: number,
+) {
+  if (points.length < 3) return;
+  const start = lonLatToCanvas(points[0][0], points[0][1], width, height);
+  ctx.beginPath();
+  ctx.moveTo(start.x, start.y);
+  points.slice(1).forEach(([lon, lat]) => {
+    const next = lonLatToCanvas(lon, lat, width, height);
+    ctx.lineTo(next.x, next.y);
+  });
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+}
+
 function createGlobeTexture() {
   const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 512;
+  canvas.width = 2048;
+  canvas.height = 1024;
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
 
-  const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  bg.addColorStop(0, "#0b1f3d");
-  bg.addColorStop(0.45, "#112f54");
-  bg.addColorStop(1, "#0a223f");
-  ctx.fillStyle = bg;
+  const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  bgGradient.addColorStop(0, "#031020");
+  bgGradient.addColorStop(0.5, "#072238");
+  bgGradient.addColorStop(1, "#03111f");
+  ctx.fillStyle = bgGradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = "rgba(103,232,249,0.14)";
+  ctx.globalAlpha = 0.15;
+  ctx.strokeStyle = "#67e8f9";
   ctx.lineWidth = 1;
-  for (let y = 24; y < canvas.height; y += 20) {
+  for (let y = 24; y < canvas.height; y += 32) {
     ctx.beginPath();
-    ctx.moveTo(0, y + Math.sin(y * 0.04) * 4);
-    ctx.lineTo(canvas.width, y + Math.cos(y * 0.03) * 4);
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
     ctx.stroke();
   }
-
-  ctx.strokeStyle = "rgba(125,211,252,0.11)";
-  for (let x = 36; x < canvas.width; x += 44) {
+  for (let x = 24; x < canvas.width; x += 36) {
     ctx.beginPath();
     ctx.moveTo(x, 0);
-    ctx.lineTo(x + Math.sin(x * 0.02) * 10, canvas.height);
+    ctx.lineTo(x, canvas.height);
     ctx.stroke();
   }
 
-  ctx.fillStyle = "rgba(110,231,183,0.11)";
-  for (let i = 0; i < 18; i += 1) {
-    const x = ((i * 137) % canvas.width) + 16;
-    const y = ((i * 89) % canvas.height) + 10;
-    const width = 42 + ((i * 19) % 80);
-    const height = 16 + ((i * 11) % 36);
-    const rotation = ((i * 0.42) % 1) * Math.PI;
-    ctx.beginPath();
-    ctx.ellipse(x, y, width, height, rotation, 0, Math.PI * 2);
-    ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = "rgba(9, 28, 44, 0.92)";
+  ctx.strokeStyle = "rgba(34, 211, 238, 0.28)";
+  ctx.lineWidth = 2;
+
+  const continents: Array<Array<[number, number]>> = [
+    [
+      [-168, 71], [-145, 73], [-132, 66], [-124, 55], [-118, 47], [-112, 38], [-103, 29], [-98, 22], [-89, 19],
+      [-82, 24], [-79, 33], [-81, 42], [-90, 50], [-105, 58], [-122, 67], [-145, 70],
+    ],
+    [
+      [-81, 12], [-75, 8], [-73, -4], [-70, -15], [-64, -26], [-58, -36], [-54, -47], [-49, -51], [-43, -45],
+      [-45, -34], [-49, -23], [-55, -12], [-61, -2], [-69, 6],
+    ],
+    [
+      [-10, 37], [1, 44], [12, 53], [29, 60], [49, 58], [72, 56], [96, 52], [120, 46], [141, 48], [158, 54],
+      [171, 60], [175, 52], [161, 36], [147, 24], [126, 21], [111, 14], [96, 9], [83, 13], [75, 20], [67, 26],
+      [56, 29], [45, 36], [34, 44], [20, 44], [8, 40],
+    ],
+    [
+      [-17, 35], [-5, 31], [8, 30], [20, 25], [31, 15], [34, 4], [30, -8], [22, -20], [12, -30], [3, -34],
+      [-4, -33], [-10, -24], [-14, -9], [-16, 6],
+    ],
+    [
+      [111, -10], [118, -17], [129, -21], [139, -28], [152, -31], [154, -23], [149, -16], [140, -12], [131, -11],
+      [121, -13],
+    ],
+    [[-52, 62], [-41, 70], [-29, 73], [-19, 69], [-28, 61], [-42, 60]],
+  ];
+
+  continents.forEach((continent) => drawLandPath(ctx, continent, canvas.width, canvas.height));
+
+  const highlight = ctx.createRadialGradient(canvas.width * 0.72, canvas.height * 0.42, 50, canvas.width * 0.72, canvas.height * 0.42, 460);
+  highlight.addColorStop(0, "rgba(110, 231, 183, 0.26)");
+  highlight.addColorStop(1, "rgba(110, 231, 183, 0)");
+  ctx.fillStyle = highlight;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.globalAlpha = 0.22;
+  ctx.fillStyle = "#67e8f9";
+  for (let i = 0; i < 1200; i += 1) {
+    const x = (i * 379) % canvas.width;
+    const y = (i * 193) % canvas.height;
+    ctx.fillRect(x, y, 1, 1);
   }
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 8;
   texture.needsUpdate = true;
   return texture;
 }
 
 function GlobeScene({ mobile }: { mobile: boolean }) {
   const globeGroupRef = useRef<THREE.Group>(null);
-  const labelMeshesRef = useRef<Array<THREE.Group | null>>([]);
+  const atmosphereRef = useRef<THREE.Mesh>(null);
+  const lineRefs = useRef<Array<THREE.Line | null>>([]);
+  const lineMaterialRefs = useRef<Array<THREE.LineBasicMaterial | null>>([]);
+  const pulseRefs = useRef<Array<THREE.Mesh | null>>([]);
+  const labelHolderRefs = useRef<Array<THREE.Group | null>>([]);
   const labelDomRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const particleRefs = useRef<Array<THREE.Mesh | null>>([]);
-  const [hovered, setHovered] = useState<string | null>(null);
 
-  const radius = mobile ? 1.36 : 1.5;
+  const radius = mobile ? 1.58 : 1.8;
 
   const nodeMap = useMemo(() => {
     const activeNodes = mobile ? NODES.slice(0, 12) : NODES;
     const map = new Map<string, { position: THREE.Vector3; kind: NetworkNode["kind"] }>();
     activeNodes.forEach((node) => {
-      map.set(node.id, { position: latLonToPosition(node.lat, node.lon, radius), kind: node.kind });
+      map.set(node.id, {
+        position: latLonToPosition(node.lat, node.lon, radius),
+        kind: node.kind,
+      });
     });
     return map;
   }, [mobile, radius]);
 
-  const arcs = useMemo(() => {
-    const activeRoutes = mobile ? ARC_ROUTES.slice(0, 8) : ARC_ROUTES;
+  const routes = useMemo<RouteRuntime[]>(() => {
+    const activeRoutes = mobile ? ROUTES.slice(0, 8) : ROUTES;
     return activeRoutes
       .map((route, routeIndex) => {
-        const from = nodeMap.get(route.route[0]);
-        const to = nodeMap.get(route.route[1]);
+        const from = nodeMap.get(route.from)?.position;
+        const to = nodeMap.get(route.to)?.position;
         if (!from || !to) return null;
-        const mid = from.position
-          .clone()
-          .add(to.position)
-          .multiplyScalar(0.5)
-          .normalize()
-          .multiplyScalar(route.lift);
-        const curve = new THREE.QuadraticBezierCurve3(from.position, mid, to.position);
+
+        const chord = from.clone().add(to).multiplyScalar(0.5).normalize();
+        const distance = from.distanceTo(to);
+        const bulge = route.lift + THREE.MathUtils.mapLinear(distance, 0.5, 3.8, 0.03, 0.2);
+
+        const controlA = from.clone().lerp(chord, 0.56).normalize().multiplyScalar(radius * bulge);
+        const controlB = to.clone().lerp(chord, 0.56).normalize().multiplyScalar(radius * bulge);
+        const curve = new THREE.CubicBezierCurve3(from, controlA, controlB, to);
+        const points = curve.getPoints(mobile ? 56 : 84);
+
         return {
           ...route,
-          key: `${route.route[0]}-${route.route[1]}`,
           curve,
-          line: new THREE.Line(
-            new THREE.BufferGeometry().setFromPoints(curve.getPoints(70)),
-            new THREE.LineBasicMaterial({ color: route.color, transparent: true, opacity: 0.82 }),
-          ),
-          particleOffsets: Array.from({ length: route.particles }, (_, i) => (routeIndex * 0.13 + i * 0.31) % 1),
+          points,
+          offset: (routeIndex * 0.137) % 1,
+          pulseOffsets: Array.from({ length: route.pulseCount }, (_, i) => ((i + 1) / (route.pulseCount + 1) + routeIndex * 0.09) % 1),
+          pulseSpeeds: Array.from({ length: route.pulseCount }, (_, i) => route.speed * (1.15 + i * 0.22)),
         };
       })
-      .filter((item): item is NonNullable<typeof item> => Boolean(item));
-  }, [mobile, nodeMap]);
+      .filter((route): route is RouteRuntime => Boolean(route));
+  }, [mobile, nodeMap, radius]);
 
   const labels = useMemo(
     () =>
-      MODULES.map((module, i) => ({
-        ...module,
-        radius: radius + 0.16,
-        inclination: -0.24 + ((i % 2) * 0.44 - 0.22),
-        speed: 0.14,
-        phase: (Math.PI * 2 * i) / MODULES.length,
-      })),
-    [radius],
+      MODULES.map((module) => {
+        const anchor = nodeMap.get(module.anchor)?.position.clone().multiplyScalar(1.13) ?? new THREE.Vector3(0, 0, 0);
+        return { ...module, anchor };
+      }),
+    [nodeMap],
   );
 
   const globeTexture = useMemo(() => createGlobeTexture(), []);
 
+  const pulseMap = useMemo(() => {
+    const mapped: Array<{ routeIndex: number; pulseIndex: number }> = [];
+    routes.forEach((route, routeIndex) => {
+      route.pulseOffsets.forEach((_, pulseIndex) => {
+        mapped.push({ routeIndex, pulseIndex });
+      });
+    });
+    return mapped;
+  }, [routes]);
+
   useFrame((state, delta) => {
+    const elapsed = state.clock.elapsedTime;
+
     if (globeGroupRef.current) {
-      globeGroupRef.current.rotation.y += delta * (mobile ? 0.06 : 0.08);
+      globeGroupRef.current.rotation.y += delta * (mobile ? 0.043 : 0.035);
+      globeGroupRef.current.rotation.x = THREE.MathUtils.damp(globeGroupRef.current.rotation.x, -0.08, 2.4, delta);
+      globeGroupRef.current.rotation.z = THREE.MathUtils.damp(globeGroupRef.current.rotation.z, 0.03, 2.8, delta);
     }
 
-    labels.forEach((label, index) => {
-      const holder = labelMeshesRef.current[index];
-      if (!holder) return;
+    if (atmosphereRef.current) {
+      const pulse = 0.09 + Math.sin(elapsed * 0.42) * 0.015;
+      (atmosphereRef.current.material as THREE.MeshBasicMaterial).opacity = pulse;
+    }
 
-      const t = state.clock.elapsedTime;
-      const azimuth = t * label.speed + label.phase;
-      const y = Math.sin(label.inclination) * label.radius;
-      const ringRadius = Math.cos(label.inclination) * label.radius;
-      const x = Math.cos(azimuth) * ringRadius;
-      const z = Math.sin(azimuth) * ringRadius;
-      holder.position.set(x, y, z);
-      holder.lookAt(0, 0, 0);
+    routes.forEach((route, routeIndex) => {
+      const line = lineRefs.current[routeIndex];
+      const lineMaterial = lineMaterialRefs.current[routeIndex];
+      if (!line || !lineMaterial) return;
 
-      const visibilityWave = 0.5 + 0.5 * Math.sin(t * 0.9 + label.phase);
-      const projected = holder.position.clone().project(state.camera);
-      const insideFrame = Math.abs(projected.x) < 0.85 && Math.abs(projected.y) < 0.72;
-      const front = z > -0.08;
-      const target = front && insideFrame ? THREE.MathUtils.lerp(0.2, 0.96, visibilityWave) : 0;
-      const scale = hovered === label.name ? 1.1 : 1;
+      const t = (elapsed * route.speed + route.offset) % 1;
+      const drawCutoff = 0.58;
+      const holdCutoff = 0.8;
 
-      holder.scale.setScalar(scale);
-      const node = holder.children[0] as THREE.Object3D | undefined;
-      if (node) {
-        node.visible = target > 0.22;
+      let progress = 1;
+      let opacity = route.mode === "persistent" ? 0.28 : 0.08;
+
+      if (route.mode === "persistent") {
+        const wave = 0.5 + 0.5 * Math.sin(elapsed * (0.65 + routeIndex * 0.06));
+        progress = THREE.MathUtils.lerp(0.72, 1, wave);
+        opacity = THREE.MathUtils.lerp(0.24, 0.52, wave);
+      } else if (t < drawCutoff) {
+        progress = t / drawCutoff;
+        opacity = THREE.MathUtils.lerp(0.08, 0.72, progress);
+      } else if (t < holdCutoff) {
+        progress = 1;
+        opacity = 0.72;
+      } else {
+        progress = 1;
+        opacity = THREE.MathUtils.lerp(0.72, 0.04, (t - holdCutoff) / (1 - holdCutoff));
       }
-      const domLabel = labelDomRefs.current[index];
-      if (domLabel) {
-        domLabel.style.opacity = target.toFixed(3);
-      }
+
+      line.geometry.setDrawRange(0, Math.max(2, Math.floor(route.points.length * progress)));
+      lineMaterial.opacity = opacity;
     });
 
-    let particleIndex = 0;
-    arcs.forEach((arc) => {
-      arc.particleOffsets.forEach((offset) => {
-        const particle = particleRefs.current[particleIndex];
-        particleIndex += 1;
-        if (!particle) return;
-        const progress = (state.clock.elapsedTime * arc.speed + offset) % 1;
-        const point = arc.curve.getPoint(progress);
-        particle.position.copy(point);
-      });
+    pulseMap.forEach((item, pulseGlobalIndex) => {
+      const mesh = pulseRefs.current[pulseGlobalIndex];
+      if (!mesh) return;
+      const route = routes[item.routeIndex];
+      const routeT = (elapsed * route.speed + route.offset) % 1;
+      const drawProgress = route.mode === "persistent" ? 1 : Math.min(1, routeT / 0.58);
+      const pulseProgress = (elapsed * route.pulseSpeeds[item.pulseIndex] + route.pulseOffsets[item.pulseIndex]) % 1;
+
+      if (pulseProgress > drawProgress + 0.05 && route.mode === "cycle") {
+        (mesh.material as THREE.MeshBasicMaterial).opacity = 0;
+        return;
+      }
+
+      const point = route.curve.getPoint(pulseProgress);
+      mesh.position.copy(point);
+      (mesh.material as THREE.MeshBasicMaterial).opacity = route.mode === "persistent" ? 0.9 : 0.95;
+      mesh.scale.setScalar(0.9 + Math.sin(elapsed * 2.2 + pulseGlobalIndex) * 0.08);
+    });
+
+    labels.forEach((label, index) => {
+      const holder = labelHolderRefs.current[index];
+      if (!holder) return;
+      holder.position.copy(label.anchor);
+      holder.lookAt(0, 0, 0);
+
+      const projected = holder.position.clone().project(state.camera);
+      const visible = projected.z < 1 && projected.z > -1 && Math.abs(projected.x) < 0.88 && Math.abs(projected.y) < 0.82;
+      const dom = labelDomRefs.current[index];
+      if (dom) dom.style.opacity = visible ? "0.94" : "0";
     });
   });
 
-  const totalParticles = arcs.reduce((sum, arc) => sum + arc.particleOffsets.length, 0);
-
   return (
     <>
-      <ambientLight intensity={0.56} color="#bfdbfe" />
-      <directionalLight position={[2.8, 2.2, 2.2]} intensity={1.24} color="#ccfbf1" />
-      <pointLight position={[-2.3, -0.3, 2.3]} intensity={1.65} color={CYAN} />
+      <ambientLight intensity={0.5} color="#a5f3fc" />
+      <hemisphereLight intensity={0.56} groundColor="#020617" color="#67e8f9" />
+      <directionalLight position={[3.2, 2.6, 2.8]} intensity={1.28} color="#d1fae5" />
+      <pointLight position={[-2.5, -0.8, 2.6]} intensity={1.15} color={CYAN} />
 
       <group ref={globeGroupRef}>
         <mesh>
-          <sphereGeometry args={[radius, mobile ? 48 : 64, mobile ? 48 : 64]} />
+          <sphereGeometry args={[radius, mobile ? 54 : 82, mobile ? 54 : 82]} />
           <meshStandardMaterial
             map={globeTexture ?? undefined}
-            color="#102f57"
-            roughness={0.56}
-            metalness={0.34}
-            emissive="#11385c"
-            emissiveIntensity={0.5}
+            color="#051628"
+            roughness={0.62}
+            metalness={0.24}
+            emissive="#0a2537"
+            emissiveIntensity={0.38}
           />
         </mesh>
 
         <mesh>
-          <sphereGeometry args={[radius * 1.02, 64, 64]} />
-          <meshBasicMaterial color="#67e8f9" transparent opacity={0.12} blending={THREE.AdditiveBlending} />
+          <sphereGeometry args={[radius * 1.004, mobile ? 44 : 64, mobile ? 44 : 64]} />
+          <meshBasicMaterial color="#67e8f9" transparent opacity={0.08} blending={THREE.AdditiveBlending} />
+        </mesh>
+
+        <mesh ref={atmosphereRef}>
+          <sphereGeometry args={[radius * 1.09, mobile ? 44 : 60, mobile ? 44 : 60]} />
+          <meshBasicMaterial color="#22d3ee" transparent opacity={0.09} blending={THREE.AdditiveBlending} />
         </mesh>
 
         <mesh>
-          <sphereGeometry args={[radius * 1.08, 48, 48]} />
-          <meshBasicMaterial color={EMERALD} transparent opacity={0.085} blending={THREE.AdditiveBlending} />
+          <sphereGeometry args={[radius * 1.13, mobile ? 36 : 44, mobile ? 36 : 44]} />
+          <meshBasicMaterial color="#22d3ee" transparent opacity={0.035} blending={THREE.AdditiveBlending} />
         </mesh>
 
-        {[0.88, 1.0, 1.12].map((mul) => (
-          <mesh key={mul} rotation={[Math.PI / (2.5 + mul), 0, 0]}>
-            <torusGeometry args={[radius * mul, 0.004, 8, 120]} />
-            <meshBasicMaterial color={SOFT_BLUE} transparent opacity={0.12} />
-          </mesh>
+        {routes.map((route, routeIndex) => (
+          <group key={route.id}>
+            <mesh>
+              <tubeGeometry args={[route.curve, mobile ? 48 : 72, route.thickness, 12, false]} />
+              <meshBasicMaterial color={route.color} transparent opacity={route.mode === "persistent" ? 0.18 : 0.1} />
+            </mesh>
+
+            <line
+              ref={(line) => {
+                lineRefs.current[routeIndex] = line as unknown as THREE.Line | null;
+              }}
+            >
+              <bufferGeometry>
+                <bufferAttribute
+                  attach="attributes-position"
+                  args={[new Float32Array(route.points.flatMap((point) => [point.x, point.y, point.z])), 3]}
+                />
+              </bufferGeometry>
+              <lineBasicMaterial
+                ref={(material) => {
+                  lineMaterialRefs.current[routeIndex] = material as THREE.LineBasicMaterial | null;
+                }}
+                color={route.color}
+                transparent
+                opacity={0.5}
+              />
+            </line>
+          </group>
         ))}
 
         {Array.from(nodeMap.entries()).map(([id, node]) => (
           <mesh key={id} position={node.position}>
             <sphereGeometry args={[node.kind === "key" ? 0.034 : 0.024, 14, 14]} />
-            <meshBasicMaterial color={node.kind === "key" ? EMERALD : CYAN} transparent opacity={node.kind === "key" ? 1 : 0.78} />
+            <meshBasicMaterial
+              color={node.kind === "key" ? EMERALD : CYAN}
+              transparent
+              opacity={node.kind === "key" ? 0.96 : 0.74}
+            />
           </mesh>
         ))}
 
-        {arcs.map((arc) => (
-          <group key={arc.key}>
-            <mesh>
-              <tubeGeometry args={[arc.curve, 90, arc.thickness * 1.22, 10, false]} />
-              <meshBasicMaterial color={arc.color} transparent opacity={0.38} />
+        {pulseMap.map((item, pulseGlobalIndex) => {
+          const route = routes[item.routeIndex];
+          return (
+            <mesh
+              key={`${route.id}-pulse-${item.pulseIndex}`}
+              ref={(mesh) => {
+                pulseRefs.current[pulseGlobalIndex] = mesh;
+              }}
+            >
+              <sphereGeometry args={[0.018, 12, 12]} />
+              <meshBasicMaterial
+                color={item.pulseIndex % 2 === 0 ? "#67e8f9" : "#6ee7b7"}
+                transparent
+                opacity={0.92}
+              />
             </mesh>
-            <primitive object={arc.line} />
-          </group>
-        ))}
-
-        {Array.from({ length: totalParticles }).map((_, index) => (
-          <mesh
-            key={`particle-${index}`}
-            ref={(el) => {
-              particleRefs.current[index] = el;
-            }}
-          >
-            <sphereGeometry args={[0.02, 10, 10]} />
-            <meshBasicMaterial color={index % 2 === 0 ? "#67e8f9" : "#6ee7b7"} transparent opacity={1} />
-          </mesh>
-        ))}
+          );
+        })}
       </group>
 
       {labels.map((label, index) => (
         <group
           key={label.name}
-          ref={(el) => {
-            labelMeshesRef.current[index] = el;
+          ref={(group) => {
+            labelHolderRefs.current[index] = group;
           }}
         >
-          <Html center distanceFactor={8}>
+          <Html center distanceFactor={9}>
             <div
               ref={(el) => {
                 labelDomRefs.current[index] = el;
               }}
-              className="group pointer-events-auto cursor-default transition-opacity duration-500"
-              onPointerEnter={() => setHovered(label.name)}
-              onPointerLeave={() => setHovered((current) => (current === label.name ? null : current))}
+              className="pointer-events-none select-none rounded-full border px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] transition-opacity duration-300"
               style={{
-                opacity: 0.95,
-                fontSize: "12px",
-                whiteSpace: "nowrap",
-                transform: "translate(-50%, -50%)",
-                maxWidth: "96px",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                padding: "4px 8px",
-                borderRadius: "999px",
-                background: "rgba(248,250,252,0.88)",
-                border: `1px solid ${label.color}66`,
+                opacity: 0.94,
+                borderColor: `${label.color}80`,
+                background: "rgba(248, 250, 252, 0.9)",
                 color: "#0f172a",
-                boxShadow: "0 0 0 1px rgba(16,185,129,0.18), 0 8px 20px rgba(2,6,23,0.22)",
-                fontWeight: 700,
-                letterSpacing: "0.04em",
+                whiteSpace: "nowrap",
+                boxShadow: "0 0 0 1px rgba(34,211,238,0.16), 0 8px 24px rgba(2,6,23,0.24)",
               }}
             >
               {label.name}
-              <span className="pointer-events-none absolute left-1/2 top-[122%] hidden -translate-x-1/2 rounded-md border border-emerald-200/60 bg-slate-50/95 px-2 py-1 text-[10px] normal-case tracking-normal text-slate-700 shadow-lg group-hover:block">
-                {label.tooltip}
-              </span>
             </div>
           </Html>
         </group>
@@ -355,12 +484,12 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
         enablePan={false}
         enableZoom={false}
         autoRotate
-        autoRotateSpeed={mobile ? 0.4 : 0.52}
-        rotateSpeed={mobile ? 0.45 : 0.62}
-        minPolarAngle={Math.PI * 0.24}
-        maxPolarAngle={Math.PI * 0.76}
+        autoRotateSpeed={mobile ? 0.18 : 0.14}
+        rotateSpeed={mobile ? 0.38 : 0.32}
+        minPolarAngle={Math.PI * 0.22}
+        maxPolarAngle={Math.PI * 0.78}
         enableDamping
-        dampingFactor={0.07}
+        dampingFactor={0.06}
       />
     </>
   );
@@ -378,17 +507,22 @@ export default function AutomationGlobe3D() {
   }, []);
 
   return (
-    <div className="mx-auto h-[300px] w-full max-w-[640px] sm:h-[380px] lg:h-[470px]">
+    <div className="relative mx-auto w-full max-w-[760px] overflow-visible h-[420px] sm:h-[500px] lg:h-[580px]">
+      <div className="pointer-events-none absolute inset-x-[8%] -top-10 h-28 rounded-full bg-cyan-400/15 blur-3xl" />
+      <div className="pointer-events-none absolute inset-x-[14%] -bottom-8 h-24 rounded-full bg-emerald-400/10 blur-3xl" />
       <Canvas
-        camera={{ position: [0, 0, 4.4], fov: 37 }}
+        camera={{ position: [0, 0, 5.55], fov: 34 }}
         gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
         dpr={[1, 2]}
       >
-        <fog attach="fog" args={["#020617", 4.8, 8.5]} />
+        <fog attach="fog" args={["#020617", 5.2, 9.4]} />
         <Suspense fallback={null}>
           <GlobeScene mobile={isMobile} />
         </Suspense>
       </Canvas>
+      <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-slate-950/65 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-cyan-100/80">
+        Drag to rotate
+      </div>
     </div>
   );
 }

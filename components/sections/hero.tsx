@@ -40,7 +40,7 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          <div className="relative order-last flex flex-col gap-4 lg:order-none lg:gap-6">
+          <div className="relative order-last flex min-w-0 flex-col gap-4 overflow-hidden lg:order-none lg:gap-6">
             <AutomationGlobe3D />
             <div className="mobile-card rounded-3xl border border-slate-200 bg-white/70 p-5 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.3)] backdrop-blur">
               <div className="flex items-center justify-between gap-3">

@@ -208,12 +208,11 @@ function createGlobeTexture() {
 
 function GlobeScene({ mobile }: { mobile: boolean }) {
   const globeGroupRef = useRef<THREE.Group>(null);
+  const labelOrbitRef = useRef<THREE.Group>(null);
   const atmosphereRef = useRef<THREE.Mesh>(null);
   const lineRefs = useRef<Array<THREE.Line | null>>([]);
   const lineMaterialRefs = useRef<Array<THREE.LineBasicMaterial | null>>([]);
   const pulseRefs = useRef<Array<THREE.Mesh | null>>([]);
-  const labelHolderRefs = useRef<Array<THREE.Group | null>>([]);
-  const labelDomRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   const radius = mobile ? 1.58 : 1.8;
 
@@ -261,7 +260,7 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
   const labels = useMemo(
     () =>
       MODULES.map((module) => {
-        const anchor = nodeMap.get(module.anchor)?.position.clone().multiplyScalar(1.13) ?? new THREE.Vector3(0, 0, 0);
+        const anchor = nodeMap.get(module.anchor)?.position.clone().multiplyScalar(1.2) ?? new THREE.Vector3(0, 0, 0);
         return { ...module, anchor };
       }),
     [nodeMap],
@@ -283,9 +282,13 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
     const elapsed = state.clock.elapsedTime;
 
     if (globeGroupRef.current) {
-      globeGroupRef.current.rotation.y += delta * (mobile ? 0.043 : 0.035);
+      globeGroupRef.current.rotation.y += 0.005 * (delta * 60);
       globeGroupRef.current.rotation.x = THREE.MathUtils.damp(globeGroupRef.current.rotation.x, -0.08, 2.4, delta);
       globeGroupRef.current.rotation.z = THREE.MathUtils.damp(globeGroupRef.current.rotation.z, 0.03, 2.8, delta);
+    }
+
+    if (labelOrbitRef.current) {
+      labelOrbitRef.current.rotation.y -= 0.005 * (delta * 60);
     }
 
     if (atmosphereRef.current) {
@@ -343,17 +346,6 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
       mesh.scale.setScalar(0.9 + Math.sin(elapsed * 2.2 + pulseGlobalIndex) * 0.08);
     });
 
-    labels.forEach((label, index) => {
-      const holder = labelHolderRefs.current[index];
-      if (!holder) return;
-      holder.position.copy(label.anchor);
-      holder.lookAt(0, 0, 0);
-
-      const projected = holder.position.clone().project(state.camera);
-      const visible = projected.z < 1 && projected.z > -1 && Math.abs(projected.x) < 0.88 && Math.abs(projected.y) < 0.82;
-      const dom = labelDomRefs.current[index];
-      if (dom) dom.style.opacity = visible ? "0.94" : "0";
-    });
   });
 
   return (
@@ -450,41 +442,34 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
             </mesh>
           );
         })}
-      </group>
-
-      {labels.map((label, index) => (
-        <group
-          key={label.name}
-          ref={(group) => {
-            labelHolderRefs.current[index] = group;
-          }}
-        >
-          <Html center distanceFactor={9}>
-            <div
-              ref={(el) => {
-                labelDomRefs.current[index] = el;
-              }}
-              className="pointer-events-none select-none rounded-full border px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] transition-opacity duration-300"
-              style={{
-                opacity: 0.94,
-                borderColor: `${label.color}80`,
-                background: "rgba(248, 250, 252, 0.9)",
-                color: "#0f172a",
-                whiteSpace: "nowrap",
-                boxShadow: "0 0 0 1px rgba(34,211,238,0.16), 0 8px 24px rgba(2,6,23,0.24)",
-              }}
-            >
-              {label.name}
-            </div>
-          </Html>
+        <group ref={labelOrbitRef}>
+          {labels.map((label) => (
+            <group key={label.name} position={label.anchor}>
+              <Html center distanceFactor={9}>
+                <div
+                  className="pointer-events-none select-none rounded-full border px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]"
+                  style={{
+                    opacity: 0.94,
+                    borderColor: `${label.color}80`,
+                    background: "rgba(248, 250, 252, 0.9)",
+                    color: "#0f172a",
+                    whiteSpace: "nowrap",
+                    boxShadow: "0 0 0 1px rgba(34,211,238,0.16), 0 8px 24px rgba(2,6,23,0.24)",
+                  }}
+                >
+                  {label.name}
+                </div>
+              </Html>
+            </group>
+          ))}
         </group>
-      ))}
+      </group>
 
       <OrbitControls
         enablePan={false}
         enableZoom={false}
         autoRotate
-        autoRotateSpeed={mobile ? 0.18 : 0.14}
+        autoRotateSpeed={mobile ? 0.5 : 0.42}
         rotateSpeed={mobile ? 0.38 : 0.32}
         minPolarAngle={Math.PI * 0.22}
         maxPolarAngle={Math.PI * 0.78}
@@ -507,21 +492,31 @@ export default function AutomationGlobe3D() {
   }, []);
 
   return (
-    <div className="relative mx-auto w-full max-w-[760px] overflow-visible h-[420px] sm:h-[500px] lg:h-[580px]">
+    <div className="relative mx-auto w-full max-w-[680px] overflow-hidden lg:max-w-[720px]">
       <div className="pointer-events-none absolute inset-x-[8%] -top-10 h-28 rounded-full bg-cyan-400/15 blur-3xl" />
       <div className="pointer-events-none absolute inset-x-[14%] -bottom-8 h-24 rounded-full bg-emerald-400/10 blur-3xl" />
-      <Canvas
-        camera={{ position: [0, 0, 5.55], fov: 34 }}
-        gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
-        dpr={[1, 2]}
+      <div
+        className="relative mx-auto aspect-square w-full max-w-[620px] overflow-hidden border border-cyan-200/20 bg-slate-950/95 shadow-[0_28px_80px_rgba(2,6,23,0.64)] sm:max-w-[640px]"
+        style={{
+          clipPath: "polygon(14% 0, 86% 0, 100% 14%, 100% 86%, 86% 100%, 14% 100%, 0 86%, 0 14%)",
+          borderRadius: "28px",
+        }}
       >
-        <fog attach="fog" args={["#020617", 5.2, 9.4]} />
-        <Suspense fallback={null}>
-          <GlobeScene mobile={isMobile} />
-        </Suspense>
-      </Canvas>
-      <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-slate-950/65 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-cyan-100/80">
-        Drag to rotate
+        <div className="pointer-events-none absolute inset-[1.8%] rounded-[24px] border border-emerald-200/15" />
+        <Canvas
+          camera={{ position: [0, 0, 5.55], fov: 34 }}
+          gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
+          dpr={[1, 2]}
+          className="h-full w-full"
+        >
+          <fog attach="fog" args={["#020617", 5.2, 9.4]} />
+          <Suspense fallback={null}>
+            <GlobeScene mobile={isMobile} />
+          </Suspense>
+        </Canvas>
+        <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-slate-950/65 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-cyan-100/80">
+          Drag to rotate
+        </div>
       </div>
     </div>
   );

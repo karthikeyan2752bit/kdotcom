@@ -5,7 +5,7 @@ import AutomationGlobe3D from "@/components/AutomationGlobe3D";
 
 export function HeroSection() {
   return (
-    <section id="hero" className="hero-section relative isolate overflow-hidden">
+    <section id="hero" className="hero-section relative isolate overflow-visible">
       <div className="hero-content mobile-shell mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-14 lg:px-10 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <motion.div
@@ -40,7 +40,7 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          <div className="relative order-last flex min-w-0 flex-col gap-4 overflow-hidden lg:order-none lg:gap-6">
+          <div className="relative order-last flex min-w-0 flex-col gap-4 overflow-visible lg:order-none lg:gap-6">
             <AutomationGlobe3D />
             <div className="mobile-card rounded-3xl border border-slate-200 bg-white/70 p-5 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.3)] backdrop-blur">
               <div className="flex items-center justify-between gap-3">

@@ -73,17 +73,17 @@ const NODES: NetworkNode[] = [
 const ROUTES: RouteDefinition[] = [
   { id: "india-europe", from: "india", to: "europe", thickness: 0.007, lift: 1.28, speed: 0.085, pulseCount: 2, color: CYAN, mode: "cycle" },
   { id: "us-asia", from: "north-america", to: "japan", thickness: 0.009, lift: 1.36, speed: 0.06, pulseCount: 3, color: SOFT_BLUE, mode: "cycle" },
-  { id: "billing-crm", from: "north-america", to: "crm", thickness: 0.006, lift: 1.2, speed: 0.12, pulseCount: 1, color: CYAN, mode: "persistent" },
+  { id: "billing-crm", from: "north-america", to: "crm", thickness: 0.006, lift: 1.2, speed: 0.12, pulseCount: 1, color: CYAN, mode: "cycle" },
   { id: "hospital-whatsapp", from: "hospital", to: "whatsapp", thickness: 0.006, lift: 1.22, speed: 0.1, pulseCount: 2, color: EMERALD, mode: "cycle" },
-  { id: "erp-cloud", from: "erp", to: "cloud", thickness: 0.007, lift: 1.26, speed: 0.082, pulseCount: 2, color: EMERALD, mode: "persistent" },
-  { id: "africa-europe", from: "africa", to: "europe", thickness: 0.005, lift: 1.17, speed: 0.14, pulseCount: 1, color: CYAN, mode: "persistent" },
+  { id: "erp-cloud", from: "erp", to: "cloud", thickness: 0.007, lift: 1.26, speed: 0.082, pulseCount: 2, color: EMERALD, mode: "cycle" },
+  { id: "africa-europe", from: "africa", to: "europe", thickness: 0.005, lift: 1.17, speed: 0.14, pulseCount: 1, color: CYAN, mode: "cycle" },
   { id: "us-europe", from: "us-west", to: "uk", thickness: 0.006, lift: 1.23, speed: 0.108, pulseCount: 2, color: SOFT_BLUE, mode: "cycle" },
-  { id: "india-singapore", from: "india", to: "singapore", thickness: 0.005, lift: 1.18, speed: 0.17, pulseCount: 1, color: CYAN, mode: "persistent" },
+  { id: "india-singapore", from: "india", to: "singapore", thickness: 0.005, lift: 1.18, speed: 0.17, pulseCount: 1, color: CYAN, mode: "cycle" },
   { id: "singapore-australia", from: "singapore", to: "australia", thickness: 0.006, lift: 1.2, speed: 0.13, pulseCount: 1, color: EMERALD, mode: "cycle" },
   { id: "brazil-africa", from: "brazil", to: "africa", thickness: 0.006, lift: 1.28, speed: 0.094, pulseCount: 2, color: SOFT_BLUE, mode: "cycle" },
-  { id: "middle-east-india", from: "middle-east", to: "india", thickness: 0.0045, lift: 1.16, speed: 0.16, pulseCount: 1, color: EMERALD, mode: "persistent" },
+  { id: "middle-east-india", from: "middle-east", to: "india", thickness: 0.0045, lift: 1.16, speed: 0.16, pulseCount: 1, color: EMERALD, mode: "cycle" },
   { id: "cloud-japan", from: "cloud", to: "japan", thickness: 0.007, lift: 1.34, speed: 0.068, pulseCount: 2, color: CYAN, mode: "cycle" },
-  { id: "north-america-brazil", from: "north-america", to: "brazil", thickness: 0.005, lift: 1.22, speed: 0.115, pulseCount: 1, color: EMERALD, mode: "persistent" },
+  { id: "north-america-brazil", from: "north-america", to: "brazil", thickness: 0.005, lift: 1.22, speed: 0.115, pulseCount: 1, color: EMERALD, mode: "cycle" },
   { id: "uk-india", from: "uk", to: "india", thickness: 0.006, lift: 1.24, speed: 0.097, pulseCount: 2, color: SOFT_BLUE, mode: "cycle" },
 ];
 
@@ -214,7 +214,7 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
   const lineMaterialRefs = useRef<Array<THREE.LineBasicMaterial | null>>([]);
   const pulseRefs = useRef<Array<THREE.Mesh | null>>([]);
 
-  const radius = mobile ? 1.58 : 1.8;
+  const radius = mobile ? 1.56 : 1.72;
 
   const nodeMap = useMemo(() => {
     const activeNodes = mobile ? NODES.slice(0, 12) : NODES;
@@ -350,10 +350,11 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
 
   return (
     <>
-      <ambientLight intensity={0.5} color="#a5f3fc" />
-      <hemisphereLight intensity={0.56} groundColor="#020617" color="#67e8f9" />
-      <directionalLight position={[3.2, 2.6, 2.8]} intensity={1.28} color="#d1fae5" />
-      <pointLight position={[-2.5, -0.8, 2.6]} intensity={1.15} color={CYAN} />
+      <ambientLight intensity={0.38} color="#a5f3fc" />
+      <hemisphereLight intensity={0.62} groundColor="#020617" color="#67e8f9" />
+      <directionalLight position={[4.1, 2.8, 3.4]} intensity={1.5} color="#d1fae5" />
+      <pointLight position={[-2.8, -1.1, 2.8]} intensity={0.92} color="#0f172a" />
+      <pointLight position={[-2.3, -0.7, 2.6]} intensity={1.08} color={CYAN} />
 
       <group ref={globeGroupRef}>
         <mesh>
@@ -375,12 +376,12 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
 
         <mesh ref={atmosphereRef}>
           <sphereGeometry args={[radius * 1.09, mobile ? 44 : 60, mobile ? 44 : 60]} />
-          <meshBasicMaterial color="#22d3ee" transparent opacity={0.09} blending={THREE.AdditiveBlending} />
+          <meshBasicMaterial color="#6ee7f9" transparent opacity={0.11} blending={THREE.AdditiveBlending} />
         </mesh>
 
         <mesh>
           <sphereGeometry args={[radius * 1.13, mobile ? 36 : 44, mobile ? 36 : 44]} />
-          <meshBasicMaterial color="#22d3ee" transparent opacity={0.035} blending={THREE.AdditiveBlending} />
+          <meshBasicMaterial color="#6ee7f9" transparent opacity={0.055} blending={THREE.AdditiveBlending} />
         </mesh>
 
         {routes.map((route, routeIndex) => (
@@ -492,24 +493,17 @@ export default function AutomationGlobe3D() {
   }, []);
 
   return (
-    <div className="relative mx-auto w-full max-w-[680px] overflow-hidden lg:max-w-[720px]">
-      <div className="pointer-events-none absolute inset-x-[8%] -top-10 h-28 rounded-full bg-cyan-400/15 blur-3xl" />
-      <div className="pointer-events-none absolute inset-x-[14%] -bottom-8 h-24 rounded-full bg-emerald-400/10 blur-3xl" />
-      <div
-        className="relative mx-auto aspect-square w-full max-w-[620px] overflow-hidden border border-cyan-200/20 bg-slate-950/95 shadow-[0_28px_80px_rgba(2,6,23,0.64)] sm:max-w-[640px]"
-        style={{
-          clipPath: "polygon(14% 0, 86% 0, 100% 14%, 100% 86%, 86% 100%, 14% 100%, 0 86%, 0 14%)",
-          borderRadius: "28px",
-        }}
-      >
-        <div className="pointer-events-none absolute inset-[1.8%] rounded-[24px] border border-emerald-200/15" />
+    <div className="relative h-[350px] w-full overflow-visible sm:h-[620px] lg:h-[680px]">
+      <div className="pointer-events-none absolute -right-8 top-1/2 h-[350px] w-[350px] -translate-y-1/2 overflow-visible sm:h-[620px] sm:w-[620px] lg:-right-10 lg:h-[680px] lg:w-[680px]">
+        <div className="pointer-events-none absolute inset-x-[8%] -top-10 h-28 rounded-full bg-cyan-400/15 blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-[14%] -bottom-8 h-24 rounded-full bg-emerald-400/10 blur-3xl" />
         <Canvas
-          camera={{ position: [0, 0, 5.55], fov: 34 }}
+          camera={{ position: [0, 0, 5.2], fov: 34 }}
           gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
           dpr={[1, 2]}
-          className="h-full w-full"
+          className="h-full w-full overflow-visible"
         >
-          <fog attach="fog" args={["#020617", 5.2, 9.4]} />
+          <fog attach="fog" args={["#020617", 5.8, 10.1]} />
           <Suspense fallback={null}>
             <GlobeScene mobile={isMobile} />
           </Suspense>

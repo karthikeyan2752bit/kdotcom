@@ -2,61 +2,70 @@
 
 import { Html, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { motion } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-
-type GlobeNode = {
-  id: string;
-  position: THREE.Vector3;
-  color: "cyan" | "emerald";
-};
-
-type ArcLink = {
-  from: GlobeNode;
-  to: GlobeNode;
-  curve: THREE.CatmullRomCurve3;
-  speed: number;
-  offset: number;
-};
-
-const NODE_COORDS = [
-  { id: "north-america", lat: 40, lon: -100, color: "cyan" as const },
-  { id: "south-america", lat: -20, lon: -58, color: "emerald" as const },
-  { id: "europe", lat: 50, lon: 10, color: "cyan" as const },
-  { id: "africa", lat: 7, lon: 20, color: "emerald" as const },
-  { id: "asia", lat: 35, lon: 95, color: "cyan" as const },
-  { id: "india", lat: 21, lon: 77, color: "emerald" as const },
-  { id: "australia", lat: -27, lon: 133, color: "cyan" as const },
-  { id: "middle-east", lat: 24, lon: 45, color: "emerald" as const },
-  { id: "japan", lat: 36, lon: 138, color: "cyan" as const },
-  { id: "uk", lat: 54, lon: -2, color: "emerald" as const },
-  { id: "canada", lat: 56, lon: -106, color: "cyan" as const },
-  { id: "brazil", lat: -10, lon: -55, color: "emerald" as const },
-];
-
-const LABELS = [
-  { text: "CRM", nodeId: "europe" },
-  { text: "Workflow", nodeId: "south-america" },
-  { text: "Billing", nodeId: "australia" },
-];
-
-const ARC_PAIRS = [
-  [0, 2],
-  [0, 4],
-  [1, 3],
-  [2, 4],
-  [3, 5],
-  [6, 4],
-  [8, 2],
-  [10, 1],
-  [11, 5],
-] as const;
 
 const CYAN = "#22d3ee";
 const EMERALD = "#34d399";
+const SOFT_BLUE = "#60a5fa";
 
-function latLonToVector3(lat: number, lon: number, radius: number) {
+type ModuleLabel = {
+  name: string;
+  color: string;
+  anchor: string;
+};
+
+type Node = {
+  id: string;
+  lat: number;
+  lon: number;
+  kind: "key" | "standard";
+};
+
+type Route = {
+  id: string;
+  from: string;
+  to: string;
+  color: string;
+  thickness: number;
+  lift: number;
+  speed: number;
+  pulseCount: number;
+};
+
+const LABELS: ModuleLabel[] = [
+  { name: "CRM", color: CYAN, anchor: "europe" },
+  { name: "Billing", color: EMERALD, anchor: "north-america" },
+  { name: "ERP", color: SOFT_BLUE, anchor: "india" },
+  { name: "Automation", color: CYAN, anchor: "japan" },
+  { name: "Hospital", color: EMERALD, anchor: "middle-east" },
+];
+
+const NODES: Node[] = [
+  { id: "north-america", lat: 40, lon: -100, kind: "key" },
+  { id: "south-america", lat: -20, lon: -60, kind: "standard" },
+  { id: "europe", lat: 52, lon: 12, kind: "key" },
+  { id: "africa", lat: 8, lon: 22, kind: "standard" },
+  { id: "middle-east", lat: 28, lon: 46, kind: "standard" },
+  { id: "india", lat: 22, lon: 78, kind: "key" },
+  { id: "japan", lat: 36, lon: 138, kind: "standard" },
+  { id: "australia", lat: -27, lon: 134, kind: "standard" },
+  { id: "uk", lat: 54, lon: -2, kind: "standard" },
+  { id: "brazil", lat: -12, lon: -54, kind: "standard" },
+];
+
+const ROUTES: Route[] = [
+  { id: "1", from: "north-america", to: "europe", color: CYAN, thickness: 0.006, lift: 1.28, speed: 0.08, pulseCount: 2 },
+  { id: "2", from: "europe", to: "india", color: EMERALD, thickness: 0.006, lift: 1.26, speed: 0.1, pulseCount: 2 },
+  { id: "3", from: "india", to: "japan", color: SOFT_BLUE, thickness: 0.005, lift: 1.22, speed: 0.12, pulseCount: 1 },
+  { id: "4", from: "india", to: "australia", color: EMERALD, thickness: 0.005, lift: 1.18, speed: 0.11, pulseCount: 1 },
+  { id: "5", from: "north-america", to: "brazil", color: CYAN, thickness: 0.004, lift: 1.18, speed: 0.14, pulseCount: 1 },
+  { id: "6", from: "brazil", to: "africa", color: SOFT_BLUE, thickness: 0.005, lift: 1.25, speed: 0.09, pulseCount: 2 },
+  { id: "7", from: "middle-east", to: "india", color: EMERALD, thickness: 0.004, lift: 1.16, speed: 0.15, pulseCount: 1 },
+  { id: "8", from: "uk", to: "india", color: CYAN, thickness: 0.005, lift: 1.24, speed: 0.1, pulseCount: 2 },
+];
+
+function latLonToVector(lat: number, lon: number, radius: number) {
   const phi = THREE.MathUtils.degToRad(90 - lat);
   const theta = THREE.MathUtils.degToRad(lon + 180);
 
@@ -67,175 +76,198 @@ function latLonToVector3(lat: number, lon: number, radius: number) {
   );
 }
 
-function createGlobeTexture() {
-  const size = 1024;
+function createTexture() {
   const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size / 2;
+  canvas.width = 2048;
+  canvas.height = 1024;
+
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
 
-  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, "#040914");
-  gradient.addColorStop(0.5, "#07131f");
-  gradient.addColorStop(1, "#030914");
-  ctx.fillStyle = gradient;
+  const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  bg.addColorStop(0, "#04111f");
+  bg.addColorStop(0.5, "#072235");
+  bg.addColorStop(1, "#04111f");
+  ctx.fillStyle = bg;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.globalAlpha = 0.14;
-  ctx.fillStyle = "#4a5d66";
-  for (let i = 0; i < 16; i += 1) {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
-    const w = 70 + Math.random() * 160;
-    const h = 30 + Math.random() * 90;
+  ctx.strokeStyle = "rgba(103,232,249,0.12)";
+  ctx.lineWidth = 1;
+
+  for (let y = 0; y < canvas.height; y += 40) {
     ctx.beginPath();
-    ctx.ellipse(x, y, w, h, Math.random() * Math.PI, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
+    ctx.stroke();
   }
 
-  ctx.globalAlpha = 0.08;
-  ctx.fillStyle = "#89cfd8";
-  for (let i = 0; i < 3000; i += 1) {
-    ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 1, 1);
-  }
+  const continents = [
+    [[-168, 71], [-145, 73], [-132, 65], [-118, 48], [-102, 28], [-90, 18], [-80, 28], [-86, 44], [-106, 58], [-140, 70]],
+    [[-82, 12], [-72, -4], [-60, -24], [-50, -44], [-42, -52], [-48, -30], [-60, -10], [-70, 2]],
+    [[-10, 36], [10, 52], [40, 58], [80, 54], [120, 46], [155, 56], [140, 26], [100, 10], [70, 22], [40, 38]],
+    [[-16, 34], [8, 30], [28, 18], [30, -10], [18, -28], [0, -34], [-12, -18], [-15, 0]],
+    [[112, -10], [128, -20], [146, -30], [152, -18], [132, -10]],
+  ];
+
+  ctx.fillStyle = "rgba(10,35,52,0.92)";
+  ctx.strokeStyle = "rgba(52,211,153,0.22)";
+  continents.forEach((points) => {
+    const first = points[0];
+    ctx.beginPath();
+    ctx.moveTo(((first[0] + 180) / 360) * canvas.width, ((90 - first[1]) / 180) * canvas.height);
+
+    points.slice(1).forEach(([lon, lat]) => {
+      ctx.lineTo(((lon + 180) / 360) * canvas.width, ((90 - lat) / 180) * canvas.height);
+    });
+
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  });
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
-  texture.needsUpdate = true;
+  texture.anisotropy = 8;
   return texture;
 }
 
 function GlobeScene({ mobile }: { mobile: boolean }) {
-  const globeRef = useRef<THREE.Group>(null);
-  const particleRefs = useRef<Array<THREE.Mesh | null>>([]);
-  const nodes = useMemo<GlobeNode[]>(() => {
-    const activeCoords = mobile ? NODE_COORDS.slice(0, 8) : NODE_COORDS;
-    return activeCoords.map((coord) => ({
-      id: coord.id,
-      color: coord.color,
-      position: latLonToVector3(coord.lat, coord.lon, 1.3),
-    }));
-  }, [mobile]);
+  const groupRef = useRef<THREE.Group>(null);
+  const lineRefs = useRef<Array<THREE.Line | null>>([]);
+  const pulseRefs = useRef<THREE.Mesh[]>([]);
 
-  const labels = useMemo(() => {
-    return LABELS
-      .map((label) => ({ ...label, node: nodes.find((node) => node.id === label.nodeId) }))
-      .filter((label): label is { text: string; nodeId: string; node: GlobeNode } => Boolean(label.node));
-  }, [nodes]);
+  const radius = mobile ? 1.5 : 1.72;
 
-  const arcs = useMemo<ArcLink[]>(() => {
-    const activePairs = mobile ? ARC_PAIRS.slice(0, 5) : ARC_PAIRS;
-    return activePairs.map(([fromIndex, toIndex], index) => {
-      const from = nodes[fromIndex % nodes.length];
-      const to = nodes[toIndex % nodes.length];
-      const mid = from.position.clone().add(to.position).multiplyScalar(0.5).normalize().multiplyScalar(1.8 + (index % 3) * 0.1);
-      const curve = new THREE.CatmullRomCurve3([from.position, mid, to.position]);
+  const nodes = useMemo(() => {
+    const map = new Map<string, THREE.Vector3>();
+    NODES.forEach((node) => {
+      map.set(node.id, latLonToVector(node.lat, node.lon, radius));
+    });
+    return map;
+  }, [radius]);
+
+  const routes = useMemo(() => {
+    return ROUTES.map((route) => {
+      const from = nodes.get(route.from)!;
+      const to = nodes.get(route.to)!;
+
+      const mid = from.clone().add(to).multiplyScalar(0.5).normalize().multiplyScalar(radius * route.lift);
+      const curve = new THREE.QuadraticBezierCurve3(from, mid, to);
+
       return {
-        from,
-        to,
+        ...route,
         curve,
-        speed: 0.12 + (index % 4) * 0.04,
-        offset: index * 0.13,
+        points: curve.getPoints(90),
       };
     });
-  }, [mobile, nodes]);
+  }, [nodes, radius]);
 
-  const globeTexture = useMemo(() => createGlobeTexture(), []);
+  const texture = useMemo(() => createTexture(), []);
 
   useFrame((state, delta) => {
-    if (globeRef.current) {
-      globeRef.current.rotation.y += delta * 0.08;
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.18;
+      groupRef.current.rotation.x = -0.08;
     }
 
-    particleRefs.current.forEach((particle, index) => {
-      const link = arcs[index];
-      if (!particle || !link) return;
-      const progress = (state.clock.elapsedTime * link.speed + link.offset) % 1;
-      const point = link.curve.getPoint(progress);
-      particle.position.copy(point);
+    routes.forEach((route, index) => {
+      const line = lineRefs.current[index];
+      if (line) {
+        const progress = ((state.clock.elapsedTime * route.speed) % 1);
+        line.geometry.setDrawRange(0, Math.max(2, Math.floor(route.points.length * progress)));
+      }
+
+      const pulse = pulseRefs.current[index];
+      if (pulse) {
+        const t = (state.clock.elapsedTime * route.speed + index * 0.12) % 1;
+        pulse.position.copy(route.curve.getPoint(t));
+      }
     });
   });
 
   return (
     <>
-      <ambientLight intensity={0.45} color="#60a5fa" />
-      <directionalLight position={[3, 2, 2]} intensity={1.25} color="#b7fff2" />
-      <pointLight position={[-2, 0.5, 2]} intensity={1.4} color="#22d3ee" />
+      <ambientLight intensity={0.45} color="#d1fae5" />
+      <directionalLight position={[4, 3, 4]} intensity={1.4} color="#ffffff" />
+      <pointLight position={[-3, 0, 3]} intensity={1.2} color={CYAN} />
 
-      <group ref={globeRef}>
+      <group ref={groupRef}>
         <mesh>
-          <sphereGeometry args={[1.3, mobile ? 36 : 52, mobile ? 36 : 52]} />
+          <sphereGeometry args={[radius, 80, 80]} />
           <meshStandardMaterial
-            map={globeTexture ?? undefined}
-            color="#081520"
-            metalness={0.25}
-            roughness={0.85}
-            transparent
-            opacity={0.88}
-            emissive="#0b1724"
-            emissiveIntensity={0.45}
+            map={texture ?? undefined}
+            color="#082033"
+            emissive="#0a2537"
+            emissiveIntensity={0.35}
+            roughness={0.68}
+            metalness={0.18}
           />
         </mesh>
 
-        <mesh>
-          <sphereGeometry args={[1.37, 48, 48]} />
-          <meshBasicMaterial color="#4ade80" transparent opacity={0.08} />
+        <mesh scale={1.06}>
+          <sphereGeometry args={[radius, 64, 64]} />
+          <meshBasicMaterial
+            color="#67e8f9"
+            transparent
+            opacity={0.08}
+            blending={THREE.AdditiveBlending}
+          />
         </mesh>
 
-        {arcs.map((link, index) => {
-          const points = link.curve.getPoints(64);
-          const positions = new Float32Array(
-            points.flatMap((point) => [point.x, point.y, point.z]),
-          );
-          const arcColor = index % 2 === 0 ? CYAN : EMERALD;
-          return (
-            <group key={`${link.from.id}-${link.to.id}`}>
-              <line>
-                <bufferGeometry>
-                  <bufferAttribute
-                    attach="attributes-position"
-                    args={[positions, 3]}
-                  />
-                </bufferGeometry>
-                <lineBasicMaterial color={arcColor} transparent opacity={0.35} />
-              </line>
-              <mesh ref={(el) => {
-                particleRefs.current[index] = el;
-              }}>
-                <sphereGeometry args={[0.018, 10, 10]} />
-                <meshBasicMaterial color={arcColor} />
-              </mesh>
-            </group>
-          );
-        })}
+        {routes.map((route, index) => (
+          <group key={route.id}>
+            <line
+              ref={(el) => {
+                if (el) {
+                  lineRefs.current[index] = el as unknown as THREE.Line;
+                }
+              }}
+            >
+              <bufferGeometry>
+                <bufferAttribute
+                  attach="attributes-position"
+                  args={[new Float32Array(route.points.flatMap((p) => [p.x, p.y, p.z])), 3]}
+                />
+              </bufferGeometry>
+              <lineBasicMaterial color={route.color} transparent opacity={0.85} />
+            </line>
 
-        {nodes.map((node) => (
-          <mesh key={node.id} position={node.position}>
-            <sphereGeometry args={[0.03, 16, 16]} />
-            <meshBasicMaterial color={node.color === "cyan" ? CYAN : EMERALD} />
+            <mesh
+              ref={(el) => {
+                if (el) pulseRefs.current[index] = el;
+              }}
+            >
+              <sphereGeometry args={[0.02, 12, 12]} />
+              <meshBasicMaterial color={route.color} />
+            </mesh>
+          </group>
+        ))}
+
+        {Array.from(nodes.entries()).map(([id, position]) => (
+          <mesh key={id} position={position}>
+            <sphereGeometry args={[0.03, 12, 12]} />
+            <meshBasicMaterial color={EMERALD} />
           </mesh>
         ))}
 
-        {labels.map((label, index) => {
-          const labelPosition = label.node.position.clone().multiplyScalar(1.16);
+        {LABELS.map((label) => {
+          const pos = nodes.get(label.anchor)?.clone().multiplyScalar(1.22);
+          if (!pos) return null;
+
           return (
-            <Html
-              key={label.text}
-              position={[labelPosition.x, labelPosition.y, labelPosition.z]}
-              center
-              transform
-              distanceFactor={8.5}
-              style={{ pointerEvents: "none" }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 2 }}
-                animate={{ opacity: 0.9, y: 0 }}
-                transition={{ delay: 0.35 + index * 0.12, duration: 0.55 }}
-                className="rounded-full border border-emerald-300/30 bg-slate-950/75 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.15em] text-cyan-100"
+            <Html key={label.name} position={[pos.x, pos.y, pos.z]} center distanceFactor={9}>
+              <div
+                className="rounded-full border px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]"
+                style={{
+                  background: "rgba(255,255,255,0.92)",
+                  color: "#0f172a",
+                  borderColor: `${label.color}66`,
+                  boxShadow: "0 10px 30px rgba(2,6,23,0.18)",
+                  whiteSpace: "nowrap",
+                }}
               >
-                {label.text}
-              </motion.div>
+                {label.name}
+              </div>
             </Html>
           );
         })}
@@ -244,47 +276,44 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
       <OrbitControls
         enablePan={false}
         enableZoom={false}
+        autoRotate={false}
+        rotateSpeed={0.45}
         minPolarAngle={Math.PI * 0.25}
         maxPolarAngle={Math.PI * 0.75}
-        rotateSpeed={0.52}
-        enableDamping
-        dampingFactor={0.08}
       />
     </>
   );
 }
 
-export function AutomationGlobe3D() {
+export default function AutomationGlobe3D() {
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 768px)");
-    const onChange = () => setMobile(media.matches);
-    onChange();
-    media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
+    const update = () => setMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.65, delay: 0.12 }}
-      className="relative isolate overflow-hidden rounded-[30px] border border-cyan-300/20 bg-gradient-to-br from-slate-900/95 via-slate-950/90 to-slate-950/95 p-3 shadow-[0_24px_80px_rgba(2,6,23,0.72)]"
-    >
-      <div className="pointer-events-none absolute inset-0 rounded-[28px] border border-emerald-300/10" />
-      <div className="pointer-events-none absolute inset-[8%] rounded-[26px] border border-cyan-300/15 bg-[radial-gradient(circle_at_26%_18%,rgba(52,211,153,0.14),transparent_50%),radial-gradient(circle_at_78%_70%,rgba(34,211,238,0.16),transparent_44%)] shadow-[inset_0_0_55px_rgba(34,211,238,0.08)]" />
-
-      <div className="relative h-[360px] w-full sm:h-[430px]">
-        <Canvas camera={{ position: [0, 0, 4.15], fov: 38 }} dpr={[1, 1.8]} gl={{ antialias: true, alpha: true }}>
-          <fog attach="fog" args={["#030712", 4.4, 8]} />
-          <GlobeScene mobile={mobile} />
+    <div className="relative h-[360px] w-full overflow-visible sm:h-[620px] lg:h-[680px]">
+      <div className="absolute -right-8 top-1/2 h-[360px] w-[360px] -translate-y-1/2 overflow-visible sm:h-[620px] sm:w-[620px] lg:h-[680px] lg:w-[680px]">
+        <Canvas
+          camera={{ position: [0, 0, 5.2], fov: 34 }}
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+          className="overflow-visible"
+        >
+          <Suspense fallback={null}>
+            <GlobeScene mobile={mobile} />
+          </Suspense>
         </Canvas>
-      </div>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full border border-emerald-300/30 bg-slate-900/70 px-4 py-1 text-[11px] uppercase tracking-[0.22em] text-emerald-100/80">
-        Drag to rotate
+        <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-slate-950/60 px-4 py-1 text-[10px] uppercase tracking-[0.18em] text-cyan-100/80">
+          Drag to rotate
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

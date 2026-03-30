@@ -214,8 +214,7 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
   const lineMaterialRefs = useRef<Array<THREE.LineBasicMaterial | null>>([]);
   const pulseRefs = useRef<Array<THREE.Mesh | null>>([]);
 
-  const radius = mobile ? 1.56 : 1.72;
-
+const radius = mobile ? 1.35 : 1.48;
   const nodeMap = useMemo(() => {
     const activeNodes = mobile ? NODES.slice(0, 12) : NODES;
     const map = new Map<string, { position: THREE.Vector3; kind: NetworkNode["kind"] }>();
@@ -260,7 +259,7 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
   const labels = useMemo(
     () =>
       MODULES.map((module) => {
-        const anchor = nodeMap.get(module.anchor)?.position.clone().multiplyScalar(1.2) ?? new THREE.Vector3(0, 0, 0);
+        const anchor = nodeMap.get(module.anchor)?.position.clone().multiplyScalar(1.08) ?? new THREE.Vector3(0, 0, 0);
         return { ...module, anchor };
       }),
     [nodeMap],
@@ -446,10 +445,8 @@ function GlobeScene({ mobile }: { mobile: boolean }) {
         <group ref={labelOrbitRef}>
           {labels.map((label) => (
             <group key={label.name} position={label.anchor}>
-              <Html center distanceFactor={9}>
-                <div
-                  className="pointer-events-none select-none rounded-full border px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]"
-                  style={{
+                <Html center distanceFactor={6}>                <div
+className="pointer-events-none select-none rounded-full border px-2 py-[3px] text-[10px] font-semibold uppercase tracking-[0.06em]"                  style={{
                     opacity: 0.94,
                     borderColor: `${label.color}80`,
                     background: "rgba(248, 250, 252, 0.9)",
@@ -492,26 +489,42 @@ export default function AutomationGlobe3D() {
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  return (
-    <div className="relative h-[350px] w-full overflow-visible sm:h-[620px] lg:h-[680px]">
-      <div className="pointer-events-none absolute -right-8 top-1/2 h-[350px] w-[350px] -translate-y-1/2 overflow-visible sm:h-[620px] sm:w-[620px] lg:-right-10 lg:h-[680px] lg:w-[680px]">
-        <div className="pointer-events-none absolute inset-x-[8%] -top-10 h-28 rounded-full bg-cyan-400/15 blur-3xl" />
-        <div className="pointer-events-none absolute inset-x-[14%] -bottom-8 h-24 rounded-full bg-emerald-400/10 blur-3xl" />
-        <Canvas
-          camera={{ position: [0, 0, 5.2], fov: 34 }}
-          gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
-          dpr={[1, 2]}
-          className="h-full w-full overflow-visible"
-        >
-          <fog attach="fog" args={["#020617", 5.8, 10.1]} />
-          <Suspense fallback={null}>
-            <GlobeScene mobile={isMobile} />
-          </Suspense>
-        </Canvas>
-        <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-slate-950/65 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-cyan-100/80">
-          Drag to rotate
-        </div>
-      </div>
+return (
+  <div className="relative h-[420px] w-full overflow-visible sm:h-[640px] lg:h-[760px]">
+    {/* glow behind globe */}
+    <div className="pointer-events-none absolute inset-0 overflow-visible">
+      <div className="absolute left-[52%] top-[12%] h-[26rem] w-[26rem] rounded-full bg-cyan-400/10 blur-3xl lg:h-[34rem] lg:w-[34rem]" />
+      <div className="absolute left-[58%] top-[22%] h-[22rem] w-[22rem] rounded-full bg-emerald-400/10 blur-3xl lg:h-[28rem] lg:w-[28rem]" />
     </div>
-  );
+
+    {/* globe wrapper */}
+    <div className="absolute right-[-8%] top-1/2 h-[420px] w-[420px] -translate-y-1/2 overflow-visible sm:right-[-2%] sm:h-[560px] sm:w-[560px] lg:right-[-4%] lg:h-[760px] lg:w-[760px]">
+      <Canvas
+        camera={{ position: [0, 0, 5.4], fov: 42 }}
+        dpr={[1, 2]}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        }}
+        style={{
+          width: "100%",
+          height: "100%",
+          background: "transparent",
+          overflow: "visible",
+        }}
+      >
+        <fog attach="fog" args={["#020617", 6.5, 14]} />
+        <Suspense fallback={null}>
+          <GlobeScene mobile={isMobile} />
+        </Suspense>
+      </Canvas>
+    </div>
+
+    {/* drag hint */}
+    <div className="pointer-events-none absolute bottom-12 right-[18%] z-20 rounded-full border border-cyan-300/20 bg-slate-950/50 px-4 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-cyan-100/80 backdrop-blur-md">
+      Drag to rotate
+    </div>
+  </div>
+);
 }
